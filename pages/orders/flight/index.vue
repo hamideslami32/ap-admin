@@ -56,7 +56,8 @@ export default {
           orderDate: 4.0,
           status: "success",
           phone: "09121234567",
-          customerName: 'Hamid Eslami'        },
+          customerName: 'Hamid Eslami'
+        },
         {
           id: "2",
           name: "MHD-THR",
@@ -66,7 +67,8 @@ export default {
           orderDate: 4.3,
           status: "success",
           phone: "09121234567",
-          customerName: 'Hamid Eslami'        },
+          customerName: 'Hamid Eslami'
+        },
         {
           id: "3",
           name: "THR-KIH",

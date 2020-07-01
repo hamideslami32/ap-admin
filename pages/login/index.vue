@@ -1,39 +1,53 @@
 <template>
-  <v-layout class="d-flex justify-center ma-auto w-80">
-    <v-flex>
-      <div class="text-xl-h4 my-8">
-        Login From
-      </div>
-      <v-card class="pa-8 login">
+  <v-layout>
+    <!-- <v-banner two-line @click:icon="alert">
+      <v-icon
+        slot="icon"
+      >
+        mdi-bed
+      </v-icon>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
+      Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
+      <template v-slot:actions>
+        <v-btn color="primary">Dismiss</v-btn>
+        <v-btn text color="primary">Retry</v-btn>
+      </template>
+    </v-banner> -->
+    <v-flex class="d-flex justify-center" width="100%">
+      <v-card class="pa-4" width="100%" max-width="500">
+        <div class="mb-6">
+          Login
+        </div>
+        <!-- <v-divider vertical></v-divider> -->
         <!-- <ValidationObserver ref="observer" v-slot="{ validate, reset }"> -->
         <ValidationObserver ref="observer">
           <form>
             <ValidationProvider
               v-slot="{ errors }"
-              name="Phone"
-              rules="required|max:11"
+              name="Username"
+              rules="required"
             >
               <v-text-field
-                v-model="phone"
+                v-model="username"
                 :counter="11"
                 :error-messages="errors"
-                label="Phone"
+                label="Username"
                 required
               />
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              name="VerificationCode"
+              name="Password"
               rules="required"
             >
               <v-text-field
-                v-model="verificationCode"
+                v-model="password"
                 :error-messages="errors"
-                label="Verification Code"
+                label="Password"
                 required
               />
             </ValidationProvider>
-            <v-btn class="mt-4" @click="submit">
+            <v-btn class="mt-4 light-blue white--text" width="100%" @click="submit">
               submit
             </v-btn>
           </form>
@@ -70,12 +84,8 @@ export default {
     ValidationObserver,
   },
   data: () => ({
-    phone: "",
-    verificationCode: "",
-    loginCardStyle: {
-      'width': '100%',
-      'maxWidth': '600px'
-    }
+    username: "",
+    password: "",
   }),
 
   methods: {
@@ -83,16 +93,10 @@ export default {
       this.$refs.observer.validate()
     },
     clear() {
-      this.phone = ""
-      this.verificationCode = ""
+      this.username = ""
+      this.password = ""
       this.$refs.observer.reset()
     },
   },
 }
 </script>
-<style lang="scss" scoped>
-  .loginForm {
-    width: 100%;
-    max-width: 600px;
-  }
-</style>

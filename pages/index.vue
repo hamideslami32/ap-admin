@@ -1,15 +1,13 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm10 class="w-80">
-      <div v-for="n in 2" id="chart" :key="n">
-        <apexchart
-          class=""
-          type="area"
-          height="600"
-          :options="chartOptions"
-          :series="n === 2 ? newSeries : series"
-        />
-      </div>
+  <v-layout justify-center align-center>
+    <v-flex v-for="n in 2" id="chart" :key="n" xs12 sm6>
+      <apexchart
+        class=""
+        type="area"
+        height="600"
+        :options="chartOptions"
+        :series="n === 2 ? newSeries : series"
+      />
     </v-flex>
   </v-layout>
 </template>

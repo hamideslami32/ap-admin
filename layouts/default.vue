@@ -4,8 +4,7 @@
       :clipped-left="clipped"
       fixed
       app
-      color="light-blue"
-      class="white--text z-index-15"
+      class="light-blue white--text z-index-15"
       :style="zIndexStyle"
       dark
     >
@@ -20,14 +19,57 @@
           </v-icon>
         </nuxt-link>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title class="colorful" v-text="title" />
       <v-spacer />
-      <div>
-        <span class="mr-2">Name</span>
-        <v-avatar>
-          <img src="~/assets/imgs/girl-avatar.webp" alt="girl-avatar">
-        </v-avatar>
-      </div>
+      <v-btn v-if="!isLogin" icon class="light-blue darken-2 rounded px-2 mr-5" tile width="100" @click.native="isLogin = true">
+        <nuxt-link to="/login" class="text-decoration-none">
+          <span class="white--text mr-1">Login</span>
+          <v-icon color="white">
+            mdi-login-variant
+          </v-icon>
+        </nuxt-link>
+      </v-btn>
+      <v-menu v-else offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            class="light-blue darken-2"
+            dark
+            v-bind="attrs"
+            height="auto"
+            v-on="on"
+          >
+            <div>
+              <v-icon>
+                mdi-arrow-bottom
+              </v-icon>
+              <span class="mr-2">P.Eslami</span>
+              <v-avatar>
+                <img src="~/assets/imgs/girl-avatar.webp" alt="girl-avatar">
+              </v-avatar>
+            </div>
+          </v-btn>
+        </template>
+        <v-list class="remove-padding">
+          <v-list-item
+            v-for="(item, index) in userMenuItems"
+            :key="index"
+            class="light-blue lighten-4 user-menu-item"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon class="text-dark-blue">
+                {{ item.icon }}
+              </v-icon>
+            </v-list-item-action>
+            <v-spacer />
+            <v-list-item-title class="text-dark-blue">
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main class="my-8">
       <v-container>
@@ -40,24 +82,41 @@
       :left="left"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      class="light-blue"
       fixed
+      dark
       app
     >
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
+        <v-list-group
+          v-for="(item, i) in menuItems"
           :key="i"
-          :to="item.to"
-          router
-          exact
+          value="true"
+          class="white--text"
+          link
         >
-          <v-list-item-action>
-            <v-icon light>
-              {{ item.icon }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title @click.prevent="$router.push(item.to)">
+              {{ item.title }}
+            </v-list-item-title>
+          </template>
+          <v-list-item
+            v-for="(childItem, j) in item.children"
+            :key="j"
+            link
+            class="light-blue pl-6"
+            router
+            :to="childItem.to"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ childItem.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ childItem.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
   </v-app>
@@ -67,38 +126,56 @@
 export default {
   data() {
     return {
+      isLogin: false,
       zIndexStyle: {
         zIndex: 15,
       },
       clipped: true,
       fixed: true,
-      items: [
+      menuItems: [
         {
-          icon: "mdi-home",
-          title: "Home",
-          to: "/",
-        },
-        {
-          icon: "mdi-airplane",
-          title: "Flight",
-          to: "/orders/flight",
-        },
-        {
-          icon: "mdi-bed",
-          title: "Hotel",
-          to: "/orders/hotel",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Insurance",
-          to: "/orders/insurance",
-        },
+          title: "Orders",
+          icon: "mdi-application",
+          to: "/orders",
+          children: [
+            {
+              icon: "mdi-airplane",
+              title: "Flight",
+              to: "/orders/flight",
+            },
+            {
+              icon: "mdi-bed",
+              title: "Hotel",
+              to: "/orders/hotel",
+            },
+            {
+              icon: "mdi-chart-bubble",
+              title: "Insurance",
+              to: "/orders/insurance",
+            },
+          ]
+        }
       ],
       miniVariant: false,
       left: true,
       leftDrawer: true,
-      title: "Apro Support Dashboard",
+      title: "Apro Dashboard",
     }
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.colorful {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.remove-padding {
+  padding: 0 !important;
+}
+
+.text-dark-blue {
+  color: #0d47a1 !important;
+}
+</style>

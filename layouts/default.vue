@@ -53,7 +53,7 @@
           <v-list-item
             v-for="(item, index) in userMenuItems"
             :key="index"
-            class="light-blue lighten-4 user-menu-item"
+            class="white pointer"
             :to="item.to"
             router
             exact
@@ -132,10 +132,20 @@ export default {
       },
       clipped: true,
       fixed: true,
+      userMenuItems: [
+        {
+          title: 'Profile',
+          icon: 'mdi-account'
+        },
+        {
+          title: 'Logout',
+          icon: 'mdi-logout-variant'
+        }
+      ],
       menuItems: [
         {
           title: "Orders",
-          icon: "mdi-application",
+          icon: "mdi-order-bool-descending-variant",
           to: "/orders",
           children: [
             {
@@ -166,6 +176,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .colorful {
   font-size: 24px;
   font-weight: bold;
@@ -177,5 +188,13 @@ export default {
 
 .text-dark-blue {
   color: #0d47a1 !important;
+}
+
+.pointer {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee !important;
+  }
 }
 </style>

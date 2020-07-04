@@ -35,7 +35,9 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: [
+    '~plugins/Auth'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -52,12 +54,15 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
+    '@nuxtjs/universal-storage'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: process.env.API_URL || 'http://localhost:3000/api' 
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

@@ -62,10 +62,8 @@ export default {
     }
   },
   mounted() {
-    // eslint-disable-next-line
-    console.log(this.$vuetify.breakpoint);
-    // eslint-disable-next-line
-    console.log(this.$vuetify);
+    const user = this.$auth.login('hamid', '123456')
+    console.log({user})
   },
 }
 </script>

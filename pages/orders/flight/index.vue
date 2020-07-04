@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <div class="w-80">
+    <div class="container">
       <v-data-table
         :headers="headers"
         :items="orders"

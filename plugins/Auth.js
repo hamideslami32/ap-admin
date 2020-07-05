@@ -34,18 +34,17 @@ class Auth {
         console.log('user is login')
         return user
     }
-    async register(username, password, phone) {
+    async register(firstName, lastName, phone, email, password) {
         const registerPayload = {
-            username,
+            firstName,
+            lastName,
             password,
+            email,
             phone
         }
-        const { token, user } = await this.axios.$post('/auth/register', registerPayload)
-        this.setToken(token)
-        this.user = user
-        this.storage.setCookie(COOKIE_TOKEN, token)
+        const res = await this.axios.$post('/auth/register', registerPayload)
         console.log('user is registered')
-        return user
+        return res
     }
 
     logout() {

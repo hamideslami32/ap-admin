@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    const user = this.$auth.login('hamid', '123456')
+    const user = this.$auth.login('09366182745', '123456')
     console.log({user})
   },
 }

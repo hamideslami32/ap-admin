@@ -21,7 +21,7 @@
       </v-btn>
       <v-toolbar-title class="colorful" v-text="title" />
       <v-spacer />
-      <v-btn v-if="!isLogin" icon class="light-blue darken-2 rounded px-2 mr-5" tile width="100" @click.native="isLogin = true">
+      <v-btn v-if="!$auth.user" icon class="light-blue darken-2 rounded px-2 mr-5" tile width="100" @click.native="isLogin = true">
         <nuxt-link to="/login" class="text-decoration-none">
           <span class="white--text mr-1">Login</span>
           <v-icon color="white">
@@ -54,9 +54,7 @@
             v-for="(item, index) in userMenuItems"
             :key="index"
             class="white pointer"
-            :to="item.to"
-            router
-            exact
+            @click.native="item.method"
           >
             <v-list-item-action>
               <v-icon class="text-dark-blue">
@@ -123,7 +121,10 @@
 </template>
 
 <script>
+import { goTo, logout } from '~/utils/mixins'
+
 export default {
+  mixins: [goTo, logout],
   data() {
     return {
       isLogin: false,
@@ -135,11 +136,13 @@ export default {
       userMenuItems: [
         {
           title: 'Profile',
-          icon: 'mdi-account'
+          icon: 'mdi-account',
+          method: () => this.goTo('/profile')
         },
         {
           title: 'Logout',
-          icon: 'mdi-logout-variant'
+          icon: 'mdi-logout-variant',
+          method: () => this.$auth.logout()
         }
       ],
       menuItems: [
@@ -171,7 +174,7 @@ export default {
       leftDrawer: true,
       title: "Apro Dashboard",
     }
-  },
+  }
 }
 </script>
 

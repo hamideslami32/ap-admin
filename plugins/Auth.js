@@ -7,6 +7,7 @@ class Auth {
     constructor(ctx) {
         this.axios = ctx.app.$axios
         this.storage = ctx.$storage
+        this.redirect = ctx.redirect
         this.user = null
 
         const token = this.storage.getCookie(COOKIE_TOKEN)
@@ -21,36 +22,40 @@ class Auth {
             this.fetchUser()
         }
     }
-    
-    async login(username, password) {
-        const loginPayload = {
-            username,
-            password
+
+    async login(args) {
+        try {
+            const { token, user } = await this.axios.$post('/auth/login', args)
+            this.setToken(token)
+            this.user = user
+            this.storage.setCookie(COOKIE_TOKEN, token)
+            this.redirect( 302, '/')
+            return user
+        } catch (error) {
+            if(error.response) {
+                console.log(error.response.data)
+                return error.response.data
+            }
         }
-        const { token, user } = await this.axios.$post('/auth/login', loginPayload)
-        this.setToken(token)
-        this.user = user
-        this.storage.setCookie(COOKIE_TOKEN, token)
-        console.log('user is login')
-        return user
     }
-    async register(firstName, lastName, phone, email, password) {
-        const registerPayload = {
-            firstName,
-            lastName,
-            password,
-            email,
-            phone
+    async register(args) {
+        try {
+            const user = await this.axios.$post('/auth/register', args)
+            this.redirect(401, '/login')
+            return user
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data)
+                return error.response.data
+            }
         }
-        const res = await this.axios.$post('/auth/register', registerPayload)
-        console.log('user is registered')
-        return res
     }
 
     logout() {
         this.user = null
         this.storage.removeCookie('token')
         this.removeToken()
+        this.redirect(401, '/login')
     }
 
     async fetchUser() {
@@ -72,10 +77,11 @@ class Auth {
         return authorization ? authorization.slice(7).trim() : null
     }
 
+    
+
 }
 
 export default async function (ctx, inject) {
     const auth = Vue.observable(new Auth(ctx))
-    console.log({auth})
     inject('auth', auth)
 }

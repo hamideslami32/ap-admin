@@ -1,36 +1,57 @@
 <template>
   <v-layout>
-    <!-- <v-banner two-line @click:icon="alert">
-      <v-icon
-        slot="icon"
-      >
-        mdi-bed
-      </v-icon>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
-      Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-      <template v-slot:actions>
-        <v-btn color="primary">Dismiss</v-btn>
-        <v-btn text color="primary">Retry</v-btn>
-      </template>
-    </v-banner> -->
     <v-flex class="d-flex justify-center" width="100%">
       <v-card class="pa-8 rounded" width="100%" max-width="500">
         <div class="mb-6">
-          Login
+          Register
         </div>
-        <!-- <v-divider vertical></v-divider> -->
-        <!-- <ValidationObserver ref="observer" v-slot="{ validate, reset }"> -->
         <ValidationObserver ref="observer">
           <form>
             <ValidationProvider
               v-slot="{ errors }"
-              name="Username"
+              name="FirstName"
               rules="required"
             >
               <v-text-field
-                v-model="username"
+                v-model="registerFormData.firstName"
                 :error-messages="errors"
-                label="Username"
+                label="First Name"
+                required
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="LastName"
+              rules="required"
+            >
+              <v-text-field
+                v-model="registerFormData.lastName"
+                :error-messages="errors"
+                label="Last Name"
+                required
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Email"
+              rules="required"
+            >
+              <v-text-field
+                v-model="registerFormData.email"
+                :error-messages="errors"
+                label="Email"
+                required
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Phone"
+              rules="required"
+            >
+              <v-text-field
+                v-model="registerFormData.phone"
+                :error-messages="errors"
+                label="Phone"
                 required
               />
             </ValidationProvider>
@@ -40,7 +61,7 @@
               rules="required"
             >
               <v-text-field
-                v-model="password"
+                v-model="registerFormData.password"
                 :error-messages="errors"
                 type="password"
                 label="Password"
@@ -79,33 +100,38 @@ extend("max", {
 })
 
 export default {
+  data() {
+    return {
+      registerFormData: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        password: "",
+      }
+    }
+  },
   components: {
     ValidationProvider,
     ValidationObserver,
   },
-  data: () => ({
-    username: "",
-    password: "",
-  }),
-
   methods: {
     async submit() {
       const validate = await this.$refs.observer.validate()
       if (validate) {
-        const loginPayload = {
-          username: this.username,
-          password: this.password,
-        }
-        const user = await this.$auth.login(loginPayload)
-        const message = user.message !== 'Wrong username or password' ? 'user is login' : 'login wasnt successfull'
+        const user = await this.$auth.register(this.registerFormData)
+        const message = user.message !== 'Wrong username or password' ? 'user is registered' : 'registeration wasnt successfull'
         alert(message)
       }
     },
     clear() {
-      this.username = ""
+      this.firsName = ""
+      this.lastName = ""
+      this.email = ""
+      this.phone = ""
       this.password = ""
       this.$refs.observer.reset()
-    },
-  },
+    }
+  }
 }
 </script>

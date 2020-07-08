@@ -1,6 +1,7 @@
 <template>
-  <v-layout justify-center align-center>
-    <v-flex v-for="n in 2" id="chart" :key="n" xs12 sm6>
+  <div class="d-flex justify-space-between">
+    <v-card v-for="n in 2" id="chart" :key="n" width="48%">
+      <span class="text-h4" />
       <apexchart
         class=""
         type="area"
@@ -8,8 +9,8 @@
         :options="chartOptions"
         :series="n === 2 ? newSeries : series"
       />
-    </v-flex>
-  </v-layout>
+    </v-card>
+  </div>
 </template>
 
 <script>

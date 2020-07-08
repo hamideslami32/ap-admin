@@ -1,8 +1,8 @@
 <template>
   <v-layout>
     <v-flex class="d-flex justify-center" width="100%">
-      <v-card class="pa-8 rounded" width="100%" max-width="500">
-        <div class="mb-6">
+      <v-card class="pa-8 card" max-width="500">
+        <div class="text-h4 mb-6">
           Register
         </div>
         <ValidationObserver ref="observer">
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { alert, loading } from '~/utils/mixins'
 import { required, max } from "vee-validate/dist/rules"
 import {
   extend,
@@ -100,6 +101,13 @@ extend("max", {
 })
 
 export default {
+  name: 'Register',
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
+  mixins: [alert, loading],
+  layout: 'auth',
   data() {
     return {
       registerFormData: {
@@ -111,27 +119,37 @@ export default {
       }
     }
   },
-  components: {
-    ValidationProvider,
-    ValidationObserver,
-  },
   methods: {
     async submit() {
       const validate = await this.$refs.observer.validate()
       if (validate) {
+        this.loading = true
         const user = await this.$auth.register(this.registerFormData)
-        const message = user.message !== 'Wrong username or password' ? 'user is registered' : 'registeration wasnt successfull'
-        alert(message)
+        this.loading = false
+        this.alert.message = user.message !== 'Wrong username or password' ? 'user is registered' : 'registeration wasnt successfull'
+        this.alert.show = true
+        this.$store.dispatch('global/setAlertData', this.alert)
+  
       }
     },
     clear() {
-      this.firsName = ""
-      this.lastName = ""
-      this.email = ""
-      this.phone = ""
-      this.password = ""
+      this.registerFormData = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        password: "",
+      }
       this.$refs.observer.reset()
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .card {
+    max-width: 500px;
+    width: 100%;
+    justify-content: center;
+  }
+</style>

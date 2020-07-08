@@ -47,7 +47,7 @@
                 required
               />
             </ValidationProvider>
-            <v-btn class="mt-4 light-blue white--text" width="100%" @click="submit">
+            <v-btn class="mt-4 light-blue white--text" :loading="loading" width="100%" @click="submit">
               submit
             </v-btn>
           </form>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { alert, loading } from '~/utils/mixins'
 import { required, max } from "vee-validate/dist/rules"
 import {
   extend,
@@ -79,15 +80,17 @@ extend("max", {
 })
 
 export default {
+  name: 'Login',
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+  mixins: [alert, loading],
+  layout: 'auth',
   data: () => ({
     username: "",
     password: "",
   }),
-
   methods: {
     async submit() {
       const validate = await this.$refs.observer.validate()
@@ -96,9 +99,15 @@ export default {
           username: this.username,
           password: this.password,
         }
+        this.loading = true
+        // this.$toast.show('Logging in...')
         const user = await this.$auth.login(loginPayload)
-        const message = user.message !== 'Wrong username or password' ? 'user is login' : 'login wasnt successfull'
-        alert(message)
+        console.log({user})
+        this.loading = false
+        this.$toast.success('Successfully authenticated')
+        // this.alert.message = user.message !== 'Wrong username or password' ? 'user is login' : 'login wasnt successfull'
+        // this.alert.show = true
+        // this.$store.dispatch('global/setAlertData', this.alert)
       }
     },
     clear() {

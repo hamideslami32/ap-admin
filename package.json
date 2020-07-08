@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
+    "@nuxtjs/toast": "^3.3.0",
     "@nuxtjs/universal-storage": "^0.5.5",
     "apexcharts": "^3.19.2",
     "node-sass": "^4.14.1",

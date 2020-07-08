@@ -42,9 +42,9 @@
               <v-icon>
                 mdi-arrow-bottom
               </v-icon>
-              <span class="mr-2">P.Eslami</span>
+              <span v-if="$auth.user" class="mr-2">{{ $auth.user.firstName[0]+ '.' + $auth.user.lastName }}</span>
               <v-avatar>
-                <img src="~/assets/imgs/girl-avatar.webp" alt="girl-avatar">
+                <img src="~/assets/imgs/avatar.png" alt="avatar">
               </v-avatar>
             </div>
           </v-btn>
@@ -117,14 +117,29 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
+    <v-alert
+      :value="alertData.show"
+      class="alert"
+      border="left"
+      close-text="Close Alert"
+      :color="alertData.color"
+      dark
+      dismissible
+      transition="scale-transition"
+      @input="closeAlert($event)"
+    >
+      {{ alertData.message }}
+    </v-alert>
   </v-app>
 </template>
 
 <script>
-import { goTo, logout } from '~/utils/mixins'
+import { mapGetters } from 'vuex'
+import { goTo, logout, alert } from '~/utils/mixins'
 
 export default {
-  mixins: [goTo, logout],
+  name: 'Default',
+  mixins: [goTo, logout, alert],
   data() {
     return {
       isLogin: false,
@@ -174,6 +189,11 @@ export default {
       leftDrawer: true,
       title: "Apro Dashboard",
     }
+  },
+  computed: {
+    ...mapGetters({
+      alertData: 'global/alertData'
+    })
   }
 }
 </script>

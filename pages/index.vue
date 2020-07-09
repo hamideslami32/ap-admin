@@ -17,6 +17,7 @@
 import ApexCharts from "vue-apexcharts"
 
 export default {
+  name: 'Home',
   components: {
     apexchart: ApexCharts,
   },

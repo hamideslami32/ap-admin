@@ -5,6 +5,7 @@ const COOKIE_TOKEN = 'token'
 class Auth {
 
     constructor(ctx) {
+        console.log(ctx)
         this.axios = ctx.app.$axios
         this.storage = ctx.$storage
         this.redirect = ctx.redirect
@@ -15,12 +16,21 @@ class Auth {
         if (token) {
             this.setToken(token)
         }
-        if (ctx.nuxtState.user) {
-            this.user = ctx.nuxtState.user
-        }
-        if (!this.user && this.token) {
-            this.fetchUser()
-        }
+
+        // let promise;
+        // if (this.token) {
+        //     promise = this.fetchUser()
+        // } else {
+        //     promise = Promise.resolve()
+        // }
+
+        // promise.then(() => {
+        //     ctx.app.router.beforeEach((to, from, next) => {
+        //         console.log(to)
+        //         // if (!this.user) next('/login')
+        //         // else next()
+        //     })
+        // })
     }
 
     async login(args) {
@@ -85,3 +95,7 @@ export default async function (ctx, inject) {
     const auth = Vue.observable(new Auth(ctx))
     inject('auth', auth)
 }
+
+// const authorize = [
+//     {}
+// ]

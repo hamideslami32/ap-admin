@@ -13,24 +13,10 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-alert
-      :value="alertData.show"
-      class="alert"
-      border="left"
-      close-text="Close Alert"
-      :color="alertData.color"
-      dark
-      dismissible
-      transition="scale-transition"
-      @input="closeAlert($event)"
-    >
-      {{ alertData.message }}
-    </v-alert>
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { goTo, logout } from '~/utils/mixins'
 
 export default {
@@ -41,11 +27,6 @@ export default {
       fixed: true,
       title: "Apro Dashboard",
     }
-  },
-  computed: {
-    ...mapGetters({
-      alertData: 'global/alertData'
-    })
   }
 }
 </script>

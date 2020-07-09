@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { alert, loading } from '~/utils/mixins'
+import { loading } from '~/utils/mixins'
 import { required, max } from "vee-validate/dist/rules"
 import {
   extend,
@@ -126,10 +126,11 @@ export default {
         this.loading = true
         const user = await this.$auth.register(this.registerFormData)
         this.loading = false
-        this.alert.message = user.message !== 'Wrong username or password' ? 'user is registered' : 'registeration wasnt successfull'
-        this.alert.show = true
-        this.$store.dispatch('global/setAlertData', this.alert)
-  
+        if (user) {
+          this.$toast.success('user is registered')
+        } else {
+          this.$$toast.error('registeration wasnt successfull')
+        }
       }
     },
     clear() {

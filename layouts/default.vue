@@ -117,29 +117,15 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <v-alert
-      :value="alertData.show"
-      class="alert"
-      border="left"
-      close-text="Close Alert"
-      :color="alertData.color"
-      dark
-      dismissible
-      transition="scale-transition"
-      @input="closeAlert($event)"
-    >
-      {{ alertData.message }}
-    </v-alert>
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { goTo, logout, alert } from '~/utils/mixins'
+import { goTo, logout } from '~/utils/mixins'
 
 export default {
   name: 'Default',
-  mixins: [goTo, logout, alert],
+  mixins: [goTo, logout],
   data() {
     return {
       isLogin: false,
@@ -189,11 +175,6 @@ export default {
       leftDrawer: true,
       title: "Apro Dashboard",
     }
-  },
-  computed: {
-    ...mapGetters({
-      alertData: 'global/alertData'
-    })
   }
 }
 </script>

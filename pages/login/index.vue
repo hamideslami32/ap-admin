@@ -24,13 +24,13 @@
           <form>
             <ValidationProvider
               v-slot="{ errors }"
-              name="Username"
+              name="Phone or Email"
               rules="required"
             >
               <v-text-field
                 v-model="username"
                 :error-messages="errors"
-                label="Username"
+                label="Phone or Email"
                 required
               />
             </ValidationProvider>
@@ -100,14 +100,13 @@ export default {
           password: this.password,
         }
         this.loading = true
-        // this.$toast.show('Logging in...')
         const user = await this.$auth.login(loginPayload)
-        console.log({user})
         this.loading = false
-        this.$toast.success('Successfully authenticated')
-        // this.alert.message = user.message !== 'Wrong username or password' ? 'user is login' : 'login wasnt successfull'
-        // this.alert.show = true
-        // this.$store.dispatch('global/setAlertData', this.alert)
+        if (user.message !== 'Wrong username or password') {
+          this.$toast.success('user is login')
+        } else {
+          this.$toast.error('login wasnt successfull')
+        }
       }
     },
     clear() {

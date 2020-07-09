@@ -1,40 +1,46 @@
 <template>
-  <v-layout>
-    <v-flex style="margin: 0 auto;">
-      <div class="mb-8 text-h4">
-        Profile
+  <div class="d-flex profile">
+    <v-card v-if="$auth.user" class="d-flex justify-space-around pa-4 align-center" width="60%">
+      <div class="avatar mr-8">
+        <v-avatar size="256">
+          <img src="~/assets/imgs/avatar.png" alt="avatar">
+        </v-avatar>
       </div>
-      <v-card v-if="$auth.user" class="d-flex justify-space-around pa-4 align-center" width="600px">
-        <div class="avatar">
-          <v-avatar size="256">
-            <img src="~/assets/imgs/avatar.png" alt="avatar">
-          </v-avatar>
+      <form class="d-flex mt-2 input-wrapper">
+        <div v-for="(item, i) in userInfoList" :key="i">
+          <v-text-field
+            v-model="$auth.user[item.property]"
+            :label="item.title"
+            :disabled="isPhone(item.property)"
+            :filled="isPhone(item.property)"
+            outlined
+          />
         </div>
-        <div class="d-flex flex-column mt-2">
-          <div v-for="(item, i) in userInfoList" :key="i">
-            <v-text-field
-              v-model="$auth.user[item.property]"
-              :label="item.title"
-              placeholder="item.title"
-              :disabled="isPhone(item.property)"
-              :filled="isPhone(item.property)"
-              outlined
-            />
-          </div>
-          <v-btn class=" light-blue white--text" width="100%" :loading="loading" large @click="submit">
-            Update User Data
-          </v-btn>
+        <v-btn class=" light-blue white--text" width="100%" :loading="loading" large @click="submit">
+          Update User Data
+        </v-btn>
+      </form>
+    </v-card>
+    <div class="card-group">
+      <v-card class="roles">
+        <div class="title text-sm-body-2">
+          roles
         </div>
       </v-card>
-    </v-flex>
-  </v-layout>
+      <v-card class="permissions">
+        <div class="title text-sm-body-2">
+          permissions
+        </div>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
-import { alert, loading } from '~/utils/mixins'
+import { loading } from '~/utils/mixins'
 export default {
   name: 'Profile',
-  mixins: [alert, loading],
+  mixins: [ loading],
   data() {
     return {
       userInfoList: [
@@ -65,12 +71,45 @@ export default {
       this.loading = true
       setTimeout(() => {
         this.loading = false
-        this.alert.message = 'Your info is updated!'
-        this.alert.show = true
-        this.alert.color = 'red'
-        this.$store.dispatch('global/setAlertData', this.alert)
+        this.$toast.success('Your info is updated!')
       }, 2000)
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .profile {
+    justify-content: space-between;
+
+    .input-wrapper {
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      & > div {
+        width: 48%;
+      }
+    }
+
+    .card-group {
+      display: flex;
+      width: 39%;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .roles,
+    .permissions {
+      padding: 1rem;
+      height: 49%;
+      align-items: space-between;
+      align-self: stretch;
+
+      .title {
+        border-bottom: 1px solid $primary;
+        color: $primary;
+        border-radius: none;
+      }
+    }
+  }
+</style>

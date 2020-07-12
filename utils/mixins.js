@@ -6,24 +6,6 @@ const goTo = {
     }
 }
 
-const alert = {
-    data() {
-        return {
-            alert: {
-                message: '',
-                color: 'green',
-                show: false
-            }
-        }
-    },
-    methods: {
-        closeAlert(event) {
-            console.log({event})
-            this.$store.dispatch('global/closeAlert')
-        }
-    }
-}
-
 const logout = {
     methods: {
         logout() {
@@ -42,7 +24,6 @@ const loading = {
 
 export {
     goTo,
-    alert,
     loading,
     logout
 }

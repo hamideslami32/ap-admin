@@ -2,11 +2,11 @@
   <v-layout>
     <v-flex class="d-flex justify-center" width="100%">
       <v-card class="pa-8 card" max-width="500">
-        <div class="text-h4 mb-6">
+        <div class="text-h4">
           Register
         </div>
         <ValidationObserver ref="observer">
-          <form>
+          <form class="mt-8">
             <ValidationProvider
               v-slot="{ errors }"
               name="FirstName"
@@ -68,8 +68,8 @@
                 required
               />
             </ValidationProvider>
-            <v-btn class="mt-4 light-blue white--text" width="100%" @click="submit">
-              submit
+            <v-btn large class="mt-8 primary white--text" width="100%" @click="submit">
+              register
             </v-btn>
           </form>
         </ValidationObserver>
@@ -106,7 +106,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
-  mixins: [alert, loading],
+  mixins: [loading],
   layout: 'auth',
   data() {
     return {

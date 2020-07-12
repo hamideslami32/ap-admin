@@ -1,10 +1,9 @@
 @import 'vars';
 
-.alert {
-    position: absolute !important;
-    bottom: 30px;
-    right: 30px;
-    width: 100%;
-    max-width: 800px;
-    height: 60px;
+* {
+    box-sizing: border-box;
+}
+
+.pointer {
+    cursor: pointer;
 }

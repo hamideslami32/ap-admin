@@ -5,32 +5,17 @@ const COOKIE_TOKEN = 'token'
 class Auth {
 
     constructor(ctx) {
-        console.log(ctx)
         this.axios = ctx.app.$axios
         this.storage = ctx.$storage
         this.redirect = ctx.redirect
         this.user = null
 
         const token = this.storage.getCookie(COOKIE_TOKEN)
-
+        
         if (token) {
             this.setToken(token)
-        }
-
-        // let promise;
-        // if (this.token) {
-        //     promise = this.fetchUser()
-        // } else {
-        //     promise = Promise.resolve()
-        // }
-
-        // promise.then(() => {
-        //     ctx.app.router.beforeEach((to, from, next) => {
-        //         console.log(to)
-        //         // if (!this.user) next('/login')
-        //         // else next()
-        //     })
-        // })
+            this.fetchUser()
+        }   
     }
 
     async login(args) {
@@ -43,7 +28,6 @@ class Auth {
             return user
         } catch (error) {
             if(error.response) {
-                console.log(error.response.data)
                 return error.response.data
             }
         }
@@ -55,7 +39,6 @@ class Auth {
             return user
         } catch (error) {
             if (error.response) {
-                console.log(error.response.data)
                 return error.response.data
             }
         }
@@ -69,9 +52,12 @@ class Auth {
     }
 
     async fetchUser() {
-        const user = await this.axios.$get('/auth/user')
-        this.user = user
-        return user
+        try {
+            const user = await this.axios.$get('/auth/user')
+            this.user = user
+        } catch (error) {
+            console.log({error})
+        }
     }
 
     setToken (token) {
@@ -87,15 +73,9 @@ class Auth {
         return authorization ? authorization.slice(7).trim() : null
     }
 
-    
-
 }
 
 export default async function (ctx, inject) {
     const auth = Vue.observable(new Auth(ctx))
     inject('auth', auth)
 }
-
-// const authorize = [
-//     {}
-// ]

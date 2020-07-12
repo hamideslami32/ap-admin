@@ -16,7 +16,7 @@
             outlined
           />
         </div>
-        <v-btn class=" light-blue white--text" width="100%" :loading="loading" large @click="submit">
+        <v-btn class="primary white--text" width="100%" :loading="loading" large @click="submit">
           Update User Data
         </v-btn>
       </form>
@@ -40,7 +40,7 @@
 import { loading } from '~/utils/mixins'
 export default {
   name: 'Profile',
-  mixins: [ loading],
+  mixins: [loading],
   data() {
     return {
       userInfoList: [

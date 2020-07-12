@@ -1,5 +1,4 @@
 const SET_ALERT_DATA = (state, alertData) => {
-    console.log('alertData', alertData)
     state.alert = alertData
 }
 const RESET_ALERT_DATA = (state) => {

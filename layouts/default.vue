@@ -81,24 +81,19 @@
       class="primary align-center"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title
-        style="width: 300px"
-        class="ml-0 pl-4"
-      >
-      <v-chip class="white py-6">
+      <v-btn icon class="mr-4">
+        <nuxt-link to="/" class="text-decoration-none">
+          <v-icon color="white">
+            mdi-home
+          </v-icon>
+        </nuxt-link>
+      </v-btn>
+      <v-chip class="white py-6 d-none d-sm-flex">
+        
         <img src="~/assets/imgs/logo.svg" alt="apro-logo" height="40px">
       </v-chip>
-      </v-toolbar-title>
-      <!-- <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-        class="hidden-sm-and-down"
-      /> -->
       <v-spacer />
-      <v-btn icon>
+      <v-btn icon class="">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
       <v-btn v-if="!$auth.user" tile icon class="rounded primary px-2 mr-5" width="100">
@@ -132,7 +127,7 @@
           <v-list-item
             v-for="(item, i) in userMenuItems"
             :key="i"
-            class="white pointer user-menu-item"
+            class="white pointer primary--text user-menu-item"
             @click.native="item.title === 'Profile' ? $router.push('/profile') : $auth.logout()"
           >
             <v-list-item-action>

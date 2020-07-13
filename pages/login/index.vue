@@ -1,37 +1,21 @@
 <template>
   <v-layout>
-    <!-- <v-banner two-line @click:icon="alert">
-      <v-icon
-        slot="icon"
-      >
-        mdi-bed
-      </v-icon>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
-      Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-      <template v-slot:actions>
-        <v-btn color="primary">Dismiss</v-btn>
-        <v-btn text color="primary">Retry</v-btn>
-      </template>
-    </v-banner> -->
     <v-flex class="d-flex justify-center" width="100%">
-      <v-card class="pa-4" width="100%" max-width="500">
-        <div class="mb-6">
+      <v-card class="pa-8 rounded" width="100%" max-width="500">
+        <div class="text-h4 mb-6">
           Login
         </div>
-        <!-- <v-divider vertical></v-divider> -->
-        <!-- <ValidationObserver ref="observer" v-slot="{ validate, reset }"> -->
         <ValidationObserver ref="observer">
-          <form>
+          <form class="mt-8">
             <ValidationProvider
               v-slot="{ errors }"
-              name="Username"
+              name="Phone or Email"
               rules="required"
             >
               <v-text-field
                 v-model="username"
-                :counter="11"
                 :error-messages="errors"
-                label="Username"
+                label="Phone or Email"
                 required
               />
             </ValidationProvider>
@@ -43,12 +27,13 @@
               <v-text-field
                 v-model="password"
                 :error-messages="errors"
+                type="password"
                 label="Password"
                 required
               />
             </ValidationProvider>
-            <v-btn class="mt-4 light-blue white--text" width="100%" @click="submit">
-              submit
+            <v-btn large class="mt-8 primary white--text" :loading="loading" width="100%" @click="submit">
+              login
             </v-btn>
           </form>
         </ValidationObserver>
@@ -58,6 +43,7 @@
 </template>
 
 <script>
+import { loading } from '~/utils/mixins'
 import { required, max } from "vee-validate/dist/rules"
 import {
   extend,
@@ -79,18 +65,34 @@ extend("max", {
 })
 
 export default {
+  name: 'Login',
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+  mixins: [loading],
+  layout: 'auth',
   data: () => ({
     username: "",
     password: "",
   }),
-
   methods: {
-    submit() {
-      this.$refs.observer.validate()
+    async submit() {
+      const validate = await this.$refs.observer.validate()
+      if (validate) {
+        const loginPayload = {
+          username: this.username,
+          password: this.password,
+        }
+        this.loading = true
+        const user = await this.$auth.login(loginPayload)
+        this.loading = false
+        if (user.message !== 'Wrong username or password') {
+          this.$toast.success('user is login')
+        } else {
+          this.$toast.error('login wasnt successfull')
+        }
+      }
     },
     clear() {
       this.username = ""

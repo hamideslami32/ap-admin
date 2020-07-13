@@ -1,5 +1,9 @@
 @import 'vars';
 
-.w-80 {
-    width: 80%;
+* {
+    box-sizing: border-box;
+}
+
+.pointer {
+    cursor: pointer;
 }

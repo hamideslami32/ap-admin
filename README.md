@@ -1,4 +1,4 @@
-# apro-admin
+# elearning-adm-panel
 
 ## Build Setup
 

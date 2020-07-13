@@ -107,7 +107,7 @@
       <v-menu v-else offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            class="primary"
+            class="primary lighten-1"
             v-bind="attrs"
             height="auto"
             v-on="on"
@@ -143,8 +143,8 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-    <v-main>
-      <div class="pa-4">
+    <v-main class="grey lighten-2">
+      <div>
         <nuxt/>
       </div>
     </v-main>

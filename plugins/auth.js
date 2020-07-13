@@ -48,7 +48,7 @@ class Auth {
         this.user = null
         this.storage.removeCookie('token')
         this.removeToken()
-        this.redirect(401, '/login')
+        this.redirect(302, '/login')
     }
 
     async fetchUser() {
@@ -71,6 +71,16 @@ class Auth {
     get token () {
         const authorization = this.axios.defaults.headers.common.Authorization
         return authorization ? authorization.slice(7).trim() : null
+    }
+
+    can(permission) {
+        const hasPermission = this.user.permissions.includes(permission)
+        return hasPermission
+    }
+
+    hasRole(role) {
+        const userHasRole = this.user.roles.includes(role)
+        return userHasRole
     }
 
 }

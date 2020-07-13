@@ -164,7 +164,7 @@
       width="800px"
     >
       <v-card>
-        <v-card-title class="primary darken-2 white--text">
+        <v-card-title class="primary white--text">
           Create contact
         </v-card-title>
         <v-container>

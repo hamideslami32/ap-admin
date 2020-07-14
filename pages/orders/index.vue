@@ -1,37 +1,44 @@
 <template>
   <v-layout>
-    <v-flex>
-      <v-card class="d-flex flex-column pa-4">
-        <div class="filters d-flex flex-column">
-          <div class="d-flex filter-cols-wrapper pa-2">
-            <div class="filter-col" v-for="(col, i) in filterFieldsData" :key="i" :style="`width:${col.width}`">
-              <div class="field d-flex align-items pl-2" v-for="(item, j) in col" :key="j">
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="3">
-                      <v-subheader class="mt-4">{{item.label}}</v-subheader>
-                    </v-col>
-                    <v-col :cols="fieldCol(i)">
-                      <v-text-field
-                        :placeholder="item.placeholder"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="4" v-if="i%2 !== 0">
-                      <v-text-field
-                        :placeholder="item.s_placeholder"
-                        class="ml-2"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
+    <v-flex class="pa-4">
+      <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header class="text-h6">Search</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <div class="d-flex flex-column">
+              <div class="filters d-flex flex-column">
+                <div class="d-flex flex-column flex-md-row filter-cols-wrapper">
+                  <div class="filter-col pr-6" v-for="(col, key) in filterFieldsData" :key="key">
+                    <div class="field d-flex align-items" v-for="(item, j) in col" :key="j">
+                      <v-container fluid>
+                        <v-row>
+                          <v-col cols="4">
+                            <v-subheader class="mt-4 subtitle-2">{{item.label}}</v-subheader>
+                          </v-col>
+                          <v-col :cols="fieldCol(key)">
+                            <v-text-field
+                              :placeholder="item.placeholder"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" v-if="key === 'secondCol'">
+                            <v-text-field
+                              :placeholder="item.s_placeholder"
+                              class="ml-2"
+                            ></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-end ma-6">
+                  <v-btn width="200" color="primary" large>search</v-btn>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="d-flex justify-end ma-4">
-            <v-btn width="200" color="primary" large>search</v-btn>
-          </div>
-        </div>
-      </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-flex>
   </v-layout>
 </template>
@@ -40,8 +47,8 @@
 export default {
   data() {
     return {
-      filterFieldsData: [
-        [
+      filterFieldsData: {
+        firstCol: [
           {
             label:'Mobile',
             placeholder: '09' 
@@ -55,7 +62,7 @@ export default {
             placeholder: 'flight'
           }
         ],
-        [
+        secondCol: [
           {
             label:'Issue Date',
             placeholder: 'From',
@@ -72,7 +79,7 @@ export default {
             s_placeholder: 'DST'
           }
         ],
-        [
+        thirdCol: [
           {
             label:'Payment Status',
             placeholder: ''
@@ -86,12 +93,12 @@ export default {
             placeholder: ''
           }
         ]
-      ]
+      }
     }
   },
   methods: {
-    fieldCol(colIndex) {
-      return colIndex%2 !== 0 ? 4 : 8
+    fieldCol(key) {
+      return key === 'secondCol' ? 4 : 8
     }
   }
 }
@@ -99,26 +106,35 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
-  height: 400px;
+  min-height: 400px;
+  height: 100%;
 
   .filter-cols-wrapper {
     background-color: #fff;
     height: 80%;
 
     .filter-col {
-      border-right: 1px solid #ccc;
-      height: inherit;
-      width: 33.33%;
+      border-right: 1px solid #eee;
+      min-width: 30%;
 
       &:last-of-type {
         border-right: none;
+        padding-right: 0 !important;
       }
 
       .field {
-        width: 90%;
+
+        .col {
+          padding: 0 !important;
+        }
       }
     }
   }
-  
+}
+
+@media only screen and (max-width: 960px) {
+  .filter-col {
+    border-right: none !important;
+  }
 }
 </style>

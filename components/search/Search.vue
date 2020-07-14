@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="d-flex justify-end my-6">
-            <v-btn width="200" color="primary" x-large @submit="search">
+            <v-btn width="200" color="primary" x-large @click="search">
               search
             </v-btn>
           </div>
@@ -52,7 +52,9 @@
 </template>
 
 <script>
-// import forOwn from 'lodash/forOwn'
+import forOwn from 'lodash/forOwn'
+import forEach from 'lodash/forEach'
+import { normalizeSearchField } from '~/utils/helpers'
 export default {
     data() {
         return {
@@ -139,7 +141,7 @@ export default {
                     label:'Confirmation Code',
                     placeholder: ''
                 }
-                ]
+                ],
             }
         }
     },
@@ -148,15 +150,29 @@ export default {
             return key === 'secondCol' ? 4 : 8
         },
         search() {
+          console.log('search method')
+          this.generateSearchUrl()
             // const url = this.generateSearchUrl()
             // this.$router.push(url)
         },
         generateSearchUrl() {
+            let fieldValuesArray = []
             // let url = ''
-            // let arr = this.filterFieldsData.forOwn(item => console.log({item}))
-
-
-            // return url
+            forOwn(this.filterFieldsData, (item,i) => {
+                forEach(item , (fieldObject) => {
+                  if (fieldObject.value) {
+                    fieldValuesArray.push(normalizeSearchField(fieldObject))
+                  }
+                  if (i === 'secondCol' && fieldObject.s_value) {
+                    let fieldData = {
+                      label: (fieldObject.label.toLowerCase()).replace(' ', '-'), 
+                      value: fieldObject.s_value.toLowerCase()
+                    }
+                    fieldValuesArray.push(fieldData)
+                  }
+                })
+            })
+                  console.log({fieldValuesArray})
         },
 
     }

@@ -22,6 +22,7 @@
                             <v-select
                               v-else
                               :items="item.selectList"
+                              v-model="item.value"
                             ></v-select>
                           </v-col>
                           <v-col cols="4" v-if="key === 'secondCol'">

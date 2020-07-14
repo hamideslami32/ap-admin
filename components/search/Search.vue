@@ -150,7 +150,6 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
-  min-height: 400px;
   height: 100%;
 
   .filter-cols-wrapper {

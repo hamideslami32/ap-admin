@@ -89,7 +89,6 @@
         </nuxt-link>
       </v-btn>
       <v-chip class="white py-6 d-none d-sm-flex">
-        
         <img src="~/assets/imgs/logo.svg" alt="apro-logo" height="40px">
       </v-chip>
       <v-spacer />
@@ -145,7 +144,7 @@
     </v-app-bar>
     <v-main class="grey lighten-2">
       <div>
-        <nuxt/>
+        <nuxt />
       </div>
     </v-main>
     <v-btn

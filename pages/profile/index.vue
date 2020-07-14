@@ -1,19 +1,18 @@
 <template>
-  <div class="d-flex profile">
+  <div class="d-flex profile pa-4">
     <v-card v-if="$auth.user" class="d-flex justify-space-around pa-4 align-center" width="60%">
       <div class="avatar mr-8">
         <v-avatar size="256">
           <img src="~/assets/imgs/avatar.png" alt="avatar">
         </v-avatar>
       </div>
-      <form class="d-flex mt-2 input-wrapper">
+      <form class="d-flex mt-2 form">
         <div v-for="(item, i) in userInfoList" :key="i">
           <v-text-field
             v-model="$auth.user[item.property]"
             :label="item.title"
             :disabled="isPhone(item.property)"
             :filled="isPhone(item.property)"
-            outlined
           />
         </div>
         <v-btn class="primary white--text" width="100%" :loading="loading" large @click="submit">
@@ -81,10 +80,12 @@ export default {
 <style lang="scss" scoped>
   .profile {
     justify-content: space-between;
+    min-height: 400px;
 
-    .input-wrapper {
+    .form {
       flex-wrap: wrap;
       justify-content: space-between;
+      height: 80%;
 
       & > div {
         width: 48%;

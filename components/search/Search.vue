@@ -1,57 +1,61 @@
 <template>
-    <v-expansion-panels :value="openExpansionPanel">
-        <v-expansion-panel>
-          <v-expansion-panel-header class="text-h6">Search</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <div class="d-flex flex-column">
-              <div class="filters d-flex flex-column">
-                <div class="d-flex flex-column flex-md-row filter-cols-wrapper">
-                  <div class="filter-col pr-6" v-for="(col, key) in filterFieldsData" :key="key">
-                    <div class="field d-flex align-items" v-for="(item, j) in col" :key="j">
-                      <v-container fluid>
-                        <v-row>
-                          <v-col cols="4">
-                            <v-subheader class="mt-4 subtitle-2">{{item.label}}</v-subheader>
-                          </v-col>
-                          <v-col :cols="fieldCol(key)">
-                            <v-text-field
-                              v-if="item.type === 'input'"
-                              :placeholder="item.placeholder"
-                              v-model="item.value"
-                            ></v-text-field>
-                            <v-select
-                              v-else
-                              :items="item.selectList"
-                              v-model="item.value"
-                            ></v-select>
-                          </v-col>
-                          <v-col cols="4" v-if="key === 'secondCol'">
-                            <v-text-field
-                              :placeholder="item.s_placeholder"
-                              class="ml-2"
-                              v-model="item.s_value"
-                            ></v-text-field>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-end my-6">
-                  <v-btn width="200" color="primary" large @submit="search">search</v-btn>
-                </div>
+  <v-expansion-panel class="search">
+    <v-expansion-panel-header class="text-h6">
+      Search
+    </v-expansion-panel-header>
+    <v-expansion-panel-content>
+      <div class="d-flex flex-column">
+        <div class="filters d-flex flex-column">
+          <div class="d-flex flex-column flex-md-row filter-cols-wrapper">
+            <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
+              <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
+                <v-container fluid>
+                  <v-row>
+                    <v-col cols="4">
+                      <v-subheader class="mt-4 subtitle-2">
+                        {{ item.label }}
+                      </v-subheader>
+                    </v-col>
+                    <v-col :cols="fieldCol(key)">
+                      <v-text-field
+                        v-if="item.type === 'input'"
+                        v-model="item.value"
+                        :placeholder="item.placeholder"
+                      />
+                      <v-select
+                        v-else
+                        v-model="item.value"
+                        :items="item.selectList"
+                      />
+                    </v-col>
+                    <v-col v-if="key === 'secondCol'" cols="4">
+                      <v-text-field
+                        v-model="item.s_value"
+                        :placeholder="item.s_placeholder"
+                        class="ml-2"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-container>
               </div>
             </div>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+          </div>
+          <div class="d-flex justify-end my-6">
+            <v-btn width="200" color="primary" x-large @submit="search">
+              search
+            </v-btn>
+          </div>
+        </div>
+      </div>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
 </template>
 
 <script>
+// import forOwn from 'lodash/forOwn'
 export default {
     data() {
         return {
-            openExpansionPanel: 0,
             filterFieldsData: {
                 firstCol: [
                 {
@@ -143,7 +147,18 @@ export default {
         fieldCol(key) {
             return key === 'secondCol' ? 4 : 8
         },
-        search() {}
+        search() {
+            // const url = this.generateSearchUrl()
+            // this.$router.push(url)
+        },
+        generateSearchUrl() {
+            // let url = ''
+            // let arr = this.filterFieldsData.forOwn(item => console.log({item}))
+
+
+            // return url
+        },
+
     }
 }
 </script>

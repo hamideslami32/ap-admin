@@ -22,7 +22,7 @@
 import { goTo, logout } from '~/utils/mixins'
 
 export default {
-  name: 'auth',
+  name: 'Auth',
   mixins: [goTo, logout],
   middleware: 'auth',
   data() {

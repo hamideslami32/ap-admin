@@ -18,12 +18,14 @@
                           <v-col :cols="fieldCol(key)">
                             <v-text-field
                               :placeholder="item.placeholder"
+                              v-model="item.value"
                             ></v-text-field>
                           </v-col>
                           <v-col cols="4" v-if="key === 'secondCol'">
                             <v-text-field
                               :placeholder="item.s_placeholder"
                               class="ml-2"
+                              v-model="item.s_value"
                             ></v-text-field>
                           </v-col>
                         </v-row>
@@ -31,7 +33,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="d-flex justify-end ma-6">
+                <div class="d-flex justify-end my-6">
                   <v-btn width="200" color="primary" large>search</v-btn>
                 </div>
               </div>
@@ -51,45 +53,57 @@ export default {
       filterFieldsData: {
         firstCol: [
           {
+            value: '',
             label:'Mobile',
             placeholder: '09' 
           },
           {
+            value: '',
             label:'Order No',
             placeholder: 'DF-'
           },
           {
+            value: '',
             label:'Product',
             placeholder: 'flight'
           }
         ],
         secondCol: [
           {
+            value: '',
             label:'Issue Date',
             placeholder: 'From',
+            s_value: '',
             s_placeholder: 'To'
           },
           {
+            value: '',
             label:'Travel Date',
             placeholder: 'From',
+            s_value: '',
             s_placeholder: 'To'
           },
           {
+            value: '',
             label:'Route',
             placeholder: 'ORG',
+            s_value: '',
             s_placeholder: 'DST'
           }
         ],
         thirdCol: [
           {
+            value: '',
             label:'Payment Status',
             placeholder: ''
           },
           {
+            value: '',
             label:'Order Status',
             placeholder: ''
           },
           {
+            value: '',
             label:'Confirmation Code',
             placeholder: ''
           }

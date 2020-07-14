@@ -17,9 +17,15 @@
                           </v-col>
                           <v-col :cols="fieldCol(key)">
                             <v-text-field
+                              v-if="item.type === 'input'"
                               :placeholder="item.placeholder"
                               v-model="item.value"
                             ></v-text-field>
+                            <v-select
+                              v-else
+                              :items="items"
+                              label="Standard"
+                            ></v-select>
                           </v-col>
                           <v-col cols="4" v-if="key === 'secondCol'">
                             <v-text-field
@@ -34,7 +40,7 @@
                   </div>
                 </div>
                 <div class="d-flex justify-end my-6">
-                  <v-btn width="200" color="primary" large>search</v-btn>
+                  <v-btn width="200" color="primary" large @submit="search">search</v-btn>
                 </div>
               </div>
             </div>
@@ -54,16 +60,19 @@ export default {
         firstCol: [
           {
             value: '',
+            type: 'input',
             label:'Mobile',
             placeholder: '09' 
           },
           {
             value: '',
+            type: 'input',
             label:'Order No',
             placeholder: 'DF-'
           },
           {
             value: '',
+            type: 'select',
             label:'Product',
             placeholder: 'flight'
           }
@@ -71,6 +80,7 @@ export default {
         secondCol: [
           {
             value: '',
+            type: 'input',
             label:'Issue Date',
             placeholder: 'From',
             s_value: '',
@@ -78,6 +88,7 @@ export default {
           },
           {
             value: '',
+            type: 'input',
             label:'Travel Date',
             placeholder: 'From',
             s_value: '',
@@ -85,6 +96,7 @@ export default {
           },
           {
             value: '',
+            type: 'input',
             label:'Route',
             placeholder: 'ORG',
             s_value: '',
@@ -94,16 +106,19 @@ export default {
         thirdCol: [
           {
             value: '',
+            type: 'select',
             label:'Payment Status',
             placeholder: ''
           },
           {
             value: '',
+            type: 'select',
             label:'Order Status',
             placeholder: ''
           },
           {
             value: '',
+            type: 'input',
             label:'Confirmation Code',
             placeholder: ''
           }
@@ -114,6 +129,9 @@ export default {
   methods: {
     fieldCol(key) {
       return key === 'secondCol' ? 4 : 8
+    },
+    search() {
+      console.log
     }
   }
 }

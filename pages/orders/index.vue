@@ -59,19 +59,16 @@ export default {
           {
             label:'Issue Date',
             placeholder: 'From',
-            s_label:'',
             s_placeholder: 'To'
           },
           {
             label:'Travel Date',
             placeholder: 'From',
-            s_label:'',
             s_placeholder: 'To'
           },
           {
             label:'Route',
             placeholder: 'ORG',
-            s_label:'',
             s_placeholder: 'DST'
           }
         ],

@@ -23,8 +23,7 @@
                             ></v-text-field>
                             <v-select
                               v-else
-                              :items="items"
-                              label="Standard"
+                              :items="item.selectList"
                             ></v-select>
                           </v-col>
                           <v-col cols="4" v-if="key === 'secondCol'">
@@ -74,7 +73,13 @@ export default {
             value: '',
             type: 'select',
             label:'Product',
-            placeholder: 'flight'
+            placeholder: 'flight',
+            selectList: [
+              'Flight',
+              'Hotel',
+              'Insurance',
+              'Visa'
+            ]
           }
         ],
         secondCol: [
@@ -108,13 +113,24 @@ export default {
             value: '',
             type: 'select',
             label:'Payment Status',
-            placeholder: ''
+            placeholder: '',
+            selectList: [
+              'Success',
+              'Pending',
+              'Failed',
+              'Partial'
+            ]
           },
           {
             value: '',
             type: 'select',
             label:'Order Status',
-            placeholder: ''
+            placeholder: '',
+            selectList: [
+              'Success',
+              'Pending',
+              'Failed'
+            ]
           },
           {
             value: '',

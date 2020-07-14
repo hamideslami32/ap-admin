@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      <v-expansion-panels>
+      <v-expansion-panels :value="openExpansionPanel">
         <v-expansion-panel>
           <v-expansion-panel-header class="text-h6">Search</v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -47,6 +47,7 @@
 export default {
   data() {
     return {
+      openExpansionPanel: 0,
       filterFieldsData: {
         firstCol: [
           {

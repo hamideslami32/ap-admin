@@ -6,8 +6,6 @@ ADD package.json package-lock.json /app/
 
 RUN npm install
 
-RUN npm install -g http-server
-
 ADD . /app/
 
 ENV HOST 0.0.0.0
@@ -22,4 +20,4 @@ RUN npm run export
 EXPOSE 3000
 
 # start command
-CMD ["http-server", "-p 3000", "./dist"]
+CMD ["yarn", "serve"]

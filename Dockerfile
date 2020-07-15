@@ -13,6 +13,7 @@ ADD . /app/
 ENV HOST 0.0.0.0
 
 ENV NODE_ENV production
+ENV BASE_URL /admin/
 
 RUN npm run build
 

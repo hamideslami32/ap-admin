@@ -150,29 +150,65 @@ export default {
             return key === 'secondCol' ? 4 : 8
         },
         search() {
-          console.log('search method')
-          this.generateSearchUrl()
-            // const url = this.generateSearchUrl()
-            // this.$router.push(url)
+          const url = this.generateSearchUrl()
+          this.$router.push(url)
         },
         generateSearchUrl() {
+            let label
+            let fieldData
             let fieldValuesArray = []
-            // let url = ''
-            forOwn(this.filterFieldsData, (item,i) => {
-                forEach(item , (fieldObject) => {
+            let url = '/orders?'
+            this.getSearchFormValue
+            forOwn(this.filterFieldsData, (items,i) => {
+                forEach(items , (fieldObject) => {
+                  const fieldLabel = fieldObject.label
+
                   if (fieldObject.value) {
-                    fieldValuesArray.push(normalizeSearchField(fieldObject))
+                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                      label = fieldLabel+'-from'
+                    } else if (fieldLabel === 'Route') {
+                      label = fieldLabel+'-origin'
+                    } else {
+                      label = fieldLabel
+                    }
+
+                    fieldData = {
+                      label: label,
+                      value: fieldObject.value
+                    }
+
+                    fieldValuesArray.push(fieldData)
                   }
                   if (i === 'secondCol' && fieldObject.s_value) {
-                    let fieldData = {
-                      label: (fieldObject.label.toLowerCase()).replace(' ', '-'), 
-                      value: fieldObject.s_value.toLowerCase()
+
+                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                      label = fieldLabel+'-to'
+                    } else if (fieldLabel === 'Route') {
+                      label = fieldLabel+'-dest'
                     }
+
+                    fieldData = {
+                      label: label, 
+                      value: fieldObject.s_value,
+                    }
+
                     fieldValuesArray.push(fieldData)
                   }
                 })
             })
-                  console.log({fieldValuesArray})
+
+            fieldValuesArray = normalizeSearchField(fieldValuesArray)
+
+            forEach(fieldValuesArray, ((x,i) => {
+              url += `${x.label}=${x.value}`
+
+              if (i !== fieldValuesArray.length-1) {
+                url += '&'
+              }
+
+            }))
+
+            return url
         },
 
     }

@@ -8,11 +8,12 @@ export const normalizePath = (path) => {
         
     return result
 }
-export const normalizeSearchField = (object) => {
-    let fieldData = {
-        label: object.label.toLowerCase().replace(' ', '-'), 
-        value: object.value.toLowerCase()
-    }
-        
-    return fieldData
+export const normalizeSearchField = (array) => {
+    let normalizedArray = array.map(object => {
+        return {
+            label: object.label.toLowerCase().replace(' ', '-'), 
+            value: object.value.toLowerCase()
+        }
+    })
+    return normalizedArray
 }

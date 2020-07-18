@@ -92,8 +92,8 @@ export default {
           if (user.message) this.$toast.success('user is login')
 
         } catch (error) {
-          this.$toast.error('login wasnt successfull')
           console.log({error})
+          this.$toast.error('login wasnt successfull')
         }
       }
     },

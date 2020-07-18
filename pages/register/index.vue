@@ -127,7 +127,7 @@ export default {
         try {
           const user = await this.$auth.register(this.registerFormData)
           this.loading = false
-          if (user.message) this.$toast.success('user is registered')
+          if (user) this.$toast.success('user is registered')
           
         } catch (error) {
           console.log({error})

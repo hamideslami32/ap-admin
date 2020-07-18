@@ -89,7 +89,7 @@ export default {
           const user = await this.$auth.login(loginPayload)
           this.loading = false
           
-          if (user.message) this.$toast.success('user is login')
+          if (user) this.$toast.success('user is login')
 
         } catch (error) {
           console.log({error})

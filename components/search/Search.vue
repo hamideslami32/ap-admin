@@ -234,7 +234,7 @@ export default {
           const url = this.generateSearchUrl()
           this.$router.push(url)
         },
-        getSearchFormValue() {
+        getSearchFormValues() {
           let fieldValuesArray = []
           let label
           let fieldData
@@ -278,7 +278,7 @@ export default {
             return normalizeSearchField(fieldValuesArray)
         },
         generateSearchUrl() {
-            let normalizedSearchFormValues = this.getSearchFormValue()
+            let normalizedSearchFormValues = this.getSearchFormValues()
             let url = '/orders?'
 
             forEach(normalizedSearchFormValues, ((x,i) => {

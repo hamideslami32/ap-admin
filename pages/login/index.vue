@@ -85,12 +85,15 @@ export default {
           password: this.password,
         }
         this.loading = true
-        const user = await this.$auth.login(loginPayload)
-        this.loading = false
-        if (user.message !== 'Wrong username or password') {
-          this.$toast.success('user is login')
-        } else {
+        try {
+          const user = await this.$auth.login(loginPayload)
+          this.loading = false
+          
+          if (user.message) this.$toast.success('user is login')
+
+        } catch (error) {
           this.$toast.error('login wasnt successfull')
+          console.log({error})
         }
       }
     },

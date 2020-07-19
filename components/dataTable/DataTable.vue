@@ -14,14 +14,39 @@
         <template v-slot:top>
           <v-text-field v-model="search" label="Search" class="mx-4" />
         </template>
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:body="{ items }">
+          <tbody>
+            <tr v-for="(item, i) in items" :key="i">
+              <td>{{ item.id }}</td>
+              <td>{{ item.route }}</td>
+              <td>{{ item.departingDate }}</td>
+              <td>{{ item.createdDate }}</td>
+              <td>{{ item.provider + ' - ' + item.airline }}</td>
+              <td>{{ item.pax+' P' }}</td>
+              <td>{{ item.netPrice }}</td>
+              <td>{{ item.departingConfCode }}</td>
+              <td>{{ item.departingOrderStatus }}</td>
+              <td>
+                <v-chips class="success white--text rounded pa-2">{{ item.departingOrderStatus }}</v-chips>
+              </td>
+              <td>{{ item.paymentStatus }}</td>
+              <td></td>
+              <span class="order-icon rounded white elevation-1">
+                <v-icon>
+                  mdi-airplane
+                </v-icon>
+              </span>
+            </tr>
+          </tbody>
+        </template>
+        <!-- <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon small @click="deleteItem(item)">
             mdi-delete
           </v-icon>
-        </template>
+        </template> -->
       </v-data-table>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -43,6 +68,13 @@ export default {
         required: true
       },
     },
+    computed: {
+      generateTableOrders() {
+        let orders = []
+
+        return orders
+      }
+    },
     data() {
         return {
             search: "",
@@ -63,29 +95,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filters {
-  height: 100%;
-
-  .filter-cols-wrapper {
+.data-table {
+  .order-icon {
     background-color: #fff;
-    height: 80%;
-
-    .filter-col {
-      border-right: 1px solid #eee;
-      min-width: 30%;
-
-      &:last-of-type {
-        border-right: none;
-        padding-right: 0 !important;
-      }
-
-      .field {
-
-        .col {
-          padding: 0 !important;
-        }
-      }
-    }
+    border: 1px solid grey;
+    position: absolute;
+    left: 2px;
+    margin-top: 5px;
+    padding: 3px;
   }
 }
 

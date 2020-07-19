@@ -121,7 +121,7 @@ export default {
                     'success',
                     'pending',
                     'failed',
-                    'patial'
+                    'partial'
                     ]
                 },
                 {
@@ -190,37 +190,19 @@ export default {
         return urlHasParams
       },
       setSearchFieldValues(fieldsArray) {
-        forEach(fieldsArray, obj => {
+
+        forEach(fieldsArray, (item) => {
           forOwn(this.filterFieldsData, (array) => {
             forEach(array, (fieldObject) => {
-              if (fieldObject.label === obj.label) {
 
-                switch (fieldObject.label) {
-                  case 'Issue Date':
-                    if (obj.placeholder === 'from') {
-                      fieldObject.value = obj.value
-                    } else{
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                  case 'Travel Date':
-                    if (obj.placeholder === 'from') {
-                      fieldObject.value = obj.value
-                    } else {
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                  case 'Route':
-                    if (obj.placeholder === 'origin') {
-                      fieldObject.value = obj.value
-                    } else {
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                
-                  default:
-                    fieldObject.value = obj.value
-                    break
+              if (item.label === fieldObject.label) {
+
+                if (item.placeholder && (item.placeholder === 'to' || item.placeholder === 'destination')) {
+                  fieldObject.s_value = item.value
+
+                } else {
+                  fieldObject.value = item.value
+
                 }
               }
             })

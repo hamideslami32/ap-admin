@@ -15,7 +15,8 @@ export const normalizeSearchField = (array) => {
     let normalizedArray = array.map(object => {
         return {
             label: object.label.toLowerCase().replace(' ', '-'), 
-            value: object.value.trim().toLowerCase()
+            value: object.value.trim().toLowerCase(),
+            placeholder: object.placeholder
         }
     })
     return normalizedArray
@@ -26,7 +27,7 @@ export const normalizeUrl= (urlObj) => {
     let result = []
     let regex = /\b\w/g
     let label
-    let placeholder = ''
+    let placeholder = null
     forOwn(urlObj, (item, key) => {
         switch (key) {
             case 'issue-date-from':

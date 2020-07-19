@@ -68,7 +68,7 @@
                 required
               />
             </ValidationProvider>
-            <v-btn large class="mt-8 primary white--text" width="100%" @click="submit">
+            <v-btn large class="mt-8 primary white--text" width="100%" @click="submit" :loading="loading">
               register
             </v-btn>
           </form>
@@ -124,12 +124,14 @@ export default {
       const validate = await this.$refs.observer.validate()
       if (validate) {
         this.loading = true
-        const user = await this.$auth.register(this.registerFormData)
-        this.loading = false
-        if (user) {
-          this.$toast.success('user is registered')
-        } else {
-          this.$$toast.error('registeration wasnt successfull')
+        try {
+          const user = await this.$auth.register(this.registerFormData)
+          this.loading = false
+          if (user) this.$toast.success('user is registered')
+          
+        } catch (error) {
+          console.log({error})
+          this.$toast.error('registeration wasnt successfull')          
         }
       }
     },

@@ -54,7 +54,7 @@
 <script>
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
-import { normalizeSearchField } from '~/utils/helpers'
+import { normalizeSearchField, normalizeUrl } from '~/utils/helpers'
 export default {
     data() {
         return {
@@ -70,7 +70,7 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Order No',
-                    placeholder: 'DF-'
+                    placeholder: 'df-'
                 },
                 {
                     value: '',
@@ -78,10 +78,10 @@ export default {
                     label:'Product',
                     placeholder: 'flight',
                     selectList: [
-                    'Flight',
-                    'Hotel',
-                    'Insurance',
-                    'Visa'
+                    'flight',
+                    'hotel',
+                    'bus',
+                    'visa'
                     ]
                 }
                 ],
@@ -90,25 +90,25 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Issue Date',
-                    placeholder: 'From',
+                    placeholder: 'from',
                     s_value: '',
-                    s_placeholder: 'To'
+                    s_placeholder: 'to'
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Travel Date',
-                    placeholder: 'From',
+                    placeholder: 'from',
                     s_value: '',
-                    s_placeholder: 'To'
+                    s_placeholder: 'to'
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Route',
-                    placeholder: 'ORG',
+                    placeholder: 'origin',
                     s_value: '',
-                    s_placeholder: 'DST'
+                    s_placeholder: 'destination'
                 }
                 ],
                 thirdCol: [
@@ -118,10 +118,10 @@ export default {
                     label:'Payment Status',
                     placeholder: '',
                     selectList: [
-                    'Success',
-                    'Pending',
-                    'Failed',
-                    'Partial'
+                    'success',
+                    'pending',
+                    'failed',
+                    'patial'
                     ]
                 },
                 {
@@ -130,9 +130,9 @@ export default {
                     label:'Order Status',
                     placeholder: '',
                     selectList: [
-                    'Success',
-                    'Pending',
-                    'Failed'
+                    'success',
+                    'pending',
+                    'failed'
                     ]
                 },
                 {
@@ -145,34 +145,152 @@ export default {
             }
         }
     },
+    watch: {
+      $route: {
+        handler: function() {
+          this.init()
+        },
+        deep: true,
+        immediate: true
+      },
+    },
+    mounted() {
+      this.init()
+
+    },
     methods: {
+      async init() {
+        await this.fillSearchValues()
+        // if (urlHasValue) this.search()
+      },
+      fillSearchValues() {
+        
+        // get url
+        let url =  window.location.search
+        let searchParams =  new URLSearchParams(url)
+
+        // let urlHasParams = Boolean(searchParams.getAll().length())
+        let urlHasParams = true
+
+        if (urlHasParams) {
+          let urlObj = {}
+          searchParams.forEach((value,label) => {
+            urlObj[label] = value
+          })
+  
+          // normalized url object
+          let fieldValuesArray = normalizeUrl(urlObj)
+
+          //set values
+          this.setSearchFieldValues(fieldValuesArray)
+  
+        }
+
+        // return if url has value
+        return urlHasParams
+      },
+      setSearchFieldValues(fieldsArray) {
+        forEach(fieldsArray, obj => {
+          forOwn(this.filterFieldsData, (array) => {
+            forEach(array, (fieldObject) => {
+              if (fieldObject.label === obj.label) {
+
+                switch (fieldObject.label) {
+                  case 'Issue Date':
+                    if (obj.placeholder === 'from') {
+                      fieldObject.value = obj.value
+                    } else{
+                      fieldObject.s_value = obj.value
+                    }
+                    break
+                  case 'Travel Date':
+                    if (obj.placeholder === 'from') {
+                      fieldObject.value = obj.value
+                    } else {
+                      fieldObject.s_value = obj.value
+                    }
+                    break
+                  case 'Route':
+                    if (obj.placeholder === 'origin') {
+                      fieldObject.value = obj.value
+                    } else {
+                      fieldObject.s_value = obj.value
+                    }
+                    break
+                
+                  default:
+                    fieldObject.value = obj.value
+                    break
+                }
+              }
+            })
+          })
+        })
+      },
         fieldCol(key) {
             return key === 'secondCol' ? 4 : 8
         },
         search() {
-          console.log('search method')
-          this.generateSearchUrl()
-            // const url = this.generateSearchUrl()
-            // this.$router.push(url)
+          const url = this.generateSearchUrl()
+          this.$router.push(url)
         },
-        generateSearchUrl() {
-            let fieldValuesArray = []
-            // let url = ''
-            forOwn(this.filterFieldsData, (item,i) => {
-                forEach(item , (fieldObject) => {
+        getSearchFormValues() {
+          let fieldValuesArray = []
+          let label
+          let fieldData
+          forOwn(this.filterFieldsData, (items,i) => {
+                forEach(items , (fieldObject) => {
+                  const fieldLabel = fieldObject.label
+
                   if (fieldObject.value) {
-                    fieldValuesArray.push(normalizeSearchField(fieldObject))
+                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                      label = fieldLabel+'-from'
+                    } else if (fieldLabel === 'Route') {
+                      label = fieldLabel+'-origin'
+                    } else {
+                      label = fieldLabel
+                    }
+
+                    fieldData = {
+                      label: label,
+                      value: fieldObject.value
+                    }
+
+                    fieldValuesArray.push(fieldData)
                   }
                   if (i === 'secondCol' && fieldObject.s_value) {
-                    let fieldData = {
-                      label: (fieldObject.label.toLowerCase()).replace(' ', '-'), 
-                      value: fieldObject.s_value.toLowerCase()
+
+                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                      label = fieldLabel+'-to'
+                    } else if (fieldLabel === 'Route') {
+                      label = fieldLabel+'-dest'
                     }
+
+                    fieldData = {
+                      label: label, 
+                      value: fieldObject.s_value,
+                    }
+
                     fieldValuesArray.push(fieldData)
                   }
                 })
             })
-                  console.log({fieldValuesArray})
+            return normalizeSearchField(fieldValuesArray)
+        },
+        generateSearchUrl() {
+            let normalizedSearchFormValues = this.getSearchFormValues()
+            let url = '/orders?'
+
+            forEach(normalizedSearchFormValues, ((x,i) => {
+              url += `${x.label}=${x.value}`
+
+              if (i !== normalizedSearchFormValues.length-1) {
+                url += '&'
+              }
+
+            }))
+
+            return url
         },
 
     }

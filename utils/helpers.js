@@ -29,6 +29,7 @@ export const normalizeUrl= (urlObj) => {
     let label
     let placeholder = null
     forOwn(urlObj, (item, key) => {
+        placeholder = null
         switch (key) {
             case 'issue-date-from':
                 label = 'Issue Date'

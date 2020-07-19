@@ -159,8 +159,8 @@ export default {
 
     },
     methods: {
-      async init() {
-        await this.fillSearchValues()
+      init() {
+        this.fillSearchValues()
         // if (urlHasValue) this.search()
       },
       fillSearchValues() {
@@ -195,7 +195,7 @@ export default {
           forOwn(this.filterFieldsData, (array) => {
             forEach(array, (fieldObject) => {
 
-              if (item.label === fieldObject.label) {
+              if (fieldObject.label === item.label) {
 
                 if (item.placeholder && (item.placeholder === 'to' || item.placeholder === 'destination')) {
                   fieldObject.s_value = item.value
@@ -214,7 +214,7 @@ export default {
         },
         search() {
           const url = this.generateSearchUrl()
-          this.$router.push(url)
+          this.$router.push({path: '/orders', query: url})
         },
         getSearchFormValues() {
           let fieldValuesArray = []
@@ -261,18 +261,13 @@ export default {
         },
         generateSearchUrl() {
             let normalizedSearchFormValues = this.getSearchFormValues()
-            let url = '/orders?'
+            let urlObject = {}
 
-            forEach(normalizedSearchFormValues, ((x,i) => {
-              url += `${x.label}=${x.value}`
-
-              if (i !== normalizedSearchFormValues.length-1) {
-                url += '&'
-              }
-
+            forEach(normalizedSearchFormValues, (x => {
+              urlObject[x.label] = x.value
             }))
 
-            return url
+            return urlObject
         },
 
     }

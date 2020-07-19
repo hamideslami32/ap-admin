@@ -15,7 +15,8 @@ export const normalizeSearchField = (array) => {
     let normalizedArray = array.map(object => {
         return {
             label: object.label.toLowerCase().replace(' ', '-'), 
-            value: object.value.trim().toLowerCase()
+            value: object.value.trim().toLowerCase(),
+            placeholder: object.placeholder
         }
     })
     return normalizedArray
@@ -26,8 +27,9 @@ export const normalizeUrl= (urlObj) => {
     let result = []
     let regex = /\b\w/g
     let label
-    let placeholder = ''
+    let placeholder = null
     forOwn(urlObj, (item, key) => {
+        placeholder = null
         switch (key) {
             case 'issue-date-from':
                 label = 'Issue Date'
@@ -66,20 +68,4 @@ export const normalizeUrl= (urlObj) => {
     })
 
     return result
-    // var urlParams;
-    // let normalizedString = () => {
-    //     var match,
-    //     pl     = /\+/g,  // Regex for replacing addition symbol with a space
-    //     search = /([^&=]+)=?([^&]*)/g,
-    //     decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-    //     query  = window.location.search.substring(1);
-
-    //     urlParams = {};
-
-    //     while (match = search.exec(query))
-    //     urlParams[decode(match[1])] = decode(match[2]);
-
-    //     return urlParams
-    // }
-    // return normalizedString
 }

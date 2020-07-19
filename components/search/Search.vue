@@ -121,7 +121,7 @@ export default {
                     'success',
                     'pending',
                     'failed',
-                    'patial'
+                    'partial'
                     ]
                 },
                 {
@@ -159,8 +159,8 @@ export default {
 
     },
     methods: {
-      async init() {
-        await this.fillSearchValues()
+      init() {
+        this.fillSearchValues()
         // if (urlHasValue) this.search()
       },
       fillSearchValues() {
@@ -190,37 +190,19 @@ export default {
         return urlHasParams
       },
       setSearchFieldValues(fieldsArray) {
-        forEach(fieldsArray, obj => {
+
+        forEach(fieldsArray, (item) => {
           forOwn(this.filterFieldsData, (array) => {
             forEach(array, (fieldObject) => {
-              if (fieldObject.label === obj.label) {
 
-                switch (fieldObject.label) {
-                  case 'Issue Date':
-                    if (obj.placeholder === 'from') {
-                      fieldObject.value = obj.value
-                    } else{
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                  case 'Travel Date':
-                    if (obj.placeholder === 'from') {
-                      fieldObject.value = obj.value
-                    } else {
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                  case 'Route':
-                    if (obj.placeholder === 'origin') {
-                      fieldObject.value = obj.value
-                    } else {
-                      fieldObject.s_value = obj.value
-                    }
-                    break
-                
-                  default:
-                    fieldObject.value = obj.value
-                    break
+              if (fieldObject.label === item.label) {
+
+                if (item.placeholder && (item.placeholder === 'to' || item.placeholder === 'destination')) {
+                  fieldObject.s_value = item.value
+
+                } else {
+                  fieldObject.value = item.value
+
                 }
               }
             })
@@ -232,7 +214,7 @@ export default {
         },
         search() {
           const url = this.generateSearchUrl()
-          this.$router.push(url)
+          this.$router.push({path: '/orders', query: url})
         },
         getSearchFormValues() {
           let fieldValuesArray = []
@@ -279,18 +261,13 @@ export default {
         },
         generateSearchUrl() {
             let normalizedSearchFormValues = this.getSearchFormValues()
-            let url = '/orders?'
+            let urlObject = {}
 
-            forEach(normalizedSearchFormValues, ((x,i) => {
-              url += `${x.label}=${x.value}`
-
-              if (i !== normalizedSearchFormValues.length-1) {
-                url += '&'
-              }
-
+            forEach(normalizedSearchFormValues, (x => {
+              urlObject[x.label] = x.value
             }))
 
-            return url
+            return urlObject
         },
 
     }

@@ -16,7 +16,8 @@
         </template>
         <template v-slot:body="{ items }">
           <tbody>
-            <tr v-for="(item, i) in items" :key="i" v-html="orderFileds(item)">
+            <tr v-for="(item, i) in items" :key="i">
+              <OrderData :data="item"></OrderData>
             </tr>
           </tbody>
         </template>
@@ -26,7 +27,11 @@
 </template>
 
 <script>
+import OrderData from '~/components/order/OrderData'
 export default {
+  components: {
+    OrderData
+  },
     props: {
       data: {
         type: Array,
@@ -63,73 +68,6 @@ export default {
             value.toString().toLocaleUpperCase().indexOf(search) !== -1
           )
         },
-        orderFileds(item) {
-          if (item.returning) {
-            return `
-              <td>
-                ${item.id}
-                <br/>
-                ${item.phone}
-              </td>
-              <td>
-                ${item.route}
-                <br/>
-                ${item.route}
-              </td>
-              <td>${item.departingDate} <br/> ${item.returningDate}</td>
-              <td>${item.createdDate}</td>
-              <td>${item.provider} - ${item.airline}</td>
-              <td>${item.pax} P</td>
-              <td>
-                ${item.netPrice}
-                <br/>
-                ${item.salesPrice}
-              </td>
-              <td>${item.departingConfCode} <br/> ${item.returningConfCode}</td>
-              <td>
-                <v-chips class="success white--text rounded py-1 px-2">${item.departingOrderStatus}</v-chips>
-                <br/>
-                <v-chips class="success white--text rounded py-1 px-2">${item.returningOrderStatus}</v-chips>
-              </td>
-              <td>${item.paymentStatus}</td>
-              <td></td>
-              <span class="order-icon rounded white elevation-1">
-                <v-icon>
-                  mdi-airplane
-                </v-icon>
-              </span>`
-          } else {
-            return `
-              <td>
-                ${item.id}
-                <br/>
-                ${item.phone}
-              </td>
-              <td>
-                ${item.route}
-              </td>
-              <td>${item.departingDate}</td>
-              <td>${item.createdDate}</td>
-              <td>${item.provider} - ${item.airline}</td>
-              <td>${item.pax} P</td>
-              <td>
-                ${item.netPrice}
-                <br/>
-                ${item.salesPrice}
-              </td>
-              <td>${item.departingConfCode}</td>
-              <td>
-                <v-chips class="success white--text rounded py-1 px-2">${item.departingOrderStatus}</v-chips>
-              </td>
-              <td>${item.paymentStatus}</td>
-              <td></td>
-              <span class="order-icon rounded white elevation-1">
-                <v-icon>
-                  mdi-airplane
-                </v-icon>
-              </span>`
-          }
-        }
     }
 }
 </script>

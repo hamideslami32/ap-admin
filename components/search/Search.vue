@@ -63,7 +63,7 @@ export default {
                 {
                     value: '',
                     type: 'input',
-                    label:'Mobile',
+                    label:'Phone',
                     placeholder: '09' 
                 },
                 {

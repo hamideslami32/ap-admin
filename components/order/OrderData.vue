@@ -4,7 +4,9 @@
       <td>
         {{data.id}}
         <br/>
-        {{data.phone}}
+        <nuxt-link :to="{ path: '/orders', query: { phone: data.phone } }">
+          {{data.phone}}
+        </nuxt-link>
       </td>
       <td>
         {{data.route}}
@@ -33,7 +35,9 @@
       <td>
         {{data.id}}
         <br/>
-        {{data.phone}}
+        <nuxt-link :to="{ path: '/orders', query: { phone: data.phone } }">
+          {{data.phone}}
+        </nuxt-link>
       </td>
       <td>
         {{data.route}}

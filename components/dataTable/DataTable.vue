@@ -8,19 +8,18 @@
         :headers="headers"
         :items="data"
         item-key="id"
-        class="elevation-1"
         :search="search"
+        class="cell-height"
       >
         <template v-slot:top>
           <v-text-field v-model="search" label="Search" class="mx-4" />
         </template>
-        <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            mdi-delete
-          </v-icon>
+        <template v-slot:body="{ items }">
+          <tbody>
+            <tr v-for="(item, i) in items" :key="i">
+              <OrderData :data="item"></OrderData>
+            </tr>
+          </tbody>
         </template>
       </v-data-table>
     </v-expansion-panel-content>
@@ -28,7 +27,11 @@
 </template>
 
 <script>
+import OrderData from '~/components/order/OrderData'
 export default {
+  components: {
+    OrderData
+  },
     props: {
       data: {
         type: Array,
@@ -42,6 +45,13 @@ export default {
         type: Array,
         required: true
       },
+    },
+    computed: {
+      generateTableOrders() {
+        let orders = []
+
+        return orders
+      }
     },
     data() {
         return {
@@ -63,29 +73,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filters {
-  height: 100%;
-
-  .filter-cols-wrapper {
+.data-table {
+  .v-data-table {
+    line-height: 2 !important;
+  }
+  .order-icon {
     background-color: #fff;
-    height: 80%;
-
-    .filter-col {
-      border-right: 1px solid #eee;
-      min-width: 30%;
-
-      &:last-of-type {
-        border-right: none;
-        padding-right: 0 !important;
-      }
-
-      .field {
-
-        .col {
-          padding: 0 !important;
-        }
-      }
-    }
+    border: 1px solid grey;
+    position: absolute;
+    left: 2px;
+    margin-top: 5px;
+    padding: 3px;
   }
 }
 

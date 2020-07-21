@@ -1,7 +1,15 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      Hotel
+      Users
     </v-flex>
   </v-layout>
 </template>
+
+<script>
+export default {
+  data() {
+    return {}
+  }
+}
+</script>

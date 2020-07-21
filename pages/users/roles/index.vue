@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      Hotel
+      Roles
     </v-flex>
   </v-layout>
 </template>

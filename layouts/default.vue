@@ -285,6 +285,11 @@
           model: true,
           children: [
             {
+              icon: "mdi-order-bool-descending",
+              text: "All",
+              to: "/orders",
+            },
+            {
               icon: "mdi-airplane",
               text: "Flight",
               to: "/orders/flight",
@@ -307,10 +312,12 @@
           'icon-pre': 'mdi-account',
           text: 'User Management',
           model: true,
+          to: "/users",
           children: [
-            { icon: 'mdi-account-multiple', text: 'Users' },
-            { icon: 'mdi-plus', text: 'Create User' },
-            { icon: 'mdi-pencil', text: 'Edit User' },
+            { to: '/users', icon: 'mdi-account-multiple', text: 'Users' },
+            { to: '/users/permissions', icon: 'mdi-account-key', text: 'Permissions' },
+            { to: '/users/roles', icon: 'mdi-card-account-details', text: 'Roles' },
+            { to: '/users/groups', icon: 'mdi-account-group', text: 'Groups' },
 
           ],
         },

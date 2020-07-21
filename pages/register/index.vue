@@ -68,7 +68,7 @@
                 required
               />
             </ValidationProvider>
-            <v-btn large class="mt-8 primary white--text" width="100%" @click="submit" :loading="loading">
+            <v-btn large class="mt-8 primary white--text" width="100%" :loading="loading" @click="submit">
               register
             </v-btn>
           </form>

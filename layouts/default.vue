@@ -2,6 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
+      width="300"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
     >
@@ -34,6 +35,9 @@
             :append-icon="item.icon"
           >
             <template v-slot:activator>
+              <v-icon class="mr-4">
+                {{ item['icon-pre'] }}
+              </v-icon>
               <v-list-item-content @click="$router.push(item.to)">
                 <v-list-item-title>
                   {{ item.text }}
@@ -276,6 +280,7 @@
           text: "Orders",
           icon: 'mdi-chevron-down',
           'icon-alt': 'mdi-chevron-up',
+          'icon-pre': 'mdi-playlist-check',
           to: "/orders",
           model: true,
           children: [
@@ -295,16 +300,20 @@
               to: "/orders/insurance",
             },
           ]
-        }
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   text: 'Orders',
-        //   model: true,
-        //   children: [
-        //     // { icon: 'mdi-plus', text: 'Create label' },
-        //   ],
-        // },
+        },
+        {
+          icon: 'mdi-chevron-down',
+          'icon-alt': 'mdi-chevron-up',
+          'icon-pre': 'mdi-account',
+          text: 'User Management',
+          model: true,
+          children: [
+            { icon: 'mdi-account-multiple', text: 'Users' },
+            { icon: 'mdi-plus', text: 'Create User' },
+            { icon: 'mdi-pencil', text: 'Edit User' },
+
+          ],
+        },
         // {
         //   icon: 'mdi-chevron-up',
         //   'icon-alt': 'mdi-chevron-down',

@@ -11,13 +11,13 @@
         :search="search"
         class="cell-height"
       >
-        <template v-slot:top>
+        <!-- <template v-slot:top>
           <v-text-field v-model="search" label="Search" class="mx-4" />
-        </template>
+        </template> -->
         <template v-slot:body="{ items }">
           <tbody>
             <tr v-for="(item, i) in items" :key="i">
-              <OrderData :data="item"></OrderData>
+              <OrderData :data="item" />
             </tr>
           </tbody>
         </template>
@@ -46,6 +46,11 @@ export default {
         required: true
       },
     },
+    data() {
+        return {
+        //     search: "",
+        }
+    },
     computed: {
       generateTableOrders() {
         let orders = []
@@ -53,21 +58,16 @@ export default {
         return orders
       }
     },
-    data() {
-        return {
-            search: "",
-        }
-    },
     methods: {
         // filterOnlyCapsText(value, search, item)
-        filterOnlyCapsText(value, search) {
-          return (
-            value != null &&
-            search != null &&
-            typeof value === "string" &&
-            value.toString().toLocaleUpperCase().indexOf(search) !== -1
-          )
-        },
+        // filterOnlyCapsText(value, search) {
+        //   return (
+        //     value != null &&
+        //     search != null &&
+        //     typeof value === "string" &&
+        //     value.toString().indexOf(search) !== -1
+        //   )
+        // },
     }
 }
 </script>

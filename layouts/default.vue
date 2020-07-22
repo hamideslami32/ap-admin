@@ -8,28 +8,23 @@
     >
       <v-list>
         <template v-for="item in items">
-          <v-row
+
+          <div
+          class="d-flex pl-2"
             v-if="item.heading"
             :key="item.heading"
-            align="center"
           >
-            <v-col cols="6">
-              <v-subheader v-if="item.heading">
+            <!-- <v-icon class="mr-4">
+              {{ item['icon-pre'] }}
+            </v-icon> -->
+            <v-list-item-content>
+              <v-list-item-title>
                 {{ item.heading }}
-              </v-subheader>
-            </v-col>
-            <v-col
-              cols="6"
-              class="text-center"
-            >
-              <a
-                href="#!"
-                class="body-2 black--text"
-              >EDIT</a>
-            </v-col>
-          </v-row>
+              </v-list-item-title>
+            </v-list-item-content>
+          </div>
           <v-list-group
-            v-else-if="item.children"
+            v-else
             :key="item.text"
             v-model="item.model"
             :append-icon="item.icon"
@@ -60,20 +55,6 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item
-            v-else
-            :key="item.text"
-            link
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ item.text }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -274,7 +255,7 @@
       ],
       items: [
         // { icon: 'mdi-contacts', text: 'Contacts' },
-        // { icon: 'mdi-history', text: 'Frequently contacted' },
+        { 'icon-pre': 'mdi-history', heading: 'Dashboard' },
         // { icon: 'mdi-content-copy', text: 'Duplicates' },
         {
           text: "Orders",

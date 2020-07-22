@@ -3,8 +3,8 @@
     <v-app-bar
       fixed
       app
-      class="primary white--text"
       dark
+      class="white"
     >
       <v-chip class="white py-6">
         <img src="~/assets/imgs/logo.svg" alt="apro-logo" height="40px">

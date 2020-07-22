@@ -44,7 +44,7 @@ export default {
   plugins: [
     "~plugins/auth",
     "~plugins/fragment",
-    
+
   ],
   /*
   ** Auto import components
@@ -90,7 +90,7 @@ export default {
       dark: false,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: '#C5ACF2',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -99,7 +99,8 @@ export default {
           success: colors.green.accent3
         },
         light: {
-          primary: '#472086',
+          primary: '#543887',
+          lightPrimary: '#C5ACF2'
         }
       }
     }

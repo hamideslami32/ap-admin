@@ -57,7 +57,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-divider width="90%" class="lightPrimary mx-auto" :key="i"/>
+          <v-divider :key="i" width="90%" class="lightPrimary mx-auto" />
         </template>
       </v-list>
     </v-navigation-drawer>

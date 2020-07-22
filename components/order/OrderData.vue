@@ -19,7 +19,11 @@
       </td>
       <td>{{ data.departingDate }} <br> {{ data.returningDate }}</td>
       <td>{{ data.createdDate }}</td>
-      <td>{{ data.provider }} - {{ data.airline }}</td>
+      <td>
+        {{ data.provider }} - {{ data.airline }}
+        <br>
+        {{ data.provider }} - {{ data.airline }}
+      </td>
       <td>{{ data.pax }} P</td>
       <td>
         {{ data.netPrice }}
@@ -63,7 +67,9 @@
       </td>
       <td>{{ data.departingDate }}</td>
       <td>{{ data.createdDate }}</td>
-      <td>{{ data.provider }} - {{ data.airline }}</td>
+      <td>
+        {{ data.provider }} - {{ data.airline }}
+      </td>
       <td>{{ data.pax }} P</td>
       <td>
         {{ data.netPrice }}

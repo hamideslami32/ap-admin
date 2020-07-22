@@ -316,6 +316,9 @@
 </script>
 
 <style lang="scss" scoped>
+a {
+  color: #C5ACF2 !important;
+}
 .v-list .v-list-item--active .v-icon {
   color: $lightPrimary ;
 }

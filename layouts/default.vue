@@ -124,7 +124,7 @@
         <nuxt />
       </div>
     </v-main>
-    <v-btn
+    <!-- <v-btn
       bottom
       color="primary"
       dark
@@ -134,7 +134,7 @@
       @click="dialog = !dialog"
     >
       <v-icon>mdi-plus</v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-dialog
       v-model="dialog"
       width="800px"

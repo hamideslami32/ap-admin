@@ -1,17 +1,19 @@
 <template>
   <div class="price-details rounded">
-    <v-card height="100%" class="d-flex">
-      <div class="d-flex">
-        <div v-for="(item, i) in data" :key="i" class="d-flex pa-2">
-          <div>{{ item.title }}</div>
-          <div>{{ item.value }}</div>
+    <v-card height="100%" class="d-flex align-center px-4">
+      <div class="d-flex" width="80%">
+        <div v-for="(item, i) in data" :key="i" class="d-flex pr-8">
+          <div class="d-flex flex-column justify-space-around">
+            <div>{{ item.title }}</div>
+            <div>{{ item.value }}</div>
+          </div>
           <v-divider vertical class="px-2" />
         </div>
       </div>
       <v-spacer />
-      <div>
+      <div width="20%">
         <span>Benefit:</span>
-        <span>20000 T</span>
+        <span>20,000 T</span>
       </div>
     </v-card>
   </div>

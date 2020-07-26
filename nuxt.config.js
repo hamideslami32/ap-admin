@@ -90,7 +90,6 @@ export default {
           accent: colors.grey.darken3,
           secondary: '#E3469A',
           grey: '#BDBDBD',
-          blue: '#45C6D4',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -101,7 +100,7 @@ export default {
           secondary: '#E3469A',
           grey: '#BDBDBD',
           lightPrimary: '#C5ACF2',
-          blue: '#45C6D4'
+          blue: '#45C6D4',
         }
       }
     }

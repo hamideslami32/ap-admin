@@ -2,9 +2,11 @@
   <div class="price-details rounded">
     <v-card height="100%" class="d-flex align-center px-4">
       <div class="d-flex" width="80%">
-        <div v-for="(item, i) in data" :key="i" class="d-flex pr-8">
+        <div v-for="(item, i) in data" :key="i" class="d-flex pr-6">
           <div class="d-flex flex-column justify-space-around">
-            <div>{{ item.title }}</div>
+            <div class="primary--text mb-2">
+              {{ item.title }}
+            </div>
             <div>{{ item.value }}</div>
           </div>
           <v-divider vertical class="px-2" />
@@ -12,7 +14,7 @@
       </div>
       <v-spacer />
       <div width="20%">
-        <span>Benefit:</span>
+        <div class="green--text mb-2">Benefit</div>
         <span>20,000 T</span>
       </div>
     </v-card>
@@ -44,6 +46,10 @@ export default {
         },
         {
           title: 'Mark Up/Down',
+          value: '20,000 T'
+        },
+        {
+          title: 'Commission',
           value: '3%'
         },
         {

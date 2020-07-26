@@ -1,5 +1,5 @@
 include:
-  - project: 'aproo/devops'
+  - project: 'apro/devops'
     file: '/main.yml'
 
 variables:

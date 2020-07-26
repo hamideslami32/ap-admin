@@ -2,7 +2,14 @@
   <v-layout>
     <v-flex>
       <div class="d-flex justify-space-between px-4 align-center user-info">
-        <span v-for="(item, i) in data.userData" :key="i">{{ item.title }}: {{ item.value }}</span>
+        <span v-for="(item, i) in data.userData" :key="i" :style="colorize">
+          <span>
+            {{ item.title }}:
+          </span>
+          <span>
+           {{ item.value }}
+          </span>
+        </span>
       </div>
       <div>
         <v-tabs
@@ -16,23 +23,24 @@
             Ticket Detail
           </v-tab>
           <v-tab href="#tab-2">
-            Refund Details
-          </v-tab>
-          <v-tab href="#tab-3">
-            Customer Support
-          </v-tab>
-          <v-tab href="#tab-4">
             Payment
           </v-tab>
+          <v-tab href="#tab-3">
+            Refund Details
+          </v-tab>
+          <v-tab href="#tab-4">
+            Customer Support
+          </v-tab>
+
         </v-tabs>
       </div>
       <div class="main pa-4 mb-10">
-        <OrderWrapper />
+        <OrderWrapper id="#tab-1" />
         <v-expansion-panels class="my-4" :value="openExpansionPanel" :multiple="true">
           <CanceledOrderWrapper />
         </v-expansion-panels>
         <OrderWrapper />
-        <PriceDetails class="mt-4" />
+        <PriceDetails class="mt-4" id="#tab-2"/>
         <div class="my-4 rounded">
           <v-data-table
             :headers="headers"
@@ -81,12 +89,12 @@
             <v-btn color="secondary">
               Replace
             </v-btn>
-            <v-btn color="lightPrimary" class="ml-2">
+            <v-btn color="red white--text" class="ml-2">
               Refund All
             </v-btn>
           </div>
         </div>
-        <div class="my-8">
+        <div class="my-8" id="#tab-3">
           <v-card class="rounded">
             <v-data-table
               :headers="refundHeaders"
@@ -102,7 +110,7 @@
           </v-card>
         </div>
         <div>
-          <v-card class="rounded">
+          <v-card class="rounded" id="#tab-4">
             <v-data-table
               :headers="supportHeaders"
               :items="customerSupportData"
@@ -121,7 +129,7 @@
             Send Ticket
           </v-btn>
           <v-btn color="secondary" class="mx-4">
-            Send Payment <Link:css />
+            Send Payment
           </v-btn>
           <v-btn color="secondary">
             User Log
@@ -313,6 +321,11 @@ export default {
           },
         ]
       }
+    }
+  },
+  computed: {
+    colorize() {
+      return {}
     }
   }
 }

@@ -26,7 +26,8 @@
           <v-list-group
             v-else
             :key="item.text"
-            v-model="item.model"
+            @input="toggle($event)"
+            :value="item.model"
             color="white"
             :append-icon="item.icon"
           >
@@ -311,7 +312,7 @@
         // { icon: 'mdi-cellphone-link', text: 'App downloads' },
         // { icon: 'mdi-keyboard', text: 'Go to the old version' },
       ],
-    }),
+    })
   }
 </script>
 

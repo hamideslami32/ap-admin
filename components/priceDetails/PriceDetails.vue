@@ -4,7 +4,7 @@
       <div class="d-flex" width="80%">
         <div v-for="(item, i) in data" :key="i" class="d-flex pr-8">
           <div class="d-flex flex-column justify-space-around">
-            <div>{{ item.title }}</div>
+            <div class="primary--text mb-2">{{ item.title }}</div>
             <div>{{ item.value }}</div>
           </div>
           <v-divider vertical class="px-2" />
@@ -12,7 +12,7 @@
       </div>
       <v-spacer />
       <div width="20%">
-        <span>Benefit:</span>
+        <span class="green--text mb-2">Benefit:</span>
         <span>20,000 T</span>
       </div>
     </v-card>

@@ -32,19 +32,19 @@
       </td>
       <td>{{ data.departingConfCode }} <br> {{ data.returningConfCode }}</td>
       <td>
-        <v-chips class="success white--text rounded py-1 px-2">
+        <v-chip class="success white--text rounded py-1 px-2">
           {{ data.departingOrderStatus }}
-        </v-chips>
+        </v-chip>
         <br>
-        <v-chips class="success white--text rounded py-1 px-2">
+        <v-chip class="success white--text rounded py-1 px-2">
           {{ data.returningOrderStatus }}
-        </v-chips>
+        </v-chip>
       </td>
       <td :class="getColor(data.paymentStatus)">
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn class="primary white--text" small>
+        <v-btn  @click="$router.push('/orders/detail')" class="primary white--text" small>
           Detail
         </v-btn>
         <v-btn class="green white--text" small>
@@ -78,15 +78,15 @@
       </td>
       <td>{{ data.departingConfCode }}</td>
       <td>
-        <v-chips class="success white--text rounded py-1 px-2">
+        <v-chip class="success white--text rounded py-1 px-2">
           {{ data.departingOrderStatus }}
-        </v-chips>
+        </v-chip>
       </td>
       <td :class="getColor(data.paymentStatus)">
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn class="primary white--text" small>
+        <v-btn  @click="$router.push('/orders/detail')" class="primary white--text" small>
           Detail
         </v-btn>
         <v-btn class="green white--text" small>

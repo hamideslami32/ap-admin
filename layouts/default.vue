@@ -311,7 +311,7 @@
         // { icon: 'mdi-cellphone-link', text: 'App downloads' },
         // { icon: 'mdi-keyboard', text: 'Go to the old version' },
       ],
-    }),
+    })
   }
 </script>
 

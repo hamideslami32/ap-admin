@@ -2,38 +2,38 @@
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
+      color="primary"
+      width="300"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      dark
     >
       <v-list>
-        <template v-for="item in items">
-          <v-row
+        <template v-for="(item, i) in items">
+          <div
             v-if="item.heading"
             :key="item.heading"
-            align="center"
+            class="d-flex pl-4 lightPrimary--text"
           >
-            <v-col cols="6">
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-col>
-            <v-col
-              cols="6"
-              class="text-center"
-            >
-              <a
-                href="#!"
-                class="body-2 black--text"
-              >EDIT</a>
-            </v-col>
-          </v-row>
+            <v-list-item-content>
+              <v-list-item-title>
+                <nuxt-link :to="item.to" class="text-decoration-none">
+                  {{ item.heading }}
+                </nuxt-link>
+              </v-list-item-title>
+            </v-list-item-content>
+          </div>
           <v-list-group
-            v-else-if="item.children"
+            v-else
             :key="item.text"
             v-model="item.model"
+            color="white"
             :append-icon="item.icon"
           >
             <template v-slot:activator>
+              <v-icon class="mr-4">
+                {{ item['icon-pre'] }}
+              </v-icon>
               <v-list-item-content @click="$router.push(item.to)">
                 <v-list-item-title>
                   {{ item.text }}
@@ -45,31 +45,19 @@
               :key="i"
               link
               :to="child.to"
+              exact
             >
-              <v-list-item-action v-if="child.icon">
+              <!-- <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
+              </v-list-item-action> -->
+              <v-list-item-content class="pl-10">
+                <v-list-item-title class="text-body-2">
                   {{ child.text }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item
-            v-else
-            :key="item.text"
-            link
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ item.text }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <v-divider :key="i" width="90%" class="lightPrimary mx-auto" />
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -77,25 +65,20 @@
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
-      dark
-      class="primary align-center"
+      class="white lightPrimary--text align-center"
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon class="mr-4">
-        <nuxt-link to="/" class="text-decoration-none">
-          <v-icon color="white">
-            mdi-home
-          </v-icon>
-        </nuxt-link>
-      </v-btn>
-      <v-chip class="white py-6 d-none d-sm-flex">
+      <v-app-bar-nav-icon class="mr-4" @click.stop="drawer = !drawer" />
+      <nuxt-link to="/">
         <img src="~/assets/imgs/logo.svg" alt="apro-logo" height="40px">
-      </v-chip>
+      </nuxt-link>
       <v-spacer />
-      <v-btn icon class="">
+      <v-btn icon>
+        <v-icon>mdi-message</v-icon>
+      </v-btn>
+      <v-btn icon class="mr-6 ml-4">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn v-if="!$auth.user" tile icon class="rounded primary px-2 mr-5" width="100">
+      <v-btn v-if="!$auth.user" icon class="px-2 mr-5" width="100">
         <nuxt-link to="/login" class="text-decoration-none">
           <span class="white--text mr-1">Login</span>
           <v-icon color="white">
@@ -106,20 +89,14 @@
       <v-menu v-else offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            class="primary lighten-1"
             v-bind="attrs"
             height="auto"
+            class="user-profile"
             v-on="on"
           >
-            <div>
-              <v-icon>
-                mdi-arrow-bottom
-              </v-icon>
-              <span v-if="$auth.user" class="mr-2">{{ $auth.user.firstName[0] + '.' + $auth.user.lastName }}</span>
-              <v-avatar>
-                <img src="~/assets/imgs/avatar.png" alt="avatar">
-              </v-avatar>
-            </div>
+            <v-avatar>
+              <img src="~/assets/imgs/avatar.png" alt="avatar">
+            </v-avatar>
           </v-btn>
         </template>
         <v-list class="remove-padding">
@@ -147,7 +124,7 @@
         <nuxt />
       </div>
     </v-main>
-    <v-btn
+    <!-- <v-btn
       bottom
       color="primary"
       dark
@@ -157,7 +134,7 @@
       @click="dialog = !dialog"
     >
       <v-icon>mdi-plus</v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-dialog
       v-model="dialog"
       width="800px"
@@ -250,11 +227,9 @@
 </template>
 
 <script>
-// import { goTo, logout } from '~/utils/mixins'
   export default {
     name: 'Default',
     middleware: ['auth'],
-    // mixins: [goTo, logout],
     data: () => ({
       dialog: false,
       drawer: null,
@@ -270,15 +245,21 @@
       ],
       items: [
         // { icon: 'mdi-contacts', text: 'Contacts' },
-        // { icon: 'mdi-history', text: 'Frequently contacted' },
+        { 'icon-pre': 'mdi-history', heading: 'Dashboard', to: '/' },
         // { icon: 'mdi-content-copy', text: 'Duplicates' },
         {
           text: "Orders",
           icon: 'mdi-chevron-down',
           'icon-alt': 'mdi-chevron-up',
+          'icon-pre': 'mdi-playlist-check',
           to: "/orders",
           model: true,
           children: [
+            {
+              icon: "mdi-order-bool-descending",
+              text: "All",
+              to: "/orders",
+            },
             {
               icon: "mdi-airplane",
               text: "Flight",
@@ -295,16 +276,22 @@
               to: "/orders/insurance",
             },
           ]
-        }
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   text: 'Orders',
-        //   model: true,
-        //   children: [
-        //     // { icon: 'mdi-plus', text: 'Create label' },
-        //   ],
-        // },
+        },
+        {
+          icon: 'mdi-chevron-down',
+          'icon-alt': 'mdi-chevron-up',
+          'icon-pre': 'mdi-account',
+          text: 'User Management',
+          model: true,
+          to: "/users",
+          children: [
+            { to: '/users', icon: 'mdi-account-multiple', text: 'Users' },
+            { to: '/users/permissions', icon: 'mdi-account-key', text: 'Permissions' },
+            { to: '/users/roles', icon: 'mdi-card-account-details', text: 'Roles' },
+            { to: '/users/groups', icon: 'mdi-account-group', text: 'Groups' },
+
+          ],
+        },
         // {
         //   icon: 'mdi-chevron-up',
         //   'icon-alt': 'mdi-chevron-down',
@@ -325,15 +312,24 @@
         // { icon: 'mdi-keyboard', text: 'Go to the old version' },
       ],
     }),
-    methods: {
-      goTo(path) {
-        this.$router.push(path)
-      },
-    },
   }
 </script>
 
 <style lang="scss" scoped>
+a {
+  color: #C5ACF2 !important;
+}
+.v-list .v-list-item--active .v-icon {
+  color: $lightPrimary ;
+}
+.child-item {
+  font-size: 0.8em !important;
+}
+.user-profile {
+  border-radius: 50%;
+  padding: 0 !important;
+  min-width: unset !important;
+}
 .user-menu-item {
   &:hover {
     background-color: #eee !important;

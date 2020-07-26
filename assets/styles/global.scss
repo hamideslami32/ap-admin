@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+a {
+  &:active {
+    color: #C5ACF2 !important;
+  }
+}
+
 .pointer {
     cursor: pointer;
 }

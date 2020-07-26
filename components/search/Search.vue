@@ -63,8 +63,8 @@ export default {
                 {
                     value: '',
                     type: 'input',
-                    label:'Mobile',
-                    placeholder: '09' 
+                    label:'Phone',
+                    placeholder: '09'
                 },
                 {
                     value: '',
@@ -164,7 +164,7 @@ export default {
         // if (urlHasValue) this.search()
       },
       fillSearchValues() {
-        
+
         // get url
         let url =  window.location.search
         let searchParams =  new URLSearchParams(url)
@@ -177,13 +177,13 @@ export default {
           searchParams.forEach((value,label) => {
             urlObj[label] = value
           })
-  
+
           // normalized url object
           let fieldValuesArray = normalizeUrl(urlObj)
 
           //set values
           this.setSearchFieldValues(fieldValuesArray)
-  
+
         }
 
         // return if url has value
@@ -249,7 +249,7 @@ export default {
                     }
 
                     fieldData = {
-                      label: label, 
+                      label: label,
                       value: fieldObject.s_value,
                     }
 
@@ -277,6 +277,9 @@ export default {
 <style lang="scss" scoped>
 .filters {
   height: 100%;
+  .container {
+    padding: 8px !important;
+  }
 
   .filter-cols-wrapper {
     background-color: #fff;

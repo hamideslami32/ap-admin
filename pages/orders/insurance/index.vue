@@ -1,7 +1,7 @@
 <template>
   <v-layout>
-    <v-flex class="text-center">
-      insurance
+    <v-flex class="pa-4">
+      Insurance
     </v-flex>
   </v-layout>
 </template>

@@ -32,7 +32,7 @@
       </td>
       <td>{{ data.departingConfCode }} <br> {{ data.returningConfCode }}</td>
       <td>
-        <v-chip class="success white--text rounded py-1 px-2">
+        <v-chip class="success white--text rounded py-1 mb-1 px-2">
           {{ data.departingOrderStatus }}
         </v-chip>
         <br>

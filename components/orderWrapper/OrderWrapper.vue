@@ -11,7 +11,7 @@
             I3 365
           </div>
           <div>
-            <v-chip tile class="rounded grey--text text--darken-1">
+            <v-chip tile class="rounded grey--text text--darken-2">
               Provider ATA
             </v-chip>
           </div>
@@ -74,7 +74,7 @@
         </div>
         <div class="action d-flex flex-column justify-space-around">
           <div>
-            <v-chip tile class="rounded grey--text text--darken-1">
+            <v-chip tile class="rounded grey--text text--darken-2">
               PNR: YTVSC
             </v-chip>
           </div>

@@ -26,8 +26,7 @@
           <v-list-group
             v-else
             :key="item.text"
-            @input="toggle($event)"
-            :value="item.model"
+            v-model="item.model"
             color="white"
             :append-icon="item.icon"
           >

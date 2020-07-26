@@ -78,10 +78,10 @@
               PNR: YTVSC
             </v-chip>
           </div>
-          <v-btn color="primary">
+          <v-btn class="primary">
             Replace
           </v-btn>
-          <v-btn color="blue white--text">
+          <v-btn class="blue white--text">
             Rules
           </v-btn>
         </div>

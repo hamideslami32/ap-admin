@@ -32,7 +32,7 @@
       </td>
       <td>{{ data.departingConfCode }} <br> {{ data.returningConfCode }}</td>
       <td>
-        <v-chip class="success white--text rounded py-1 px-2">
+        <v-chip class="success white--text rounded py-1 mb-1 px-2">
           {{ data.departingOrderStatus }}
         </v-chip>
         <br>
@@ -44,7 +44,7 @@
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn  @click="$router.push('/orders/detail')" class="primary white--text" small>
+        <v-btn class="primary white--text" small @click="$router.push('/orders/detail')">
           Detail
         </v-btn>
         <v-btn class="green white--text" small>
@@ -86,7 +86,7 @@
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn  @click="$router.push('/orders/detail')" class="primary white--text" small>
+        <v-btn class="primary white--text" small @click="$router.push('/orders/detail')">
           Detail
         </v-btn>
         <v-btn class="green white--text" small>

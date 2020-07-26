@@ -41,8 +41,8 @@
               </v-list-item-content>
             </template>
             <v-list-item
-              v-for="(child, i) in item.children"
-              :key="i"
+              v-for="(child, j) in item.children"
+              :key="j"
               link
               :to="child.to"
               exact

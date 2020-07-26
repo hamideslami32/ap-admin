@@ -2,12 +2,26 @@
   <v-layout>
     <v-flex>
       <div class="d-flex justify-space-between px-4 align-center user-info">
-        <span v-for="(item, i) in data.userData" :key="i" :style="colorize">
+        <span v-for="(item, i) in data.userData" :key="i">
           <span>
             {{ item.title }}:
           </span>
-          <span>
-           {{ item.value }}
+          <span class="font-weight-bold" :class="colorize(item)">
+            <span v-if="item.title === 'Orders'">
+              <span class="green--text">
+                {{ item.value[0] }}
+              </span>
+              -
+              <span class="red--text">
+                {{ item.value[item.value.length - 1] }}
+              </span>
+
+            </span>
+            <span v-else>
+              <span>
+                {{ item.value }}
+              </span>
+            </span>
           </span>
         </span>
       </div>
@@ -31,60 +45,20 @@
           <v-tab href="#tab-4">
             Customer Support
           </v-tab>
-
         </v-tabs>
       </div>
       <div class="main pa-4 mb-10">
         <OrderWrapper id="#tab-1" />
         <v-expansion-panels class="my-4" :value="openExpansionPanel" :multiple="true">
-          <CanceledOrderWrapper />
+          <!-- <CanceledOrderWrapper /> -->
         </v-expansion-panels>
-        <OrderWrapper />
-        <PriceDetails class="mt-4" id="#tab-2"/>
+        <OrderWrapper label-color="green" label-title="Charter" />
+        <PriceDetails id="#tab-2" class="my-8" />
         <div class="my-4 rounded">
-          <v-data-table
-            :headers="headers"
-            :items="passengers"
-            :expanded.sync="expanded"
-            :single-expand="singleExpand"
-            item-key="nationalId"
-            show-expand
-            class="rounded"
-          >
-            <template v-slot:top>
-              <v-toolbar flat dark class="primary">
-                <v-toolbar-title>Passengers</v-toolbar-title>
-              </v-toolbar>
-            </template>
-            <template v-slot:expanded-item="{ passengers, item }">
-              <td :colspan="headers.length">
-                <tr class="d-flex justify-space-between">
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td class="pr-4">
-                    {{ item.nationalId }}
-                  </td>
-                  <td>{{ item.nationalId }}</td>
-                </tr>
-              </td>
-            </template>
-          </v-data-table>
+          <!-- <CanceledOrderWrapper /> -->
+          <v-card class="rounded">
+            <DataTable title="Passengers" :data="passengersData" :headers="passengersHeaders" :expandable="true" />
+          </v-card>
           <div class="d-flex justify-end mt-4">
             <v-btn color="secondary">
               Replace
@@ -94,34 +68,14 @@
             </v-btn>
           </div>
         </div>
-        <div class="my-8" id="#tab-3">
+        <div id="#tab-3" class="my-8">
           <v-card class="rounded">
-            <v-data-table
-              :headers="refundHeaders"
-              :items="refundsData"
-              :items-per-page="5"
-            >
-              <template v-slot:top>
-                <v-toolbar flat dark class="primary">
-                  <v-toolbar-title>Refund Details</v-toolbar-title>
-                </v-toolbar>
-              </template>
-            </v-data-table>
+            <DataTable title="Refund Details" :data="refundsData" :headers="refundHeaders" />
           </v-card>
         </div>
         <div>
-          <v-card class="rounded" id="#tab-4">
-            <v-data-table
-              :headers="supportHeaders"
-              :items="customerSupportData"
-              :items-per-page="5"
-            >
-              <template v-slot:top>
-                <v-toolbar flat dark class="primary">
-                  <v-toolbar-title>Customer Support</v-toolbar-title>
-                </v-toolbar>
-              </template>
-            </v-data-table>
+          <v-card id="#tab-4" class="rounded">
+            <DataTable title="Customer Support" :data="customerSupportData" :headers="supportHeaders" />
           </v-card>
         </div>
         <div class="d-flex justify-center mt-8">
@@ -142,20 +96,22 @@
 
 <script>
 import OrderWrapper from '~/components/orderWrapper/OrderWrapper'
-import CanceledOrderWrapper from '~/components/canceledOrderWrapper/CanceledOrderWrapper'
+import DataTable from '~/components/dataTable/DataTable'
+
+// import CanceledOrderWrapper from '~/components/canceledOrderWrapper/CanceledOrderWrapper'
 import PriceDetails from '~/components/priceDetails/PriceDetails'
 
 export default {
   components: {
     OrderWrapper,
-    CanceledOrderWrapper,
+    DataTable,
+    // CanceledOrderWrapper,
     PriceDetails
   },
   data() {
     return {
       tab: null,
       openExpansionPanel: [],
-      expanded: [],
       singleExpand: false,
       supportHeaders: [
         {
@@ -185,7 +141,7 @@ export default {
         { sortable: false, text: 'Penalty Amount', value: 'penaltyAmount' },
         { sortable: false, text: 'Refund Amount', value: 'refundAmount' },
       ],
-      headers: [
+      passengersHeaders: [
         {
           text: 'Title',
           align: 'start',
@@ -244,7 +200,7 @@ export default {
           refundAmount: '200,000',
         }
       ],
-      passengers: [
+      passengersData: [
         {
           title: 'MS',
           age: 'Adult',
@@ -323,9 +279,9 @@ export default {
       }
     }
   },
-  computed: {
-    colorize() {
-      return {}
+  methods: {
+    colorize(item) {
+      if (item.title === 'Phone' || item.title === 'Order Number') return 'secondary--text'
     }
   }
 }

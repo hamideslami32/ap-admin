@@ -89,6 +89,8 @@ export default {
           primary: '#C5ACF2',
           accent: colors.grey.darken3,
           secondary: '#E3469A',
+          grey: '#BDBDBD',
+          blue: '#45C6D4',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -97,7 +99,9 @@ export default {
         light: {
           primary: '#543887',
           secondary: '#E3469A',
-          lightPrimary: '#C5ACF2'
+          grey: '#BDBDBD',
+          lightPrimary: '#C5ACF2',
+          blue: '#45C6D4'
         }
       }
     }

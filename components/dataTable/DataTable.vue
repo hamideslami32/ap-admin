@@ -1,37 +1,50 @@
 <template>
-  <v-expansion-panel class="data-table" :value="0">
-    <v-expansion-panel-header class="text-h6">
-      {{ title }}
-    </v-expansion-panel-header>
-    <v-expansion-panel-content>
-      <v-data-table
-        :headers="headers"
-        :items="data"
-        item-key="id"
-        :search="search"
-        class="cell-height"
-      >
-        <!-- <template v-slot:top>
-          <v-text-field v-model="search" label="Search" class="mx-4" />
-        </template> -->
-        <template v-slot:body="{ items }">
-          <tbody>
-            <tr v-for="(item, i) in items" :key="i">
-              <OrderData :data="item" />
-            </tr>
-          </tbody>
-        </template>
-      </v-data-table>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+  <v-data-table
+    :headers="headers"
+    :items="data"
+    :expanded.sync="expanded"
+    item-key="nationalId"
+    :show-expand="expandable"
+    class="rounded"
+  >
+    <template v-slot:top>
+      <v-toolbar flat dark class="primary table-header">
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
+      </v-toolbar>
+    </template>
+    <template v-if="expandable" v-slot:expanded-item="{ item }">
+      <td :colspan="headers.length">
+        <tr class="d-flex justify-space-between">
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td class="pr-4">
+            {{ item.nationalId }}
+          </td>
+          <td>{{ item.nationalId }}</td>
+        </tr>
+      </td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
-import OrderData from '~/components/order/OrderData'
 export default {
-  components: {
-    OrderData
-  },
     props: {
       data: {
         type: Array,
@@ -45,51 +58,21 @@ export default {
         type: Array,
         required: true
       },
+      expandable: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
         return {
-            search: "",
+            expanded: [],
         }
     },
-    computed: {
-      generateTableOrders() {
-        let orders = []
-
-        return orders
-      }
-    },
-    methods: {
-        // filterOnlyCapsText(value, search, item)
-        // filterOnlyCapsText(value, search) {
-        //   return (
-        //     value != null &&
-        //     search != null &&
-        //     typeof value === "string" &&
-        //     value.toString().indexOf(search) !== -1
-        //   )
-        // },
-    }
 }
 </script>
 
 <style lang="scss" scoped>
-.data-table {
-  .v-data-table {
-    line-height: 2 !important;
-  }
-  .order-icon {
-    background-color: #fff;
-    border: 1px solid grey;
-    position: absolute;
-    left: 2px;
-    margin-top: 5px;
-    padding: 3px;
-  }
-}
-
-@media only screen and (max-width: 960px) {
-  .filter-col {
-    border-right: none !important;
-  }
+.table-header {
+  border-radius: 4px 4px 0 0;
 }
 </style>

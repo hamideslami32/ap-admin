@@ -10,6 +10,20 @@ a {
   }
 }
 
+.circle {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #BDBDBD;
+}
+
+.line {
+  height: 1px;
+  width: 200px;
+  margin: 0 8px;
+  background-color: #BDBDBD;
+}
+
 .pointer {
     cursor: pointer;
 }

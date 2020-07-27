@@ -14,7 +14,9 @@
       </div>
       <v-spacer />
       <div width="20%">
-        <div class="green--text mb-2">Benefit</div>
+        <div class="green--text mb-2">
+          Benefit
+        </div>
         <span>20,000 T</span>
       </div>
     </v-card>

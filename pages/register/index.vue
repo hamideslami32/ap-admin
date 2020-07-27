@@ -124,14 +124,14 @@ export default {
       const validate = await this.$refs.observer.validate()
       if (validate) {
         this.loading = true
-        try {
-          const user = await this.$auth.register(this.registerFormData)
-          this.loading = false
-          if (user) this.$toast.success('user is registered')
-          
-        } catch (error) {
-          console.log({error})
-          this.$toast.error('registeration wasnt successfull')          
+
+        const message = await this.$auth.register(this.registerFormData)
+        this.loading = false
+
+        if (message.status === 'success') {
+          this.$toast.success(message.text)
+        } else {
+          this.$toast.error(message.text)
         }
       }
     },

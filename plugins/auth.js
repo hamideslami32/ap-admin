@@ -11,37 +11,43 @@ class Auth {
         this.user = null
 
         const token = this.storage.getCookie(COOKIE_TOKEN)
-        
+
         if (token) {
             this.setToken(token)
             this.fetchUser()
-        }   
+        }
     }
 
     async login(args) {
-        try {
-            const { token, user } = await this.axios.$post('/auth/login', args)
-            this.setToken(token)
-            this.user = user
-            this.storage.setCookie(COOKIE_TOKEN, token)
-            this.redirect( 302, '/')
-            return user
-        } catch (error) {
-            if(error.response) {
-                return error.response.data
-            }
-        }
+      let message = {}
+      try {
+          const { token, user } = await this.axios.$post('/auth/login', args)
+          this.setToken(token)
+          this.user = user
+          this.storage.setCookie(COOKIE_TOKEN, token)
+          this.redirect( 302, '/')
+          message.status = 'success'
+          message.text = 'user is login'
+      } catch (error) {
+          if(error.response.status === 401) {
+            message.status = 'error'
+            message.text = 'username or password is wrong'
+          }
+      }
+      return message
     }
     async register(args) {
+      let message = {}
         try {
-            const user = await this.axios.$post('/auth/register', args)
+            await this.axios.$post('/auth/register', args)
             this.redirect(401, '/login')
-            return user
+            message.status = 'success'
+            message.text = 'user is registered'
         } catch (error) {
-            if (error.response) {
-                return error.response.data
-            }
+            message.status = 'error'
+            message.text = 'registeration failed'
         }
+        return message
     }
 
     logout() {

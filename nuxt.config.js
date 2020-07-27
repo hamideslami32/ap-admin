@@ -74,7 +74,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.API_URL || 'http://212.33.194.76/api',
+    baseURL: process.env.API_URL || 'https://apro-dev.ir/api',
   },
   /*
   ** vuetify module configuration

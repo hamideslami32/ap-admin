@@ -1,7 +1,8 @@
 include:
-  - project: 'aproo/devops'
+  - project: 'apro/devops'
     file: '/main.yml'
 
 variables:
-  IMAGE: apro-admin
+  IMAGE: registry.apro-dev.ir/apro/apro-admin
+  SERVICE: apro-admin
 

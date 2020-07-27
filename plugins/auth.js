@@ -37,15 +37,17 @@ class Auth {
       return message
     }
     async register(args) {
+      let message = {}
         try {
-            const user = await this.axios.$post('/auth/register', args)
+            await this.axios.$post('/auth/register', args)
             this.redirect(401, '/login')
-            return user
+            message.status = 'success'
+            message.text = 'user is registered'
         } catch (error) {
-            if (error.response) {
-                return error.response.data
-            }
+            message.status = 'error'
+            message.text = 'registeration failed'
         }
+        return message
     }
 
     logout() {

@@ -27,6 +27,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  router: {
+    base: process.env.BASE_URL || '/'
+  },
   /*
   ** Global CSS
   */
@@ -107,7 +111,7 @@ export default {
   },
 
   server: {
-    port: 3002,
+    port: process.env.PORT || 3002,
   },
   /*
   ** Build configuration

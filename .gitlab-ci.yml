@@ -1,0 +1,8 @@
+include:
+  - project: 'apro/devops'
+    file: '/main.yml'
+
+variables:
+  IMAGE: registry.apro-dev.ir/apro/apro-admin
+  SERVICE: apro-admin
+

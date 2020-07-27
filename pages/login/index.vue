@@ -89,11 +89,8 @@ export default {
         const message = await this.$auth.login(loginPayload)
         this.loading = false
 
-        if (message.status === 'success') {
-          this.$toast.success(message.text)
-        } else {
-          this.$toast.error(message.text)
-        }
+        this.$toast[message.status](message.text)
+
       }
     },
     clear() {

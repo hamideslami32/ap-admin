@@ -20,6 +20,7 @@
                       <v-text-field
                         v-if="item.type === 'input'"
                         v-model="item.value"
+                        v-mask="item.mask"
                         :placeholder="item.placeholder"
                       />
                       <v-select
@@ -31,6 +32,7 @@
                     <v-col v-if="key === 'secondCol'" cols="4">
                       <v-text-field
                         v-model="item.s_value"
+                        v-mask="item.mask"
                         :placeholder="item.s_placeholder"
                         class="ml-2"
                       />
@@ -64,13 +66,15 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Phone',
-                    placeholder: '09'
+                    placeholder: '09',
+                    mask:'####-#######'
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Order No',
-                    placeholder: 'df-'
+                    placeholder: 'df-',
+                    mask:'AA-#######'
                 },
                 {
                     value: '',
@@ -92,7 +96,9 @@ export default {
                     label:'Issue Date',
                     placeholder: 'from',
                     s_value: '',
-                    s_placeholder: 'to'
+                    s_placeholder: 'to',
+                    mask:'##/##/####'
+
                 },
                 {
                     value: '',
@@ -100,7 +106,9 @@ export default {
                     label:'Travel Date',
                     placeholder: 'from',
                     s_value: '',
-                    s_placeholder: 'to'
+                    s_placeholder: 'to',
+                    mask:'##/##/####'
+
                 },
                 {
                     value: '',
@@ -108,7 +116,9 @@ export default {
                     label:'Route',
                     placeholder: 'origin',
                     s_value: '',
-                    s_placeholder: 'destination'
+                    s_placeholder: 'destination',
+                    mask:'AAA'
+
                 }
                 ],
                 thirdCol: [
@@ -139,7 +149,9 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Confirmation Code',
-                    placeholder: ''
+                    placeholder: '',
+                    mask:''
+
                 }
                 ],
             }

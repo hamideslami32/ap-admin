@@ -31,6 +31,7 @@
     "nuxt": "^2.13.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "v-mask": "^2.2.3",
     "vee-validate": "^3.3.5",
     "vue-apexcharts": "^1.5.3",
     "vue-fragment": "^1.5.1"

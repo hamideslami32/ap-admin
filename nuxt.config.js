@@ -44,7 +44,7 @@ export default {
   plugins: [
     "~plugins/auth",
     "~plugins/fragment",
-
+    "~plugins/mask",
   ],
   /*
   ** Auto import components

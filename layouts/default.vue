@@ -3,8 +3,10 @@
     <v-navigation-drawer
       v-model="drawer"
       color="primary"
-      width="300"
-      :clipped="$vuetify.breakpoint.lgAndUp"
+      width="270"
+      :clipped="true"
+      :mini-variant="miniVariant"
+      mini-variant-width="70"
       app
       dark
     >
@@ -47,10 +49,10 @@
               :to="child.to"
               exact
             >
-              <!-- <v-list-item-action v-if="child.icon">
+              <v-list-item-action v-if="child.icon" class="ml-3">
                 <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action> -->
-              <v-list-item-content class="pl-10">
+              </v-list-item-action>
+              <v-list-item-content>
                 <v-list-item-title class="text-body-2">
                   {{ child.text }}
                 </v-list-item-title>
@@ -230,88 +232,101 @@
   export default {
     name: 'Default',
     middleware: ['auth'],
-    data: () => ({
-      dialog: false,
-      drawer: null,
-      userMenuItems: [
-        {
-          title: 'Profile',
-          icon: 'mdi-account',
-        },
-        {
-          title: 'Logout',
-          icon: 'mdi-logout-variant',
-        }
-      ],
-      items: [
-        // { icon: 'mdi-contacts', text: 'Contacts' },
-        { 'icon-pre': 'mdi-history', heading: 'Dashboard', to: '/' },
-        // { icon: 'mdi-content-copy', text: 'Duplicates' },
-        {
-          text: "Orders",
-          icon: 'mdi-chevron-down',
-          'icon-alt': 'mdi-chevron-up',
-          'icon-pre': 'mdi-playlist-check',
-          to: "/orders",
-          model: true,
-          children: [
-            {
-              icon: "mdi-order-bool-descending",
-              text: "All",
-              to: "/orders",
-            },
-            {
-              icon: "mdi-airplane",
-              text: "Flight",
-              to: "/orders/flight",
-            },
-            {
-              icon: "mdi-bed",
-              text: "Hotel",
-              to: "/orders/hotel",
-            },
-            {
-              icon: "mdi-chart-bubble",
-              text: "Insurance",
-              to: "/orders/insurance",
-            },
-          ]
-        },
-        {
-          icon: 'mdi-chevron-down',
-          'icon-alt': 'mdi-chevron-up',
-          'icon-pre': 'mdi-account',
-          text: 'User Management',
-          model: true,
-          to: "/users",
-          children: [
-            { to: '/users', icon: 'mdi-account-multiple', text: 'Users' },
-            { to: '/users/permissions', icon: 'mdi-account-key', text: 'Permissions' },
-            { to: '/users/roles', icon: 'mdi-card-account-details', text: 'Roles' },
-            { to: '/users/groups', icon: 'mdi-account-group', text: 'Groups' },
+    data() {
+      return {
+        dialog: false,
+        drawer: false,
+        miniVariant: false,
+        userMenuItems: [
+          {
+            title: 'Profile',
+            icon: 'mdi-account',
+          },
+          {
+            title: 'Logout',
+            icon: 'mdi-logout-variant',
+          }
+        ],
+        items: [
+          // { icon: 'mdi-contacts', text: 'Contacts' },
+          { 'icon-pre': 'mdi-history', heading: 'Dashboard', to: '/' },
+          // { icon: 'mdi-content-copy', text: 'Duplicates' },
+          {
+            text: "Orders",
+            icon: 'mdi-chevron-down',
+            'icon-alt': 'mdi-chevron-up',
+            'icon-pre': 'mdi-playlist-check',
+            to: "/orders",
+            model: true,
+            children: [
+              {
+                icon: "mdi-order-bool-descending",
+                text: "All",
+                to: "/orders",
+              },
+              {
+                icon: "mdi-airplane",
+                text: "Flight",
+                to: "/orders/flight",
+              },
+              {
+                icon: "mdi-bed",
+                text: "Hotel",
+                to: "/orders/hotel",
+              },
+              {
+                icon: "mdi-chart-bubble",
+                text: "Insurance",
+                to: "/orders/insurance",
+              },
+            ]
+          },
+          {
+            icon: 'mdi-chevron-down',
+            'icon-alt': 'mdi-chevron-up',
+            'icon-pre': 'mdi-account',
+            text: 'User Management',
+            model: true,
+            to: "/users",
+            children: [
+              { to: '/users', icon: 'mdi-account-multiple', text: 'Users' },
+              { to: '/users/permissions', icon: 'mdi-account-key', text: 'Permissions' },
+              { to: '/users/roles', icon: 'mdi-card-account-details', text: 'Roles' },
+              { to: '/users/groups', icon: 'mdi-account-group', text: 'Groups' },
 
-          ],
-        },
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   text: 'More',
-        //   model: false,
-        //   children: [
-        //     { text: 'Import' },
-        //     { text: 'Export' },
-        //     { text: 'Print' },
-        //     { text: 'Undo changes' },
-        //     { text: 'Other contacts' },
-        //   ],
-        // },
-        // { icon: 'mdi-cog', text: 'Settings' },
-        // { icon: 'mdi-message', text: 'Send feedback' },
-        // { icon: 'mdi-help-circle', text: 'Help' },
-        // { icon: 'mdi-cellphone-link', text: 'App downloads' },
-        // { icon: 'mdi-keyboard', text: 'Go to the old version' },
-      ],
-    })
+            ],
+          },
+          // {
+          //   icon: 'mdi-chevron-up',
+          //   'icon-alt': 'mdi-chevron-down',
+          //   text: 'More',
+          //   model: false,
+          //   children: [
+          //     { text: 'Import' },
+          //     { text: 'Export' },
+          //     { text: 'Print' },
+          //     { text: 'Undo changes' },
+          //     { text: 'Other contacts' },
+          //   ],
+          // },
+          // { icon: 'mdi-cog', text: 'Settings' },
+          // { icon: 'mdi-message', text: 'Send feedback' },
+          // { icon: 'mdi-help-circle', text: 'Help' },
+          // { icon: 'mdi-cellphone-link', text: 'App downloads' },
+          // { icon: 'mdi-keyboard', text: 'Go to the old version' },
+        ],
+    }},
+    watch: {
+      '$vuetify.breakpoint.width'() {
+        if (this.$vuetify.breakpoint.width > 1440) {
+          this.drawer = true
+          this.miniVariant = false
+        } else if (this.$vuetify.breakpoint.width <= 1440 && this.$vuetify.breakpoint.width > 1200) {
+          this.miniVariant = true
+          this.drawer = false
+        }
+      }
+    }
   }
 </script>
 

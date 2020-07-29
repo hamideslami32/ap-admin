@@ -28,19 +28,18 @@ export default {
           {
             text: "Order ID",
             align: "start",
-            sortable: false,
             value: "id",
           },
-          { text: "ORG - DST", sortable: false, },
-          { text: "Travel Date", sortable: false, },
-          { text: "Date of Issue", sortable: false, },
-          { text: "Airline / Provider", sortable: false, },
-          { text: "Pax", sortable: false, },
-          { text: "Net Price / Sales Price", sortable: false, },
-          { text: "Confirmation Code", sortable: false, },
-          { text: "Order Status", sortable: false, },
-          { text: "Payment Status", sortable: false, },
-          { text: "Ticket / Details", sortable: false}
+          { text: "ORG - DST" , value: 'route'},
+          { text: "Travel Date" , value: 'travel-date'},
+          { text: "Date of Issue" , value: "issue-date"},
+          { text: "Airline/Provider", value: "airline-provider" },
+          { text: "Pax", value: "pax" },
+          { text: "Net/Sales Price", value: "price" },
+          { text: "Confirmation Code", value: "conf-code" },
+          { text: "Order Status", value: "order-status" },
+          { text: "Payment Status", value: "payment-status" },
+          { text: "Ticket/Details", value: "ticket-details", sortable :false }
         ],
       // request for this data (default -> latest || query data by search widget link)
       // mockOrdersData: [

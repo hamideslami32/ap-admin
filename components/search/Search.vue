@@ -87,20 +87,20 @@ export default {
                 {
                     value: '',
                     type: 'input',
-                    label:'Issue Date - DD/MM/YY',
-                    placeholder: 'From',
+                    label:'Issue Date',
+                    placeholder: 'From - DD/MM/YY',
                     s_value: '',
-                    s_placeholder: 'To',
+                    s_placeholder: 'To - DD/MM/YY',
                     mask:'##/##/##'
 
                 },
                 {
                     value: '',
                     type: 'input',
-                    label:'Travel Date - DD/MM/YY',
-                    placeholder: 'From',
+                    label:'Travel Date',
+                    placeholder: 'From - DD/MM/YY',
                     s_value: '',
-                    s_placeholder: 'To',
+                    s_placeholder: 'To - DD/MM/YY',
                     mask:'##/##/##'
 
                 },
@@ -108,9 +108,9 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Route',
-                    placeholder: 'Origin',
+                    placeholder: 'Origin (THR)',
                     s_value: '',
-                    s_placeholder: 'Destination',
+                    s_placeholder: 'Destination (KIH)',
                     mask:'AAA'
 
                 }
@@ -299,7 +299,8 @@ export default {
         margin-left: 0;
       }
       &:last-of-type {
-        padding-right: 0;
+        padding-right: 0 !important;
+        border-right: none;
       }
 
       .field {

@@ -5,8 +5,6 @@
       color="primary"
       width="270"
       :clipped="true"
-      :mini-variant="miniVariant"
-      mini-variant-width="70"
       app
       dark
     >
@@ -65,7 +63,7 @@
     </v-navigation-drawer>
 
     <v-app-bar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
+      :clipped-left="$vuetify.breakpoint.mdAndUp"
       app
       class="white lightPrimary--text align-center"
     >
@@ -236,7 +234,6 @@
       return {
         dialog: false,
         drawer: false,
-        miniVariant: false,
         userMenuItems: [
           {
             title: 'Profile',
@@ -318,13 +315,20 @@
     }},
     watch: {
       '$vuetify.breakpoint.width'() {
+        this.changeDrawer()
+      }
+    },
+    mounted() {
+        this.changeDrawer()
+    },
+    methods: {
+      changeDrawer() {
         if (this.$vuetify.breakpoint.width > 1440) {
           this.drawer = true
-          this.miniVariant = false
-        } else if (this.$vuetify.breakpoint.width <= 1440 && this.$vuetify.breakpoint.width > 1200) {
-          this.miniVariant = true
+        } else {
           this.drawer = false
         }
+
       }
     }
   }

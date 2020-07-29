@@ -5,7 +5,8 @@
       color="primary"
       width="270"
       :clipped="true"
-      :mini-variant="false"
+      :mini-variant="miniVariant"
+      mini-variant-width="70"
       app
       dark
     >
@@ -48,10 +49,10 @@
               :to="child.to"
               exact
             >
-              <!-- <v-list-item-action v-if="child.icon">
+              <v-list-item-action v-if="child.icon" class="ml-3">
                 <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action> -->
-              <v-list-item-content class="pl-10">
+              </v-list-item-action>
+              <v-list-item-content>
                 <v-list-item-title class="text-body-2">
                   {{ child.text }}
                 </v-list-item-title>
@@ -234,6 +235,8 @@
     data() {
       return {
         dialog: false,
+        drawer: false,
+        miniVariant: false,
         userMenuItems: [
           {
             title: 'Profile',
@@ -313,17 +316,16 @@
           // { icon: 'mdi-keyboard', text: 'Go to the old version' },
         ],
     }},
-    computed: {
-      drawer() {
-        let drawer = false
-        if (this.$vuetify.breakpoint.width >= '1500') drawer = true
-        return drawer
-      },
-      // miniVariant() {
-      //   let variant = false
-      //   if (this.$vuetify.breakpoint.width < '1500' && this.$vuetify.breakpoint.width >= '1200') variant = true
-      //   return variant
-      // }
+    watch: {
+      '$vuetify.breakpoint.width'() {
+        if (this.$vuetify.breakpoint.width > 1440) {
+          this.drawer = true
+          this.miniVariant = false
+        } else if (this.$vuetify.breakpoint.width <= 1440 && this.$vuetify.breakpoint.width > 1200) {
+          this.miniVariant = true
+          this.drawer = false
+        }
+      }
     }
   }
 </script>

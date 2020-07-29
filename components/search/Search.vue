@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel class="search">
-    <v-expansion-panel-header class="text-h6">
+    <v-expansion-panel-header class="text-h6 mb-4">
       Search
     </v-expansion-panel-header>
     <v-expansion-panel-content>
@@ -9,40 +9,35 @@
           <div class="d-flex flex-column flex-md-row filter-cols-wrapper">
             <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
               <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="4">
-                      <v-subheader class="mt-4 subtitle-2">
-                        {{ item.label }}
-                      </v-subheader>
-                    </v-col>
-                    <v-col :cols="fieldCol(key)">
-                      <v-text-field
-                        v-if="item.type === 'input'"
-                        v-model="item.value"
-                        v-mask="item.mask"
-                        :placeholder="item.placeholder"
-                      />
-                      <v-select
-                        v-else
-                        v-model="item.value"
-                        :items="item.selectList"
-                      />
-                    </v-col>
-                    <v-col v-if="key === 'secondCol'" cols="4">
-                      <v-text-field
-                        v-model="item.s_value"
-                        v-mask="item.mask"
-                        :placeholder="item.s_placeholder"
-                        class="ml-2"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-container>
+                <v-text-field
+                  v-if="item.type === 'input'"
+                  v-model="item.value"
+                  v-mask="item.mask"
+                  outlined
+                  :label="item.label"
+                  :placeholder="item.placeholder"
+                />
+                <v-select
+                  v-else
+                  v-model="item.value"
+                  :label="item.label"
+                  outlined
+                  :items="item.selectList"
+                />
+                <div v-if="key === 'secondCol'">
+                  <v-text-field
+                    v-model="item.s_value"
+                    v-mask="item.mask"
+                    outlined
+                    :label="item.label"
+                    :placeholder="item.s_placeholder"
+                    class="ml-2"
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div class="d-flex justify-end my-6">
+          <div class="d-flex justify-end my-2">
             <v-btn width="200" color="primary" x-large @click="search">
               search
             </v-btn>
@@ -66,26 +61,25 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Phone',
-                    placeholder: '09',
+                    placeholder: '0912-1234567',
                     mask:'####-#######'
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Order No',
-                    placeholder: 'df-',
+                    placeholder: 'IF-123456',
                     mask:'AA-#######'
                 },
                 {
-                    value: '',
+                    value: 'Flight',
                     type: 'select',
                     label:'Product',
-                    placeholder: 'flight',
                     selectList: [
-                    'flight',
-                    'hotel',
-                    'bus',
-                    'visa'
+                    'Flight',
+                    'Hotel',
+                    'Bus',
+                    'Visa'
                     ]
                 }
                 ],
@@ -93,63 +87,63 @@ export default {
                 {
                     value: '',
                     type: 'input',
-                    label:'Issue Date',
-                    placeholder: 'from',
+                    label:'Issue Date - DD/MM/YY',
+                    placeholder: 'From',
                     s_value: '',
-                    s_placeholder: 'to',
-                    mask:'##/##/####'
+                    s_placeholder: 'To',
+                    mask:'##/##/##'
 
                 },
                 {
                     value: '',
                     type: 'input',
-                    label:'Travel Date',
-                    placeholder: 'from',
+                    label:'Travel Date - DD/MM/YY',
+                    placeholder: 'From',
                     s_value: '',
-                    s_placeholder: 'to',
-                    mask:'##/##/####'
+                    s_placeholder: 'To',
+                    mask:'##/##/##'
 
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Route',
-                    placeholder: 'origin',
+                    placeholder: 'Origin',
                     s_value: '',
-                    s_placeholder: 'destination',
+                    s_placeholder: 'Destination',
                     mask:'AAA'
 
                 }
                 ],
                 thirdCol: [
                 {
-                    value: '',
+                    value: 'Failed',
                     type: 'select',
                     label:'Payment Status',
                     placeholder: '',
                     selectList: [
-                    'success',
-                    'pending',
-                    'failed',
-                    'partial'
+                    'Success',
+                    'Pending',
+                    'Failed',
+                    'Partial'
                     ]
                 },
                 {
-                    value: '',
+                    value: 'Pending',
                     type: 'select',
                     label:'Order Status',
                     placeholder: '',
                     selectList: [
-                    'success',
-                    'pending',
-                    'failed'
+                    'Success',
+                    'Pending',
+                    'Failed'
                     ]
                 },
                 {
                     value: '',
                     type: 'input',
                     label:'Confirmation Code',
-                    placeholder: '',
+                    placeholder: '12X45FH9',
                     mask:''
 
                 }
@@ -295,27 +289,25 @@ export default {
 
   .filter-cols-wrapper {
     background-color: #fff;
-    height: 80%;
 
     .filter-col {
-      border-right: 1px solid #eee;
-      min-width: 30%;
+      width: 100%;
+      border-right: 1px solid $lightGray;
+      margin-left: 24px;
 
+      &:first-of-type {
+        margin-left: 0;
+      }
       &:last-of-type {
-        border-right: none;
-        padding-right: 0 !important;
+        padding-right: 0;
       }
 
       .field {
-
-        .col {
-          padding: 0 !important;
-        }
+        width: 100%;
       }
     }
   }
 }
-
 @media only screen and (max-width: 960px) {
   .filter-col {
     border-right: none !important;

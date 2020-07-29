@@ -4,7 +4,7 @@
       <div class="white--text label" :class="labelColor">
         <div>{{ labelTitle }}</div>
       </div>
-      <div class="main d-flex align-center flex-grow-1 pa-4">
+      <div class="main d-flex align-center flex-grow-1 px-4">
         <div class="airline mr-6 d-flex flex-column justify-center">
           <img src="~/assets/imgs/I3.png" class="mb-4" alt="airline logo" width="70%">
           <div class="mb-2">

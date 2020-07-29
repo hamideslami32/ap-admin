@@ -7,13 +7,14 @@
       <v-data-table
         :headers="headers"
         :items="data"
+        :page.sync="page"
+        hide-default-footer
         item-key="id"
-        :search="search"
         class="cell-height"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        @page-count="pageCount = $event"
       >
-        <!-- <template v-slot:top>
-          <v-text-field v-model="search" label="Search" class="mx-4" />
-        </template> -->
         <template v-slot:body="{ items }">
           <tbody>
             <tr v-for="(item, i) in items" :key="i">
@@ -22,6 +23,17 @@
           </tbody>
         </template>
       </v-data-table>
+      <div class="d-flex justify-space-between mt-10">
+        <div class="text-center">
+          <v-btn color="secondary" class="mr-2" @click="toggleOrder">
+            Toggle sort order
+          </v-btn>
+          <v-btn color="secondary" @click="nextSort">
+            Sort next column
+          </v-btn>
+        </div>
+        <v-pagination v-model="page" color="secondary" :length="pageCount" />
+      </div>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>
@@ -48,7 +60,10 @@ export default {
     },
     data() {
         return {
-            search: "",
+            page: 1,
+            pageCount: 0,
+            sortBy: 'id',
+            sortDesc: false,
         }
     },
     computed: {
@@ -59,15 +74,14 @@ export default {
       }
     },
     methods: {
-        // filterOnlyCapsText(value, search, item)
-        // filterOnlyCapsText(value, search) {
-        //   return (
-        //     value != null &&
-        //     search != null &&
-        //     typeof value === "string" &&
-        //     value.toString().indexOf(search) !== -1
-        //   )
-        // },
+        toggleOrder () {
+          this.sortDesc = !this.sortDesc
+        },
+        nextSort () {
+          let index = this.headers.findIndex(h => h.value === this.sortBy)
+          index = (index + 1) % this.headers.length
+          this.sortBy = this.headers[index].value
+        },
     }
 }
 </script>

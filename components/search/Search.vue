@@ -61,8 +61,8 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Phone',
-                    placeholder: '0912-1234567',
-                    mask:'####-#######'
+                    placeholder: '0912-123-4567',
+                    mask:'####-###-####'
                 },
                 {
                     value: '',
@@ -88,9 +88,9 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Issue Date',
-                    placeholder: 'From - DD/MM/YY',
+                    placeholder: 'From - YY/MM/DD',
                     s_value: '',
-                    s_placeholder: 'To - DD/MM/YY',
+                    s_placeholder: 'To - YY/MM/DD',
                     mask:'##/##/##'
 
                 },
@@ -98,9 +98,9 @@ export default {
                     value: '',
                     type: 'input',
                     label:'Travel Date',
-                    placeholder: 'From - DD/MM/YY',
+                    placeholder: 'From - YY/MM/DD',
                     s_value: '',
-                    s_placeholder: 'To - DD/MM/YY',
+                    s_placeholder: 'To - YY/MM/DD',
                     mask:'##/##/##'
 
                 },

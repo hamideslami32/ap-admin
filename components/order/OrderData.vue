@@ -44,10 +44,10 @@
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn class="primary white--text" small @click="$router.push('/orders/detail')">
+        <v-btn class="secondary white--text" small @click="$router.push('/orders/detail')">
           Detail
         </v-btn>
-        <v-btn class="green white--text" small>
+        <v-btn class="blue white--text" small>
           Ticket
         </v-btn>
       </td>
@@ -86,10 +86,10 @@
         {{ data.paymentStatus }}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn class="primary white--text" small @click="$router.push('/orders/detail')">
+        <v-btn class="secondary white--text" small @click="$router.push('/orders/detail')">
           Detail
         </v-btn>
-        <v-btn class="green white--text" small>
+        <v-btn class="blue white--text" small>
           Ticket
         </v-btn>
       </td>

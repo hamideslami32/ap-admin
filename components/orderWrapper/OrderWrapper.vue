@@ -16,16 +16,20 @@
             </v-chip>
           </div>
         </div>
-        <div class="flight-detail d-flex align-center flex-grow-1 mx-10">
+        <div class="flight-detail d-flex align-center flex-grow-1 mr-8">
           <div class="d-flex flex-column">
             <span class="font-weight-bold">{{ 'Tehran' }}</span>
             <span class="grey--text">{{ 'THR' }}</span>
-            <span>{{ '1399/04/16 - 17:30' }}</span>
+            <span>
+              {{ '1399/04/16' }}
+              <br>
+              {{ '17:30' }}
+            </span>
           </div>
-          <div class="d-flex align-center">
-            <div class="d-flex flex-column  align-center">
+          <div class="d-flex align-center flex-grow-1">
+            <div class="d-flex flex-column  align-center flex-grow-1">
               <span>{{ 'Economy' }}</span>
-              <span class="d-flex align-center">
+              <span class="d-flex align-center" style="width:100%;">
                 <div class="circle" />
                 <div class="line" />
               </span>
@@ -34,9 +38,9 @@
             <v-icon>
               mdi-airplane-takeoff
             </v-icon>
-            <div class="d-flex flex-column align-center">
+            <div class="d-flex flex-column align-center flex-grow-1">
               <span>{{ 'Class H' }}</span>
-              <span class="d-flex align-center">
+              <span class="d-flex align-center" style="width:100%;">
                 <div class="line" />
                 <div class="circle primary" />
               </span>
@@ -46,7 +50,11 @@
           <div class="d-flex flex-column align-end">
             <span class="font-weight-bold">{{ 'Mashhad' }}</span>
             <span class="grey--text">{{ 'MHD' }}</span>
-            <span>{{ '1399/04/16 - 18:40' }}</span>
+            <span class="text-right">
+              {{ '1399/04/16' }}
+              <br>
+              {{ '18:40' }}
+            </span>
           </div>
         </div>
         <div class="passengers-price mr-10 d-flex flex-column justify-space-around">

@@ -226,6 +226,7 @@ export default {
 
     .filter-col {
       width: 100%;
+      max-width: 400px;
       border-right: 1px solid $lightGray;
       margin-left: 24px;
 

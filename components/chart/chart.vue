@@ -1,7 +1,9 @@
 <template>
   <v-card class="pa-4">
-    <p class="mb-8 text-h6">{{title}}</p>
-    <apexchart :type="type" :options="chartOptions" :series="chartData"></apexchart>
+    <p class="mb-8 text-h6">
+      {{ title }}
+    </p>
+    <apexchart :type="type" :options="chartOptions" :series="chartData" />
   </v-card>
 </template>
 
@@ -9,6 +11,9 @@
 import ApexCharts from "vue-apexcharts"
 
 export default {
+  components: {
+    apexchart: ApexCharts,
+  },
   props: {
     title: {
       type: String,
@@ -26,9 +31,6 @@ export default {
       type: String,
       required: true
     },
-  },
-  components: {
-    apexchart: ApexCharts,
   },
 
 }

@@ -4,9 +4,9 @@ import forOwn from 'lodash/forOwn'
 export const normalizePath = (path) => {
     const regex = /\/$/gm
     const subst = ''
-        
+
     const result = path.replace(regex, subst)
-        
+
     return result
 }
 
@@ -14,7 +14,7 @@ export const normalizePath = (path) => {
 export const normalizeSearchField = (array) => {
     let normalizedArray = array.map(object => {
         return {
-            label: object.label.toLowerCase().replace(' ', '-'), 
+            label: object.label.toLowerCase().replace(' ', '-'),
             value: object.value.trim().toLowerCase(),
             placeholder: object.placeholder
         }
@@ -55,17 +55,21 @@ export const normalizeUrl= (urlObj) => {
                 label = 'Route'
                 placeholder = 'destination'
                 break
-        
+
             default:
                 label = key
                 break
         }
         result.push({
-            label: label.replace('-', ' ').replace(regex, (c) => c.toUpperCase()), 
+            label: label.replace('-', ' ').replace(regex, (c) => c.toUpperCase()),
             value: item,
             placeholder: placeholder
         })
     })
 
     return result
+}
+
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }

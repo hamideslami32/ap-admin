@@ -51,7 +51,7 @@
 <script>
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
-import { normalizeSearchField, normalizeUrl } from '~/utils/helpers'
+import { normalizeSearchField, normalizeUrl, capitalizeFirstLetter } from '~/utils/helpers'
 export default {
     data() {
         return {
@@ -196,7 +196,6 @@ export default {
         return urlHasParams
       },
       setSearchFieldValues(fieldsArray) {
-
         forEach(fieldsArray, (item) => {
           forOwn(this.filterFieldsData, (array) => {
             forEach(array, (fieldObject) => {
@@ -207,8 +206,11 @@ export default {
                   fieldObject.s_value = item.value
 
                 } else {
-                  fieldObject.value = item.value
-
+                  if (fieldObject.type === 'select') {
+                    fieldObject.value = capitalizeFirstLetter(item.value)
+                  } else {
+                    fieldObject.value = item.value
+                  }
                 }
               }
             })

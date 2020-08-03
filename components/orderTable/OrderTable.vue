@@ -32,8 +32,8 @@
             Sort next column
           </v-btn>
           <v-select
-            class="mt-4"
             v-model="sortSelect.value"
+            class="mt-4"
             :label="sortSelect.label"
             outlined
             dense

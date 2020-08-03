@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      <UserSearch class="mb-4"/>
+      <UserSearch class="mb-4" />
       <v-card class="rounded">
         <v-data-table
           :headers="headers"
@@ -16,8 +16,8 @@
                 class="mx-4"
                 inset
                 vertical
-              ></v-divider>
-              <v-spacer></v-spacer>
+              />
+              <v-spacer />
               <v-dialog v-model="dialog" max-width="500px">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -26,7 +26,9 @@
                     class="mb-2"
                     v-bind="attrs"
                     v-on="on"
-                  >New Item</v-btn>
+                  >
+                    New Item
+                  </v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
@@ -37,28 +39,32 @@
                     <v-container>
                       <v-row>
                         <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                          <v-text-field v-model="editedItem.name" label="Name" />
                         </v-col>
                         <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.phone" label="Phone"></v-text-field>
+                          <v-text-field v-model="editedItem.phone" label="Phone" />
                         </v-col>
                         <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                          <v-text-field v-model="editedItem.email" label="Email" />
                         </v-col>
                         <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.nationalCode" label="National Code"></v-text-field>
+                          <v-text-field v-model="editedItem.nationalCode" label="National Code" />
                         </v-col>
                         <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.lastOrder" label="Last Order"></v-text-field>
+                          <v-text-field v-model="editedItem.lastOrder" label="Last Order" />
                         </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
 
                   <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                    <v-spacer />
+                    <v-btn color="blue darken-1" text @click="close">
+                      Cancel
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="save">
+                      Save
+                    </v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -80,7 +86,9 @@
             </v-icon>
           </template>
           <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
+            <v-btn color="primary" @click="initialize">
+              Reset
+            </v-btn>
           </template>
         </v-data-table>
       </v-card>

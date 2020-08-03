@@ -95,6 +95,23 @@
         </div>
       </div>
     </v-card>
+    <div class="edit pa-4 pt-8 elevation-1">
+      <div class="inputs d-flex flex-wrap">
+        <v-text-field
+          v-for="(item, index) in editOrderData"
+          :key="index"
+          class="mr-4"
+          outlined
+          :label="item.label"
+          :value="item.value"
+        />
+      </div>
+      <div class="d-flex justify-end pr-4">
+        <v-btn color="secondary">
+          Confirm
+        </v-btn>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -107,8 +124,74 @@ export default {
     },
     labelTitle: {
       type: String,
-      default: 'System'
+      default: 'Failed'
     },
+  },
+  data() {
+    return {
+      editOrderData: [
+        {
+          label: 'Origin',
+          value: 'THR'
+        },
+        {
+          label: 'Destination',
+          value: 'MHD'
+        },
+        {
+          label: 'Airline',
+          value: 'I3'
+        },
+        {
+          label: 'Flight NO',
+          value: '654'
+        },
+        {
+          label: 'Dep. Date',
+          value: '1399-03-02'
+        },
+        {
+          label: 'Dep. Time',
+          value: '10:30'
+        },
+        {
+          label: 'Ari. Date',
+          value: '1399-03-02'
+        },
+        {
+          label: 'Ari. Time',
+          value: '14:12'
+        },
+        {
+          label: 'RBD',
+          value: 'Y'
+        },
+        {
+          label: 'PNR',
+          value: 'DVGHJ'
+        },
+        {
+          label: 'Provider',
+          value: 'ATA'
+        },
+        {
+          label: 'Airline',
+          value: 'ATA'
+        },
+        {
+          label: 'Fare',
+          value: '2,600,000'
+        },
+        {
+          label: 'Tax',
+          value: '250,000'
+        },
+        {
+          label: 'Total',
+          value: '2,850,000'
+        },
+      ]
+    }
   }
 }
 </script>
@@ -116,9 +199,10 @@ export default {
 <style lang="scss" scoped>
 .order-wrapper {
   width: 100%;
-  height: 210px;
+  min-height: 210px;
   .label {
     display: flex;
+    width: 45px;
     justify-content: center;
     align-items: center;
     border-radius: 4px 0 0 4px !important;
@@ -127,6 +211,7 @@ export default {
     }
   }
   .main {
+    height: 200px;
     & > div {
       height: 100%;
     }
@@ -134,6 +219,15 @@ export default {
       & > div {
         height: inherit;
         justify-content: space-around;
+      }
+    }
+  }
+  .edit {
+    background-color: #F8F4FF;
+    min-height: 200px;
+    .inputs {
+      & > div {
+        width: 10%;
       }
     }
   }

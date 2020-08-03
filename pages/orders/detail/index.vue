@@ -45,6 +45,12 @@
           <v-tab href="#tab-4">
             Customer Support
           </v-tab>
+          <v-tab href="#tab-5">
+            System LOG
+          </v-tab>
+          <v-tab href="#tab-6">
+            User LOG
+          </v-tab>
         </v-tabs>
       </div>
       <div class="main pa-4 mb-10">
@@ -52,7 +58,7 @@
         <v-expansion-panels class="my-4" :value="openExpansionPanel" :multiple="true">
           <!-- <CanceledOrderWrapper /> -->
         </v-expansion-panels>
-        <OrderWrapper label-color="green" label-title="Charter" />
+        <OrderWrapper label-color="green" label-title="Success" />
         <PriceDetails id="#tab-2" class="my-8" />
         <div class="my-4 rounded">
           <!-- <CanceledOrderWrapper /> -->

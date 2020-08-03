@@ -31,6 +31,14 @@
           <v-btn color="secondary" @click="nextSort">
             Sort next column
           </v-btn>
+          <v-select
+            class="mt-4"
+            v-model="sortSelect.value"
+            :label="sortSelect.label"
+            outlined
+            dense
+            :items="sortSelect.selectList"
+          />
         </div>
         <v-pagination v-model="page" color="secondary" :length="pageCount" />
       </div>
@@ -60,6 +68,11 @@ export default {
     },
     data() {
         return {
+            sortSelect: {
+                value: 'orderID',
+                label:'Sort Item',
+                selectList: this.headers.map(x => x.value)
+            },
             page: 1,
             pageCount: 0,
             sortBy: 'id',

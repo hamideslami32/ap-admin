@@ -61,6 +61,8 @@ export default {
                     placeholder: 'example@apro.com',
                     mask:''
                 },
+                ],
+                secondCol: [
                 {
                     value: '',
                     type: 'input',
@@ -68,8 +70,6 @@ export default {
                     placeholder: '0123456789',
                     mask:'##########'
                 },
-                ],
-                secondCol: [
                 {
                     value: 'Flight',
                     type: 'select',

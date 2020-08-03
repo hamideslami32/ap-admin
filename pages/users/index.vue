@@ -5,7 +5,7 @@
       <v-card class="rounded">
         <v-data-table
           :headers="headers"
-          :items="desserts"
+          :items="users"
           sort-by="calories"
           class="elevation-1"
         >
@@ -36,20 +36,20 @@
                   <v-card-text>
                     <v-container>
                       <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                        <v-col cols="12" md="6">
+                          <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                        <v-col cols="12" md="6">
+                          <v-text-field v-model="editedItem.phone" label="Phone"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                        <v-col cols="12" md="6">
+                          <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                        <v-col cols="12" md="6">
+                          <v-text-field v-model="editedItem.nationalCode" label="National Code"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                        <v-col cols="12" md="6">
+                          <v-text-field v-model="editedItem.lastOrder" label="Last Order"></v-text-field>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -111,21 +111,21 @@ export default {
         { sortable: false, text: 'Group', value: '' },
         { sortable: false, text: '', value: 'actions'},
       ],
-      desserts: [],
+      users: [],
       editedIndex: -1,
       editedItem: {
         name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        phone: '',
+        email: '',
+        nationalCode: '',
+        lastOrder: '',
       },
       defaultItem: {
         name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        phone: '',
+        email: '',
+        nationalCode: '',
+        lastOrder: '',
       },
 
     }
@@ -148,7 +148,7 @@ export default {
 
     methods: {
       initialize () {
-        this.desserts = [
+        this.users = [
           {
             name: 'Ali Taheri  ',
             phone: '09121234567',
@@ -223,14 +223,14 @@ export default {
       },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.users.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        const index = this.users.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.users.splice(index, 1)
       },
 
       close () {
@@ -243,9 +243,9 @@ export default {
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.users[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.users.push(this.editedItem)
         }
         this.close()
       },

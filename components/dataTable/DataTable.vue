@@ -25,6 +25,9 @@
         {{ item.icon }}
       </v-icon>
     </template>
+    <template v-if="title === 'Customer Support'" v-slot:item.priority="{ item }">
+      <v-chip :color="getColor(item.priority)" dark>{{ item.priority }}</v-chip>
+    </template>
     <template v-if="expandable" v-slot:expanded-item="{ item }">
       <td colspan="5" class="expand">
         <tr class="d-flex justify-space-between">
@@ -101,6 +104,12 @@ export default {
             return 'lightPrimary--text'
           }
         }
+      },
+      getColor(item) {
+        console.log({item})
+        if (item === 'High') return 'red'
+        else if (item === 'Average') return 'orange'
+        else return 'grey'
       }
     },
 }

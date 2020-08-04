@@ -294,7 +294,7 @@ export default {
 
     .filter-col {
       width: 100%;
-      border-right: 1px solid $lightGray;
+      border-right: 1px solid $lightGrey;
       margin-left: 24px;
 
       &:first-of-type {

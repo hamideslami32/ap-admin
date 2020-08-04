@@ -104,6 +104,7 @@ export default {
           secondary: '#E3469A',
           grey: '#BDBDBD',
           lightPrimary: '#C5ACF2',
+          lightGrey: '#F5F5F5',
           blue: '#45C6D4',
         }
       }

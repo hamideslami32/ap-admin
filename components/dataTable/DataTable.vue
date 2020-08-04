@@ -4,6 +4,7 @@
     :items="data"
     :expanded.sync="expanded"
     item-key="nationalId"
+    :item-class="rowClasses"
     :show-expand="expandable"
     class="rounded"
   >
@@ -17,6 +18,11 @@
         class="mr-2"
       >
         mdi-dots-vertical
+      </v-icon>
+    </template>
+    <template v-if="title === 'Payment'" v-slot:item.icon="{ item }">
+      <v-icon :class="rowClasses(item)">
+        {{ item.icon }}
       </v-icon>
     </template>
     <template v-if="expandable" v-slot:expanded-item="{ item }">
@@ -83,6 +89,19 @@ export default {
               },
             ]
         }
+    },
+    methods: {
+      rowClasses(item) {
+        if (this.title === 'Payment') {
+          if (item.icon === 'mdi-download-outline') {
+            return "green--text" //can also return multiple classes e.g ["orange","disabled"]
+          } else if (item.icon === 'mdi-upload-outline') {
+            return "red--text"
+          } else {
+            return 'lightPrimary--text'
+          }
+        }
+      }
     },
 }
 </script>

@@ -79,6 +79,40 @@
             <DataTable title="Refund Details" :data="refundsData" :headers="refundHeaders" />
           </v-card>
         </div>
+        <div id="#tab-3" class="my-8">
+          <v-card class="rounded">
+            <DataTable title="Payment" :data="paymentData" :headers="paymentHeaders" />
+          </v-card>
+          <v-card class="d-flex mt-1 pa-4 justify-space-between">
+            <div class="d-flex">
+              <div class="d-flex flex-column mr-8">
+                <span class="grey--text text--darken-1 text-body-2 mb-2">
+                  Total
+                </span>
+                <span class="secondary--text text-h6">
+                  3,500,000 T
+                </span>
+              </div>
+              <v-divider vertical />
+              <div class="d-flex flex-column ml-8">
+                <span class="grey--text text--darken-1 text-body-2 mb-2">
+                  Paid
+                </span>
+                <span class="primary--text text-h6">
+                  1,000,000 T
+                </span>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="grey--text text--darken-1 text-body-2 mb-2">
+                Benefit
+              </span>
+              <span class="green--text text-h6">
+                20,000 T
+              </span>
+            </div>
+          </v-card>
+        </div>
         <div>
           <v-card id="#tab-4" class="rounded">
             <DataTable title="Customer Support" :data="customerSupportData" :headers="supportHeaders" />
@@ -119,6 +153,27 @@ export default {
       tab: null,
       openExpansionPanel: [],
       singleExpand: false,
+      paymentHeaders: [
+        {
+          text: '',
+          align: 'start',
+          sortable: false,
+          value: 'icon',
+        },
+        {
+          text: 'Title',
+          align: 'start',
+          sortable: false,
+          value: 'title',
+        },
+        { sortable: false, text: 'Date', value: 'date' },
+        { sortable: false, text: 'Time', value: 'time' },
+        { sortable: false, text: 'Payment Type', value: 'paymentType' },
+        { sortable: false, text: 'Reference', value: 'reference' },
+        { sortable: false, text: 'Bank Name', value: 'bank' },
+        { sortable: false, text: 'Amount', value: 'amount' },
+
+      ],
       supportHeaders: [
         {
           text: 'No',
@@ -165,6 +220,41 @@ export default {
         { sortable: false, text: 'Total', value: 'totalPrice' },
         { sortable: false, text: 'Actions', value: 'actions' },
         { sortable: false, text: '', value: 'data-table-expand' }
+      ],
+      paymentData: [
+        {
+          icon: 'mdi-download-outline',
+          title: 'Part 1',
+          date: '1365/3/5',
+          time: '13:00',
+          paymentType: 'IPG',
+          reference: '123578hg6456788489',
+          bank: 'Saman',
+          amount: '1,900,000 T',
+          status: 'incoming'
+        },
+        {
+          icon: 'mdi-upload-outline',
+          title: 'Refund',
+          date: '1365/3/5',
+          time: '13:00',
+          paymentType: 'IPG',
+          reference: '123578hg6456788489',
+          bank: 'Saman',
+          amount: '900,000 T',
+          status: 'outgoing'
+        },
+        {
+          icon: 'mdi-timer-sand',
+          title: 'Part 2',
+          date: '1365/3/5',
+          time: 'waiting...',
+          paymentType: 'waiting...',
+          reference: 'waiting...',
+          bank: 'waiting...',
+          amount: '200,000 T',
+          status: 'waiting'
+        }
       ],
       customerSupportData: [
         {

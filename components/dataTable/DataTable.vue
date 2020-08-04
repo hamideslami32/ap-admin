@@ -12,31 +12,25 @@
         <v-toolbar-title>{{ title }}</v-toolbar-title>
       </v-toolbar>
     </template>
+    <template v-slot:item.actions="{ }">
+      <v-icon
+        class="mr-2"
+      >
+        mdi-dots-vertical
+      </v-icon>
+    </template>
     <template v-if="expandable" v-slot:expanded-item="{ item }">
-      <td :colspan="headers.length">
+      <td colspan="5" class="expand">
         <tr class="d-flex justify-space-between">
-          <td class="pr-4">
-            {{ item.nationalId }}
+          <td v-for="(cell, i) in expandData" :key="i" class="pr-4 text-center">
+            <div class="text-body-2 grey--text text--darken-1">
+              {{ cell.title }}
+            </div>
+            <br>
+            <div class="primary--text font-weight-medium">
+              {{ item[cell.value] }}
+            </div>
           </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td class="pr-4">
-            {{ item.nationalId }}
-          </td>
-          <td>{{ item.nationalId }}</td>
         </tr>
       </td>
     </template>
@@ -66,6 +60,28 @@ export default {
     data() {
         return {
             expanded: [],
+            expandData: [
+              {
+                title: 'Passport NO',
+                value: 'passportNo',
+              },
+              {
+                title: 'Date of Birth',
+                value: 'birthday',
+              },
+              {
+                title: 'Date of Expire',
+                value: 'expireDate',
+              },
+              {
+                title: 'Nationality',
+                value: 'nationality',
+              },
+              {
+                title: 'Issuing Country',
+                value: 'issueCountry',
+              },
+            ]
         }
     },
 }
@@ -74,5 +90,9 @@ export default {
 <style lang="scss" scoped>
 .table-header {
   border-radius: 4px 4px 0 0;
+}
+.expand {
+  line-height: 1.5 !important;
+  padding: 15px !important;
 }
 </style>

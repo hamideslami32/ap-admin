@@ -86,7 +86,7 @@
               PNR: YTVSC
             </v-chip>
           </div>
-          <v-btn class="primary">
+          <v-btn class="primary" @click.native="edit = !edit">
             Replace
           </v-btn>
           <v-btn class="blue white--text">
@@ -95,7 +95,7 @@
         </div>
       </div>
     </v-card>
-    <div class="edit pa-4 pt-8 elevation-1">
+    <div v-if="edit" class="edit pa-4 pt-8 elevation-1">
       <div class="inputs d-flex flex-wrap">
         <v-text-field
           v-for="(item, index) in editOrderData"
@@ -129,6 +129,7 @@ export default {
   },
   data() {
     return {
+      edit: false,
       editOrderData: [
         {
           label: 'Origin',
@@ -232,4 +233,5 @@ export default {
     }
   }
 }
+
 </style>

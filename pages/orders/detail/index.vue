@@ -163,6 +163,7 @@ export default {
         { sortable: false, text: 'National ID', value: 'nationalId' },
         { sortable: false, text: 'Tax', value: 'tax' },
         { sortable: false, text: 'Total', value: 'totalPrice' },
+        { sortable: false, text: 'Actions', value: 'actions' },
         { sortable: false, text: '', value: 'data-table-expand' }
       ],
       customerSupportData: [
@@ -212,6 +213,10 @@ export default {
           firstName: 'Maedeh',
           lastName: 'Masoumi',
           passportNo: 'A123456780',
+          birthday: '1365/3/5',
+          expireDate: '1401/02/12',
+          nationality: 'Iranian',
+          issueCountry: 'Turkey',
           ticketNo: '91755555555',
           farePrice: '2,200,000',
           nationalId: '1757473859',

@@ -219,7 +219,7 @@ export default {
         { sortable: false, text: 'National ID', value: 'nationalId' },
         { sortable: false, text: 'Tax', value: 'tax' },
         { sortable: false, text: 'Total', value: 'totalPrice' },
-        { sortable: false, text: 'Actions', value: 'actions' },
+        { sortable: false, text: 'Menu', value: 'actions' },
         { sortable: false, text: '', value: 'data-table-expand' }
       ],
       paymentData: [

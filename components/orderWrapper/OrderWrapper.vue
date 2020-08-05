@@ -118,16 +118,18 @@
       </div>
       <div class="d-flex justify-space-between mt-4 pt-4">
         <span class="primary--text text-h5">
-          <v-icon color="primary" class="mr-2" size="36">
+          <v-icon color="primary" size="36">
             mdi-bag-carry-on
           </v-icon>
-          Baggage: 20 KG
+          <span>
+            Baggage: 20 Kg
+          </span>
         </span>
-        <div class="pax__rules rounded pa-3 text-right">
-          <span class="font-weight-bold">قوانین استرداد (شناسه نرخی y)</span>
-          <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-4">
-            <span class="primary--text">{{ rule.value }}</span>
+        <div class="pax__rules rounded pa-3">
+          <span class="font-weight-bold" style="fontSize: 20px;">قوانین استرداد (شناسه نرخی y)</span>
+          <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-6">
             <span>{{ rule.title }}</span>
+            <span class="primary--text">{{ rule.value }}</span>
           </div>
         </div>
       </div>
@@ -319,6 +321,8 @@ export default {
 
     &__rules {
       height: auto;
+      font-family: 'dana' !important;
+      direction: rtl;
       min-height: 100px;
       width: 100%;
       max-width:600px;

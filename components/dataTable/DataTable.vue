@@ -8,27 +8,29 @@
     :show-expand="expandable"
     class="rounded"
   >
-    <template v-slot:top>
+    <template v-if="title" #top>
       <v-toolbar flat dark class="primary table-header">
         <v-toolbar-title>{{ title }}</v-toolbar-title>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ }">
+    <template #item.actions>
       <v-icon
         class="mr-2"
       >
         mdi-dots-vertical
       </v-icon>
     </template>
-    <template v-if="title === 'Payment'" v-slot:item.icon="{ item }">
+    <template v-if="title === 'Payment'" #item.icon="{ item }">
       <v-icon :class="rowClasses(item)">
         {{ item.icon }}
       </v-icon>
     </template>
-    <template v-if="title === 'Customer Support'" v-slot:item.priority="{ item }">
-      <v-chip :color="getColor(item.priority)" dark>{{ item.priority }}</v-chip>
+    <template v-if="title === 'Customer Support'" #item.priority="{ item }">
+      <v-chip :color="getColor(item.priority)" dark>
+        {{ item.priority }}
+      </v-chip>
     </template>
-    <template v-if="expandable" v-slot:expanded-item="{ item }">
+    <template v-if="expandable" #expanded-item="{ item }">
       <td colspan="5" class="expand">
         <tr class="d-flex justify-space-between">
           <td v-for="(cell, i) in expandData" :key="i" class="pr-4 text-center">
@@ -96,13 +98,10 @@ export default {
     methods: {
       rowClasses(item) {
         if (this.title === 'Payment') {
-          if (item.icon === 'mdi-download-outline') {
-            return "green--text" //can also return multiple classes e.g ["orange","disabled"]
-          } else if (item.icon === 'mdi-upload-outline') {
-            return "red--text"
-          } else {
-            return 'lightPrimary--text'
-          }
+          //can also return multiple classes e.g ["orange","disabled"]
+          if (item.icon === 'mdi-download-outline') return "green--text"
+          else if (item.icon === 'mdi-upload-outline') return "red--text"
+          else return 'lightPrimary--text'
         }
       },
       getColor(item) {

@@ -50,6 +50,13 @@ export default {
                 {
                     value: '',
                     type: 'input',
+                    label:'Name',
+                    placeholder: 'ali taheri',
+                    mask:''
+                },
+                {
+                    value: '',
+                    type: 'input',
                     label:'Phone',
                     placeholder: '0912-123-4567',
                     mask:'####-###-####'

@@ -27,7 +27,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    New Item
+                    Add User
                   </v-btn>
                 </template>
                 <v-card>
@@ -49,9 +49,6 @@
                         </v-col>
                         <v-col cols="12" md="6">
                           <v-text-field v-model="editedItem.nationalCode" label="National Code" />
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <v-text-field v-model="editedItem.lastOrder" label="Last Order" />
                         </v-col>
                       </v-row>
                     </v-container>
@@ -126,21 +123,19 @@ export default {
         phone: '',
         email: '',
         nationalCode: '',
-        lastOrder: '',
       },
       defaultItem: {
         name: '',
         phone: '',
         email: '',
         nationalCode: '',
-        lastOrder: '',
       },
 
     }
   },
   computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'Add User' : 'Edit User'
       },
     },
 

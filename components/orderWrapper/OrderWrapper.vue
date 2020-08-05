@@ -86,16 +86,16 @@
               PNR: YTVSC
             </v-chip>
           </div>
-          <v-btn class="primary" @click.native="edit = !edit">
+          <v-btn class="primary" @click="showEdit = !showEdit">
             Replace
           </v-btn>
-          <v-btn class="blue white--text">
+          <v-btn class="blue white--text" @click="showRules = !showRules">
             Rules
           </v-btn>
         </div>
       </div>
     </v-card>
-    <div v-if="edit" class="edit pa-4 pt-8 elevation-1">
+    <div v-if="showEdit" class="edit pa-4 pt-8 elevation-1">
       <div class="inputs d-flex flex-wrap">
         <v-text-field
           v-for="(item, index) in editOrderData"
@@ -110,6 +110,26 @@
         <v-btn color="secondary">
           Confirm
         </v-btn>
+      </div>
+    </div>
+    <div v-if="showRules" class="white pax pa-4 pt-8 elevation-1">
+      <div class="pax__table pb-6">
+        <DataTable :data="pax" :headers="paxHeaders" />
+      </div>
+      <div class="d-flex justify-space-between mt-4 pt-4">
+        <span class="primary--text text-h5">
+          <v-icon color="primary" class="mr-2" size="36">
+            mdi-bag-carry-on
+          </v-icon>
+          Baggage: 20 KG
+        </span>
+        <div class="pax__rules rounded pa-3 text-right">
+          <span class="font-weight-bold">قوانین استرداد (شناسه نرخی y)</span>
+          <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-4">
+            <span class="primary--text">{{ rule.value }}</span>
+            <span>{{ rule.title }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -129,7 +149,68 @@ export default {
   },
   data() {
     return {
-      edit: false,
+      showEdit: false,
+      showRules: false,
+      rules: [
+        {
+          title: '12 ظهر سه روز قبل از پرواز',
+          value: '30٪'
+        },
+        {
+          title: '12 ظهر یک روز قبل از پرواز',
+          value: '50٪'
+        },
+        {
+          title: '3 ساعت قبل از پرواز',
+          value: '70٪'
+        },
+      ],
+      paxHeaders: [
+        {
+          text: 'Pax Type',
+          align: 'start',
+          sortable: false,
+          value: 'paxType',
+        },
+        {
+          text: 'Fare',
+          sortable: false,
+          value: 'fare',
+        },
+        { sortable: false, text: 'Tax', value: 'tax' },
+        { sortable: false, text: 'Tax', value: 'secondTax' },
+        { sortable: false, text: 'Tax', value: 'thirdTax' },
+        { sortable: false, text: 'ToTal', value: 'total' }
+      ],
+      pax: [
+        {
+          paxType: 'Adult',
+          fare: '2 x 335,000 LP',
+          type: 'LP',
+          tax: '2 x 15,000 LP',
+          secondTax: '2 x 15,000 KU',
+          thirdTax: '2 x 15,000 I6',
+          total: '2,400,000',
+        },
+        {
+          paxType: 'Child',
+          fare: '',
+          type: '',
+          tax: '',
+          secondTax: '',
+          thirdTax: '',
+          total: '',
+        },
+        {
+          paxType: 'Infant',
+          fare: '',
+          type: '',
+          tax: '',
+          secondTax: '',
+          thirdTax: '',
+          total: '',
+        }
+      ],
       editOrderData: [
         {
           label: 'Origin',
@@ -224,12 +305,30 @@ export default {
     }
   }
   .edit {
-    background-color: #F8F4FF;
+    background-color: $backLight;
     min-height: 200px;
     .inputs {
       & > div {
         width: 10%;
       }
+    }
+  }
+  .pax {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    &__rules {
+      height: auto;
+      min-height: 100px;
+      width: 100%;
+      max-width:600px;
+      border: 1px dashed $primary;
+      background-color: $backLight;
+    }
+
+    &__table {
+      border-bottom: 1px dashed $lightPrimary;
+
     }
   }
 }

@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex>
       <div class="d-flex justify-space-between px-4 align-center user-info">
-        <span v-for="(item, i) in data.userData" :key="i">
+        <span v-for="(item, i) in userData" :key="i">
           <span>
             {{ item.title }}:
           </span>
@@ -60,10 +60,49 @@
         </v-expansion-panels>
         <OrderWrapper label-color="green" label-title="Success" />
         <PriceDetails id="#tab-2" class="my-8" />
-        <div class="my-4 rounded">
+        <div class="my-4 rounded passengers">
           <!-- <CanceledOrderWrapper /> -->
           <v-card class="rounded">
-            <DataTable title="Passengers" :data="passengersData" :headers="passengersHeaders" :expandable="true" />
+            <DataTable title="Passengers" :data="passengersData" :headers="passengersHeaders" :expandable="true" @show-passenger-edit="showPassengerEdit = true" />
+            <div v-if="showPassengerEdit" class="edit pa-4">
+              <div class="edit__header d-flex justify-space-between align-center">
+                <span class="mb-6 text-h6">
+                  Edit User
+                </span>
+                <v-icon @click="showPassengerEdit = false">
+                  mdi-close
+                </v-icon>
+              </div>
+              <div class="edit__main">
+                <div class="d-flex flex-wrap fields-wrapper">
+                  <div v-for="(field, j) in passengerEditData" :key="j" class="mr-2">
+                    <v-select
+                      v-if="field.type === 'select'"
+                      v-model="field.value"
+                      :label="field.label"
+                      outlined
+                      :items="field.selectList"
+                    />
+                    <v-text-field
+                      v-if="field.type === 'input'"
+                      v-model="field.value"
+                      :label="field.label"
+                      outlined
+                      :placeholder="field.placeholder"
+                    />
+                  </div>
+                </div>
+                <div class="edit__confirm d-flex justify-end">
+                  <v-btn large class="white backLight mr-2" @click="showPassengerEdit = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn large class="primary">
+                    Save
+                  </v-btn>
+                </div>
+              </div>
+              <div />
+            </div>
           </v-card>
           <div class="d-flex justify-end mt-4">
             <v-btn color="secondary">
@@ -153,6 +192,92 @@ export default {
       tab: null,
       openExpansionPanel: [],
       singleExpand: false,
+      showPassengerEdit: false,
+      userData: [
+        {
+          title: 'User',
+          value: 'Maedeh Masoumi'
+        },
+        {
+          title: 'Phone',
+          value: '09125277216'
+        },
+        {
+          title: 'Orders',
+          value: '3 - 9'
+        },
+        {
+          title: 'Order Number',
+          value: 'IF34988'
+        },
+        {
+          title: 'Date of Issue',
+          value: '1399-03-12 - 11:45'
+        },
+      ],
+      passengerEditData: [
+        {
+            value: 'MS',
+            type: 'select',
+            label:'Title',
+            selectList: [
+            'MR',
+            'MS',
+            'MiSS',
+            'Sir'
+            ]
+        },
+        {
+            value: 'Adult',
+            type: 'select',
+            label:'Age',
+            selectList: [
+            'Adult',
+            'Child',
+            'Infant'
+            ]
+        },
+        {
+            value: 'Maedeh',
+            type: 'input',
+            label:'First Name',
+        },
+        {
+            value: 'Masoumi',
+            type: 'input',
+            label:'Last Name',
+        },
+        {
+            value: '0123456789',
+            type: 'input',
+            label:'National Code',
+        },
+        {
+            value: 'A123456780',
+            type: 'input',
+            label:'Passport NO',
+        },
+        {
+            value: '1365/03/05',
+            type: 'input',
+            label:'Birthday',
+        },
+        {
+            value: '1401/03/05',
+            type: 'input',
+            label:'Date of Expire',
+        },
+        {
+            value: 'Iranian',
+            type: 'input',
+            label:'Nationality',
+        },
+        {
+            value: 'Turkey',
+            type: 'input',
+            label:'Issuing Country',
+        },
+      ],
       paymentHeaders: [
         {
           text: '',
@@ -377,33 +502,12 @@ export default {
           details: [],
         },
       ],
-      data: {
-        userData: [
-          {
-            title: 'User',
-            value: 'Maedeh Masoumi'
-          },
-          {
-            title: 'Phone',
-            value: '09125277216'
-          },
-          {
-            title: 'Orders',
-            value: '3 - 9'
-          },
-          {
-            title: 'Order Number',
-            value: 'IF34988'
-          },
-          {
-            title: 'Date of Issue',
-            value: '1399-03-12 - 11:45'
-          },
-        ]
-      }
     }
   },
   methods: {
+    x() {
+      alert('hamid')
+    },
     colorize(item) {
       if (item.title === 'Phone' || item.title === 'Order Number') return 'secondary--text'
     }
@@ -415,5 +519,17 @@ export default {
   .user-info {
     height: 60px;
     background-color: $lightGrey;
+  }
+  .passengers {
+    .edit {
+      width: 100%;
+      min-height: 200px;
+      background: $backLight;
+      &__main {
+        .fields-wrapper > * {
+          width: 15%;
+        }
+      }
+    }
   }
 </style>

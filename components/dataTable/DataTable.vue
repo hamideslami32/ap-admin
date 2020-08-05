@@ -18,7 +18,6 @@
         bottom
         origin="center center"
         transition="scale-transition"
-        offset-y
         offset-x
         left
       >
@@ -38,9 +37,11 @@
           <v-list-item
             v-for="(menuItem, i) in passengersMenu"
             :key="i"
-            @click="menuItem.method"
+            @click="menuItemClick(menuItem.title)"
           >
-            <v-icon class="mr-2">{{menuItem.icon}}</v-icon>
+            <v-icon class="mr-2">
+              {{ menuItem.icon }}
+            </v-icon>
             <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -101,22 +102,22 @@ export default {
               {
                 title: 'Edit',
                 icon: 'mdi-pencil-outline',
-                method: () => 'h'
+                func: ''
               },
               {
                 title: 'Share Ticket',
                 icon: 'mdi-share-variant-outline',
-                method: () => 'h'
+                func: ''
               },
               {
                 title: 'Download Ticket',
                 icon: 'mdi-download-outline',
-                method: () => 'h'
+                func: ''
               },
               {
                 title: 'Refund',
                 icon: 'mdi-arrow-left-circle-outline',
-                method: () => 'h'
+                func: ''
               }
             ],
             expandData: [
@@ -144,6 +145,9 @@ export default {
         }
     },
     methods: {
+      menuItemClick(title) {
+        if (title === 'Edit') this.$emit('show-passenger-edit')
+      },
       rowClasses(item) {
         if (this.title === 'Payment') {
           //can also return multiple classes e.g ["orange","disabled"]

@@ -14,11 +14,37 @@
       </v-toolbar>
     </template>
     <template #item.actions>
-      <v-icon
-        class="mr-2"
+      <v-menu
+        bottom
+        origin="center center"
+        transition="scale-transition"
+        offset-y
+        offset-x
+        left
       >
-        mdi-dots-vertical
-      </v-icon>
+        <template v-slot:activator="{ on, attrs }">
+          <div
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon
+              class="mr-2"
+            >
+              mdi-dots-vertical
+            </v-icon>
+          </div>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(menuItem, i) in passengersMenu"
+            :key="i"
+            @click="menuItem.method"
+          >
+            <v-icon class="mr-2">{{menuItem.icon}}</v-icon>
+            <v-list-item-title>{{ menuItem.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </template>
     <template v-if="title === 'Payment'" #item.icon="{ item }">
       <v-icon :class="rowClasses(item)">
@@ -71,6 +97,28 @@ export default {
     data() {
         return {
             expanded: [],
+            passengersMenu: [
+              {
+                title: 'Edit',
+                icon: 'mdi-pencil-outline',
+                method: () => 'h'
+              },
+              {
+                title: 'Share Ticket',
+                icon: 'mdi-share-variant-outline',
+                method: () => 'h'
+              },
+              {
+                title: 'Download Ticket',
+                icon: 'mdi-download-outline',
+                method: () => 'h'
+              },
+              {
+                title: 'Refund',
+                icon: 'mdi-arrow-left-circle-outline',
+                method: () => 'h'
+              }
+            ],
             expandData: [
               {
                 title: 'Passport NO',
@@ -105,7 +153,6 @@ export default {
         }
       },
       getColor(item) {
-        console.log({item})
         if (item === 'High') return 'red'
         else if (item === 'Average') return 'orange'
         else return 'grey'

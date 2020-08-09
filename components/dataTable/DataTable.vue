@@ -47,6 +47,38 @@
         </v-list>
       </v-menu>
     </template>
+    <template v-if="isPassengersTable" #item.ticketNo="{ item }">
+      <td class="pa-1">
+        <div class="mb-1">
+          {{ item.ticketNo }}
+        </div>
+        <div>{{ item.ticketNo }}</div>
+      </td>
+    </template>
+    <template v-if="isPassengersTable" #item.farePrice="{ item }">
+      <td>
+        <div class="mb-1">
+          {{ item.farePrice }}
+        </div>
+        <div>{{ item.farePrice }}</div>
+      </td>
+    </template>
+    <template v-if="isPassengersTable" #item.tax="{ item }">
+      <td>
+        <div class="mb-1">
+          {{ item.tax }}
+        </div>
+        <div>{{ item.tax }}</div>
+      </td>
+    </template>
+    <template v-if="isPassengersTable" #item.totalPrice="{ item }">
+      <td>
+        <div class="mb-1">
+          {{ item.totalPrice }}
+        </div>
+        <div>{{ item.totalPrice }}</div>
+      </td>
+    </template>
     <template v-if="title === 'Payment'" #item.icon="{ item }">
       <v-icon :class="rowClasses(item)">
         {{ item.icon }}
@@ -144,9 +176,16 @@ export default {
             ]
         }
     },
+    computed: {
+      isPassengersTable() {
+        return this.title === 'Passengers'
+      }
+    },
     methods: {
       menuItemClick(title) {
         if (title === 'Edit') this.$emit('show-passenger-edit')
+        if (title === 'Refund') this.$emit('open-refund')
+
       },
       rowClasses(item) {
         if (this.title === 'Payment') {

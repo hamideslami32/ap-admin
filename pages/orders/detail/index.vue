@@ -63,7 +63,7 @@
         <div class="my-4 rounded passengers">
           <!-- <CanceledOrderWrapper /> -->
           <v-card class="rounded">
-            <DataTable title="Passengers" :data="passengersData" :headers="passengersHeaders" :expandable="true" @show-passenger-edit="showPassengerEdit = true" />
+            <DataTable title="Passengers" :data="passengersData" :headers="passengersHeaders" :expandable="true" @open-refund="dialog = true" @show-passenger-edit="showPassengerEdit = true" />
             <div v-if="showPassengerEdit" class="edit pa-4">
               <div class="edit__header d-flex justify-space-between align-center">
                 <span class="mb-6 text-h6">
@@ -170,6 +170,76 @@
         </div>
       </div>
     </v-flex>
+    <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span>Refund</span>
+          <v-spacer />
+          <v-btn icon @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text class="dialog-main pt-4">
+          <div v-for="(checkbox, i) in dialogData" :key="i">
+            <v-checkbox
+              v-model="checkbox.model"
+              :label="checkbox.label"
+            />
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            @click="dialog = false"
+          >
+            back
+          </v-btn>
+
+          <v-btn
+            color="primary"
+            @click="secondDialog = true"
+          >
+            next
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="secondDialog" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span>Refund</span>
+          <v-spacer />
+          <v-btn icon @click="secondDialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text class="dialog-main pt-4">
+          <div v-for="(input, i) in secondDialogData" :key="i">
+            <v-text-field
+              v-model="input.value"
+              outlined
+              :label="input.label"
+              :placeholder="input.placeholder"
+            />
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            @click="secondDialog = false"
+          >
+            back
+          </v-btn>
+
+          <v-btn
+            color="primary"
+            @click="secondDialog = false"
+          >
+            confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 
@@ -189,6 +259,34 @@ export default {
   },
   data() {
     return {
+      dialog: false,
+      secondDialog: false,
+      secondDialogData: [
+        {
+          label: 'Penalty Amount',
+          placeholder: '20,000',
+          value: ''
+        },
+        {
+          label: 'Refund Amount',
+          placeholder: '10,000',
+          value: ''
+        },
+      ],
+      dialogData: [
+        {
+          model: true,
+          label: 'Tehran > Mashhad'
+        },
+        {
+          model: true,
+          label: 'Mashhad > Tehran'
+        },
+        {
+          model: true,
+          label: 'Both of them'
+        },
+      ],
       tab: null,
       openExpansionPanel: [],
       singleExpand: false,
@@ -338,10 +436,10 @@ export default {
         { sortable: false, text: 'Age', value: 'age' },
         { sortable: false, text: 'Name', value: 'firstName' },
         { sortable: false, text: 'Last Name', value: 'lastName' },
+        { sortable: false, text: 'National ID', value: 'nationalId' },
         { sortable: false, text: 'Passport No', value: 'passportNo' },
         { sortable: false, text: 'TKT No', value: 'ticketNo' },
         { sortable: false, text: 'Fare', value: 'farePrice' },
-        { sortable: false, text: 'National ID', value: 'nationalId' },
         { sortable: false, text: 'Tax', value: 'tax' },
         { sortable: false, text: 'Total', value: 'totalPrice' },
         { sortable: false, text: 'Menu', value: 'actions' },
@@ -505,9 +603,6 @@ export default {
     }
   },
   methods: {
-    x() {
-      alert('hamid')
-    },
     colorize(item) {
       if (item.title === 'Phone' || item.title === 'Order Number') return 'secondary--text'
     }
@@ -516,6 +611,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .v-input--selection-controls {
+    margin-top: 0 !important;
+  }
+  .dialog-main {
+    border-top: 1px solid $grey;
+  }
   .user-info {
     height: 60px;
     background-color: $lightGrey;

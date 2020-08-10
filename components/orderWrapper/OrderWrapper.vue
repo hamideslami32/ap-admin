@@ -80,7 +80,7 @@
             <span>{{ '9,100,000' }}</span>
           </div>
         </div>
-        <div class="action d-flex flex-column justify-space-around">
+        <div class="action d-flex flex-column btn-wrapper">
           <div>
             <v-chip tile class="rounded grey--text text--darken-2">
               PNR: YTVSC
@@ -117,19 +117,24 @@
         <DataTable :data="pax" :headers="paxHeaders" />
       </div>
       <div class="d-flex justify-space-between mt-4 pt-4">
-        <span class="primary--text text-h5">
-          <v-icon color="primary" size="36">
-            mdi-bag-carry-on
-          </v-icon>
-          <span>
-            Baggage: 20 Kg
-          </span>
-        </span>
         <div class="pax__rules rounded pa-3">
-          <span class="font-weight-bold" style="fontSize: 20px;">قوانین استرداد (شناسه نرخی y)</span>
-          <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-6">
-            <span>{{ rule.title }}</span>
-            <span class="primary--text">{{ rule.value }}</span>
+          <div>
+            <div class="d-flex justify-space-between">
+              <div class="font-weight-bold" style="fontSize: 20px;">قوانین استرداد (شناسه نرخی y)</div>
+              <div class="primary--text text-h5 mb-4">
+                <span>
+                  Baggage : 20 Kg
+                </span>
+                <v-icon color="primary" size="36">
+                  mdi-bag-carry-on
+                </v-icon>
+              </div>
+
+            </div>
+            <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-4">
+              <span>{{ rule.title }}</span>
+              <span class="primary--text">{{ rule.value }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -305,6 +310,9 @@ export default {
         justify-content: space-around;
       }
     }
+    .btn-wrapper {
+      justify-content: space-evenly;
+    }
   }
   .edit {
     background-color: $backLight;
@@ -325,7 +333,6 @@ export default {
       direction: rtl;
       min-height: 100px;
       width: 100%;
-      max-width:600px;
       border: 1px dashed $primary;
       background-color: $backLight;
     }

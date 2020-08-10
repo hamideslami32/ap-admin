@@ -3,6 +3,7 @@
     :headers="headers"
     :items="data"
     :expanded.sync="expanded"
+    :hide-default-footer="true"
     item-key="nationalId"
     :item-class="rowClasses"
     :show-expand="expandable"

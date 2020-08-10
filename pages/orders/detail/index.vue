@@ -626,7 +626,7 @@ export default {
     margin-top: 0 !important;
   }
   .dialog-main {
-    border-top: 1px solid $grey;
+    border-top: 1px solid $greyColor;
   }
   .user-info {
     height: 60px;

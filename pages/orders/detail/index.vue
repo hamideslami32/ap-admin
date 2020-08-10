@@ -33,33 +33,18 @@
           centered
         >
           <v-tabs-slider />
-          <v-tab href="#tab-1">
-            Ticket Detail
-          </v-tab>
-          <v-tab href="#tab-2">
-            Payment
-          </v-tab>
-          <v-tab href="#tab-3">
-            Refund Details
-          </v-tab>
-          <v-tab href="#tab-4">
-            Customer Support
-          </v-tab>
-          <v-tab href="#tab-5">
-            System LOG
-          </v-tab>
-          <v-tab href="#tab-6">
-            User LOG
+          <v-tab v-for="(item, i) in tabItems" :key="i" @click="$vuetify.goTo(item.selector, {offset: 10})">
+            {{ item.title }}
           </v-tab>
         </v-tabs>
       </div>
       <div class="main pa-4 mb-10">
-        <OrderWrapper id="#tab-1" />
+        <OrderWrapper id="tab-1" />
         <v-expansion-panels class="my-4" :value="openExpansionPanel" :multiple="true">
           <!-- <CanceledOrderWrapper /> -->
         </v-expansion-panels>
         <OrderWrapper label-color="green" label-title="Success" />
-        <PriceDetails id="#tab-2" class="my-8" />
+        <PriceDetails class="my-8" />
         <div class="my-4 rounded passengers">
           <!-- <CanceledOrderWrapper /> -->
           <v-card class="rounded">
@@ -113,12 +98,12 @@
             </v-btn>
           </div>
         </div>
-        <div id="#tab-3" class="my-8">
+        <div id="tab-3" class="my-8">
           <v-card class="rounded">
             <DataTable title="Refund Details" :data="refundsData" :headers="refundHeaders" />
           </v-card>
         </div>
-        <div id="#tab-3" class="my-8">
+        <div id="tab-2" class="my-8">
           <v-card class="rounded">
             <DataTable title="Payment" :data="paymentData" :headers="paymentHeaders" />
           </v-card>
@@ -153,7 +138,7 @@
           </v-card>
         </div>
         <div>
-          <v-card id="#tab-4" class="rounded">
+          <v-card id="tab-4" class="rounded">
             <DataTable title="Customer Support" :data="customerSupportData" :headers="supportHeaders" />
           </v-card>
         </div>
@@ -285,6 +270,32 @@ export default {
         {
           model: true,
           label: 'Both of them'
+        },
+      ],
+      tabItems: [
+        {
+          title: 'Ticket Detail',
+          selector: '#tab-1'
+        },
+        {
+          title: 'Payment',
+          selector: '#tab-2'
+        },
+        {
+          title: 'Refund Details',
+          selector: '#tab-3'
+        },
+        {
+          title: 'Customer Support',
+          selector: '#tab-4'
+        },
+        {
+          title: 'System Log',
+          selector: '#tab-1'
+        },
+        {
+          title: 'User Log',
+          selector: '#tab-1'
         },
       ],
       tab: null,

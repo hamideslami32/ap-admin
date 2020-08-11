@@ -358,6 +358,20 @@ import { VHover, VListItem } from 'vuetify/lib'
           {
             icon: 'mdi-chevron-down',
             'icon-alt': 'mdi-chevron-up',
+            'icon-pre': 'mdi-currency-usd',
+            text: 'Financial',
+            model: true,
+            to: "/financial",
+            children: [
+              { to: '/financial/sales', icon: 'mdi-finance', text: 'Sales' },
+              { to: '/financial/invoice', icon: 'mdi-receipt', text: 'Invoice' },
+              { to: '/financial/balance', icon: 'mdi-wallet-outline', text: 'Balance' },
+
+            ],
+          },
+          {
+            icon: 'mdi-chevron-down',
+            'icon-alt': 'mdi-chevron-up',
             'icon-pre': 'mdi-account',
             text: 'User Management',
             model: true,
@@ -370,6 +384,7 @@ import { VHover, VListItem } from 'vuetify/lib'
 
             ],
           },
+
           // {
           //   icon: 'mdi-chevron-up',
           //   'icon-alt': 'mdi-chevron-down',

@@ -1,13 +1,13 @@
 <template>
-  <v-card class="search pa-4">
-    <div class="text-h6 mb-4">
-      {{ title + ' Search' }}
-    </div>
-    <div>
+  <v-expansion-panel class="search">
+    <v-expansion-panel-header class="text-h6 mb-4">
+      Search
+    </v-expansion-panel-header>
+    <v-expansion-panel-content>
       <div class="d-flex flex-column">
         <div class="filters d-flex flex-column">
           <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
-            <div v-for="(col, key) in fieldsData" :key="key" class="filter-col pr-6">
+            <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
               <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
                 <v-text-field
                   v-if="item.type === 'input'"
@@ -24,6 +24,16 @@
                   outlined
                   :items="item.selectList"
                 />
+                <div v-if="key === 'secondCol'">
+                  <v-text-field
+                    v-model="item.s_value"
+                    v-mask="item.mask"
+                    outlined
+                    :label="item.label"
+                    :placeholder="item.s_placeholder"
+                    class="ml-2"
+                  />
+                </div>
               </div>
             </div>
           </form>
@@ -34,8 +44,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
 </template>
 
 <script>
@@ -43,35 +53,123 @@ import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
 import { normalizeSearchField, normalizeUrl, capitalizeFirstLetter } from '~/utils/helpers'
 export default {
-  props: {
-    title: {
-      type: String,
-      default: 'Search'
+    data() {
+        return {
+            filterFieldsData: {
+                firstCol: [
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Phone',
+                    placeholder: '0912-123-4567',
+                    mask:'####-###-####'
+                },
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Order No',
+                    placeholder: 'IF-123456',
+                    mask:'AA-#######'
+                },
+                {
+                    value: 'Flight',
+                    type: 'select',
+                    label:'Product',
+                    selectList: [
+                    'Flight',
+                    'Hotel',
+                    'Bus',
+                    'Visa'
+                    ]
+                }
+                ],
+                secondCol: [
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Issue Date',
+                    placeholder: 'From - YY/MM/DD',
+                    s_value: '',
+                    s_placeholder: 'To - YY/MM/DD',
+                    mask:'##/##/##'
+
+                },
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Travel Date',
+                    placeholder: 'From - YY/MM/DD',
+                    s_value: '',
+                    s_placeholder: 'To - YY/MM/DD',
+                    mask:'##/##/##'
+
+                },
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Route',
+                    placeholder: 'Origin (THR)',
+                    s_value: '',
+                    s_placeholder: 'Destination (KIH)',
+                    mask:'AAA'
+
+                }
+                ],
+                thirdCol: [
+                {
+                    value: 'Failed',
+                    type: 'select',
+                    label:'Payment Status',
+                    placeholder: '',
+                    selectList: [
+                    'Success',
+                    'Pending',
+                    'Failed',
+                    'Partial'
+                    ]
+                },
+                {
+                    value: 'Pending',
+                    type: 'select',
+                    label:'Order Status',
+                    placeholder: '',
+                    selectList: [
+                    'Success',
+                    'Pending',
+                    'Failed'
+                    ]
+                },
+                {
+                    value: '',
+                    type: 'input',
+                    label:'Confirmation Code',
+                    placeholder: '12X45FH9',
+                    mask:''
+
+                }
+                ],
+            }
+        }
     },
-    fieldsData: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-    }
-  },
-  watch: {
-    $route: {
-      handler: function() {
-        this.init()
+    watch: {
+      $route: {
+        handler: function() {
+          this.init()
+        },
+        deep: true,
+        immediate: true
       },
-      deep: true,
-      immediate: true
     },
-  },
-  methods: {
-    init() {
-      this.fillSearchValues()
-      // if (urlHasValue) this.search()
+    mounted() {
+      this.init()
+
     },
-    fillSearchValues() {
+    methods: {
+      init() {
+        this.fillSearchValues()
+        // if (urlHasValue) this.search()
+      },
+      fillSearchValues() {
 
         // get url
         let url =  window.location.search
@@ -96,8 +194,8 @@ export default {
 
         // return if url has value
         return urlHasParams
-    },
-    setSearchFieldValues(fieldsArray) {
+      },
+      setSearchFieldValues(fieldsArray) {
         forEach(fieldsArray, (item) => {
           forOwn(this.filterFieldsData, (array) => {
             forEach(array, (fieldObject) => {
@@ -118,15 +216,15 @@ export default {
             })
           })
         })
-    },
-    fieldCol(key) {
+      },
+        fieldCol(key) {
             return key === 'secondCol' ? 4 : 8
-    },
-    search() {
+        },
+        search() {
           const url = this.generateSearchUrl()
           this.$router.push({path: '/orders', query: url})
-    },
-    getSearchFormValues() {
+        },
+        getSearchFormValues() {
           let fieldValuesArray = []
           let label
           let fieldData
@@ -168,8 +266,8 @@ export default {
                 })
             })
             return normalizeSearchField(fieldValuesArray)
-    },
-    generateSearchUrl() {
+        },
+        generateSearchUrl() {
             let normalizedSearchFormValues = this.getSearchFormValues()
             let urlObject = {}
 
@@ -178,8 +276,9 @@ export default {
             }))
 
             return urlObject
-    },
-  }
+        },
+
+    }
 }
 </script>
 
@@ -195,7 +294,6 @@ export default {
 
     .filter-col {
       width: 100%;
-      max-width: 400px;
       border-right: 1px solid $lightGrey;
       margin-left: 24px;
 

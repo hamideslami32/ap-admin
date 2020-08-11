@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex class="pa-4">
       <v-expansion-panels :value="openExpansionPanel" :multiple="true">
-        <Search />
+        <OrderSearch />
         <OrderTable title="Orders" :data="ordersData" :headers="mockHeaderData" />
       </v-expansion-panels>
     </v-flex>
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import Search from '~/components/search/Search'
+import OrderSearch from '~/components/orderSearch/OrderSearch'
 import OrderTable from '~/components/orderTable/OrderTable'
 import {ordersData} from '~/assets/js/orders-data'
 export default {
   components: {
-    Search,
+    OrderSearch,
     OrderTable
   },
   data() {

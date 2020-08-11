@@ -1,51 +1,104 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      <UserSearch />
-      <DataTable class="mt-4" title="Invoice" :data="invoiceData" :headers="invoiceHeaders" />
+      <Search title="Invoice" :fieldsData="invoiceSearchFields"/>
+      <DataTable class="mt-4" title="Invoice" :data="invoiceData" :headers="invoiceHeaders" :hideFooter="false" />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import UserSearch from '~/components/users/search/UserSearch'
+import Search from '~/components/search/Search'
 import DataTable from '~/components/dataTable/DataTable'
 export default {
   components: {
     DataTable,
-    UserSearch
+    Search
   },
   data() {
     return {
-      invoiceData: [
+      invoiceSearchFields: {
+        firstCol: [
         {
-          id: '1',
-          amount: '12,000,000',
-          service: 'Example',
-          remainingCredit: '20,000,000',
+            value: '',
+            type: 'input',
+            label:'Invoice No',
+            placeholder: '12345',
+            mask:''
         },
         {
-          id: '2',
-          amount: '5,000,000',
-          service: 'Example 2',
-          remainingCredit: '6,000,000',
+            value: '',
+            type: 'input',
+            label:'Issue Date',
+            placeholder: 'YY/MM/DD',
+            mask:'##/##/##'
+        },
+        {
+            value: '',
+            type: 'input',
+            label:'Payment Date',
+            placeholder: 'YY/MM/DD',
+            mask:'##/##/##'
+        }
+        ],
+        secondCol: [
+        {
+            value: 'Example 1',
+            type: 'select',
+            label:'Notify Status',
+            selectList: [
+            'Example 1',
+            'Example 2',
+            'Example 3',
+            'Example 4',
+            'Example 5'
+            ]
+        },
+        {
+            value: 'Success',
+            type: 'select',
+            label:'Payment Status',
+            selectList: [
+            'Success',
+            'Failed',
+            'Partial',
+            'Waiting'
+            ]
+        }
+        ],
+      },
+      invoiceData: [
+        {
+          invoiceNo: '12345',
+          issueDate: '2020-12-09',
+          paymentDate: '2020-12-09',
+          notifyStatus: 'Example 1',
+          paymentStatus: 'Success'
+        },
+        {
+          invoiceNo: '54321',
+          issueDate: '2020-12-09',
+          paymentDate: '2020-12-09',
+          notifyStatus: 'Example 2',
+          paymentStatus: 'Failed'
         }
       ],
       invoiceHeaders: [
         {
-          text: 'ID/Type',
+          text: 'Invoice No',
           align: 'start',
           sortable: false,
-          value: 'id',
+          value: 'invoiceNo',
         },
         {
-          text: 'Amount',
+          text: 'Date of Issue',
           align: 'start',
           sortable: false,
-          value: 'amount',
+          value: 'issueDate',
         },
-        { sortable: false, text: 'Service', value: 'service' },
-        { sortable: false, text: 'Remaining Credit', value: 'remainingCredit' },
+        { sortable: false, text: 'Date of Payment', value: 'paymentDate' },
+        { sortable: false, text: 'Notify Status', value: 'notifyStatus' },
+        { sortable: false, text: 'Payment Status', value: 'paymentStatus' },
       ],
     }
   }

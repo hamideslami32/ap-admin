@@ -3,7 +3,7 @@
     :headers="headers"
     :items="data"
     :expanded.sync="expanded"
-    :hide-default-footer="true"
+    :hide-default-footer="hideFooter"
     item-key="nationalId"
     :item-class="rowClasses"
     :show-expand="expandable"
@@ -126,6 +126,10 @@ export default {
       expandable: {
         type: Boolean,
         default: false
+      },
+      hideFooter: {
+        type: Boolean,
+        default: true
       }
     },
     data() {

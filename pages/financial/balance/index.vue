@@ -1,22 +1,60 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      <UserSearch />
-      <DataTable class="mt-4" title="Balance" :data="balanceData" :headers="balanceHeaders" />
+      <Search title="Balance" :fieldsData="balanceSearchFields"/>
+      <DataTable class="mt-4" title="Balance" :data="balanceData" :headers="balanceHeaders" :hideFooter="false" />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import UserSearch from '~/components/users/search/UserSearch'
+import Search from '~/components/search/Search'
 import DataTable from '~/components/dataTable/DataTable'
 export default {
   components: {
     DataTable,
-    UserSearch
+    Search
   },
   data() {
     return {
+      balanceSearchFields: {
+        firstCol: [
+        {
+            value: '',
+            type: 'input',
+            label:'ID',
+            placeholder: '',
+            mask:''
+        },
+        {
+            value: '',
+            type: 'input',
+            label:'Amount',
+            placeholder: '186,000',
+            mask:''
+        },
+        {
+            value: 'Flight',
+            type: 'select',
+            label:'Service',
+            selectList: [
+            'Flight',
+            'Hotel',
+            'Bus',
+            'Visa'
+            ]
+        }
+        ],
+        secondCol: [
+        {
+            value: '',
+            type: 'input',
+            label:'Remaining Credit',
+            placeholder: '12,000,000',
+            mask:''
+        },
+        ],
+      },
       balanceData: [
         {
           id: '1',

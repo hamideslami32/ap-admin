@@ -120,7 +120,9 @@
         <div class="pax__rules rounded pa-3">
           <div>
             <div class="d-flex justify-space-between">
-              <div class="font-weight-bold" style="fontSize: 20px;">قوانین استرداد (شناسه نرخی y)</div>
+              <div class="font-weight-bold" style="fontSize: 20px;">
+                قوانین استرداد (شناسه نرخی y)
+              </div>
               <div class="primary--text text-h5 mb-4">
                 <span>
                   Baggage : 20 Kg
@@ -129,7 +131,6 @@
                   mdi-bag-carry-on
                 </v-icon>
               </div>
-
             </div>
             <div v-for="(rule, i) in rules" :key="i" class="d-flex justify-space-between mt-4">
               <span>{{ rule.title }}</span>

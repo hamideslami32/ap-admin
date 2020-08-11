@@ -90,10 +90,10 @@
             </div>
           </v-card>
           <div class="d-flex justify-end mt-4">
-            <v-btn color="secondary">
-              Replace
+            <v-btn color="primary">
+              Share Ticket
             </v-btn>
-            <v-btn color="red white--text" class="ml-2">
+            <v-btn color="secondary white--text" class="ml-2">
               Refund All
             </v-btn>
           </div>
@@ -142,7 +142,7 @@
             <DataTable title="Customer Support" :data="customerSupportData" :headers="supportHeaders" />
           </v-card>
         </div>
-        <div class="d-flex justify-center mt-8">
+        <!-- <div class="d-flex justify-center mt-8">
           <v-btn color="secondary">
             Send Ticket
           </v-btn>
@@ -152,7 +152,7 @@
           <v-btn color="secondary">
             User Log
           </v-btn>
-        </div>
+        </div> -->
       </div>
     </v-flex>
     <v-dialog v-model="dialog" persistent max-width="600px">
@@ -428,12 +428,12 @@ export default {
           sortable: false,
           value: 'ticketNo',
         },
+        { sortable: false, text: 'PNR', value: 'pnr' },
         { sortable: false, text: 'Date', value: 'date' },
         { sortable: false, text: 'Fare', value: 'fairPrice' },
         { sortable: false, text: 'Tax', value: 'tax' },
         { sortable: false, text: 'Total', value: 'totalPrice' },
         { sortable: false, text: 'CRCN', value: 'cancelationRate' },
-        { sortable: false, text: 'PNR', value: 'pnr' },
         { sortable: false, text: 'Penalty Amount', value: 'penaltyAmount' },
         { sortable: false, text: 'Refund Amount', value: 'refundAmount' },
       ],

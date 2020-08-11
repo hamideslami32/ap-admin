@@ -75,9 +75,52 @@
       <v-btn icon>
         <v-icon>mdi-message</v-icon>
       </v-btn>
-      <v-btn icon class="mr-6 ml-4">
+      <v-menu
+        bottom
+        left
+        offset-y
+        origin="top right"
+        transition="scale-transition"
+      >
+        <template v-slot:activator="{ attrs, on }">
+          <v-btn
+            class="mr-3"
+            min-width="0"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-badge
+              color="red"
+              overlap
+              bordered
+            >
+              <template v-slot:badge>
+                <span>5</span>
+              </template>
+
+              <v-icon>mdi-bell</v-icon>
+            </v-badge>
+          </v-btn>
+        </template>
+
+        <v-list
+          :tile="false"
+          nav
+        >
+          <div>
+            <app-bar-item
+              v-for="(n, i) in notifications"
+              :key="`item-${i}`"
+            >
+              <v-list-item-title v-text="n" />
+            </app-bar-item>
+          </div>
+        </v-list>
+      </v-menu>
+      <!-- <v-btn icon class="mr-6 ml-4">
         <v-icon>mdi-bell</v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-btn v-if="!$auth.user" icon class="px-2 mr-5" width="100">
         <nuxt-link to="/login" class="text-decoration-none">
           <span class="white--text mr-1">Login</span>
@@ -227,9 +270,36 @@
 </template>
 
 <script>
+import { VHover, VListItem } from 'vuetify/lib'
+
   export default {
     name: 'Default',
     middleware: ['auth'],
+    components: {
+      AppBarItem: {
+        render (h) {
+          return h(VHover, {
+            scopedSlots: {
+              default: ({ hover }) => {
+                return h(VListItem, {
+                  attrs: this.$attrs,
+                  class: {
+                    'black--text': !hover,
+                    'white--text primary elevation-4': hover,
+                  },
+                  props: {
+                    activeClass: '',
+                    dark: hover,
+                    link: true,
+                    ...this.$attrs,
+                  },
+                }, this.$slots.default)
+              },
+            },
+          })
+        },
+      },
+    },
     data() {
       return {
         dialog: false,
@@ -243,6 +313,13 @@
             title: 'Logout',
             icon: 'mdi-logout-variant',
           }
+        ],
+        notifications: [
+          'Mike John Responded to your email',
+          'You have 5 new tasks',
+          'You\'re now friends with Andrew',
+          'Another Notification',
+          'Another one',
         ],
         items: [
           // { icon: 'mdi-contacts', text: 'Contacts' },

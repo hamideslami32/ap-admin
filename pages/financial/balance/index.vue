@@ -1,8 +1,8 @@
 <template>
   <v-layout>
     <v-flex class="pa-4">
-      <Search title="Balance" :fieldsData="balanceSearchFields"/>
-      <DataTable class="mt-4" title="Balance" :data="balanceData" :headers="balanceHeaders" :hideFooter="false" />
+      <Search title="Balance" :fields-data="balanceSearchFields" />
+      <DataTable class="mt-4" title="Balance" :data="balanceData" :headers="balanceHeaders" :hide-footer="false" />
     </v-flex>
   </v-layout>
 </template>

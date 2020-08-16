@@ -1,82 +1,35 @@
 <template>
   <div class="pa-4 d-flex flex-column">
-    <!-- <v-card height="500" width="50%" class="d-flex">
-        <chart class="chart" title="Daily Sign-up" :chart-data="series" :chart-options="options" type="area" width="80%"/>
-        <div class="d-flex flex-column">
-          <v-btn v-for="(item, i) in chartBtns" :key="i" >
+    <div class="d-flex">
+      <div v-if="viewCharts" class="chart-wrapper d-flex flex-column">
+        <div class="chart mb-1">
+          <chart title="Daily Sign-up" :chart-data="series" :chart-options="options" type="area" />
+        </div>
+        <v-card class="d-flex pa-2 align-center justify-space-between">
+          <v-btn :color="item.color" width="24%" class="btn" v-for="(item, i) in chartBtns" :key="i" >
             {{item.text}}
           </v-btn>
-        </div>
-      </v-card>
-    <div v-if="viewCharts" class="chart-wrapper">
-    </div> -->
-    <div class="charts pa-4">
-      charts
+        </v-card>
+      </div>
+      <div class="stats-wrapper d-flex pt-7 justify-space-around">
+        <base-material-stats-card
+          color="secondary"
+          icon="mdi-currency-usd"
+          title="Credit"
+          value="12,000,000"
+          sub-icon="mdi-clock"
+          sub-text="Just Updated"
+        />
+        <base-material-stats-card
+          color="blue"
+          icon="mdi-chart-box-plus-outline"
+          title="Today Sales"
+          value="1780"
+          sub-icon="mdi-tag"
+          sub-text="Sales By Fantastic Apro Team."
+        />
+      </div>
     </div>
-    <v-container class="mt-8">
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          lg="3"
-        >
-          <base-material-stats-card
-            color="secondary"
-            icon="mdi-currency-usd"
-            title="Credit"
-            value="12,000,000"
-            sub-icon="mdi-clock"
-            sub-text="Just Updated"
-          />
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          lg="3"
-        >
-          <base-material-stats-card
-            color="blue"
-            icon="mdi-chart-box-plus-outline"
-            title="Today Sales"
-            value="1780"
-            sub-icon="mdi-tag"
-            sub-text="Sales By Fantastic Apro Team."
-          />
-        </v-col>
-
-        <!-- <v-col
-          cols="12"
-          sm="6"
-          lg="3"
-        >
-          <base-material-stats-card
-            color="success"
-            icon="mdi-store"
-            title="Revenue"
-            value="$ 34,245"
-            sub-icon="mdi-calendar"
-            sub-text="Last 24 Hours"
-          />
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          lg="3"
-        >
-          <base-material-stats-card
-            color="orange"
-            icon="mdi-sofa"
-            title="Bookings"
-            value="184"
-            sub-icon="mdi-alert"
-            sub-icon-color="red"
-            sub-text="Get More Space..."
-          />
-        </v-col> -->
-      </v-row>
-    </v-container>
     <div class="mt-6">
       <span>
         In Progress Sales
@@ -95,10 +48,10 @@
   </div>
 </template>
 <script>
-// import chart from '~/components/chart/chart'
+import chart from '~/components/chart/chart'
 export default {
   components: {
-    // chart
+    chart
   },
   data() {
     return {
@@ -126,15 +79,19 @@ export default {
       ],
       chartBtns: [
         {
+          color: 'primary',
           text: 'Flight Sales'
         },
         {
+          color: 'secondary',
           text: 'Hotel Sales'
         },
         {
+          color: 'blue',
           text: 'Tours Sales'
         },
         {
+          color: 'greyColor',
           text: 'Bus Sales'
         },
       ],
@@ -161,9 +118,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.charts {
-  height: 400px;
-  border: 2px solid $greyColor;
+.stats-wrapper {
+  & > div {
+    width: 45%;
+  }
+}
+.chart-wrapper {
+  width: 50%;
 }
 .progress-table {
   border: 1px solid $greyColor;

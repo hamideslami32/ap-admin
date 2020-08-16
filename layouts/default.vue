@@ -4,7 +4,7 @@
       v-model="drawer"
       color="primary"
       width="270"
-      :clipped="true"
+      :clipped="drawerClipped"
       app
       dark
     >
@@ -304,6 +304,7 @@ import { VHover, VListItem } from 'vuetify/lib'
       return {
         dialog: false,
         drawer: false,
+        drawerClipped: true,
         userMenuItems: [
           {
             title: 'Profile',
@@ -406,8 +407,12 @@ import { VHover, VListItem } from 'vuetify/lib'
         ],
     }},
     watch: {
-      '$vuetify.breakpoint.width'() {
-        this.changeDrawer()
+      '$vuetify.breakpoint.width': {
+        handler: function() {
+          this.changeDrawer()
+        },
+        deep: true,
+        immediate: true
       }
     },
     mounted() {

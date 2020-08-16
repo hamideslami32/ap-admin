@@ -1,48 +1,75 @@
 <template>
   <div class="pa-4 d-flex flex-column">
-    <div class="d-flex">
+    <div class="stats-wrapper d-flex pt-7 justify-space-between">
+      <base-material-stats-card
+        color="secondary"
+        icon="mdi-currency-usd"
+        title="Credit"
+        value="12,000,000"
+        sub-icon="mdi-clock"
+        sub-text="Just Updated"
+      />
+      <base-material-stats-card
+        color="blue"
+        icon="mdi-chart-box-plus-outline"
+        title="Today Sales"
+        value="1780"
+        sub-icon="mdi-tag"
+        sub-text="Sales By Fantastic Apro Team."
+      />
+      <base-material-stats-card
+        color="primary"
+        icon="mdi-help"
+        title="Partial"
+        value="80,500,000"
+        sub-icon="mdi-clock"
+        sub-text="Just Updated"
+      />
+      <base-material-stats-card
+        color="grey"
+        icon="mdi-sale"
+        title="Sales With Discount"
+        value="520"
+        sub-icon="mdi-tag"
+        sub-text="Sales By Fantastic Apro Team."
+      />
+    </div>
+    <div class="d-flex mt-6">
       <div v-if="viewCharts" class="chart-wrapper d-flex flex-column">
         <div class="chart mb-1">
-          <chart title="Daily Sign-up" :chart-data="series" :chart-options="options" type="area" />
+          <chart :title="chartTitle" :chart-data="series" :chart-options="options" type="area" />
         </div>
         <v-card class="d-flex pa-2 align-center justify-space-between">
-          <v-btn :color="item.color" width="24%" class="btn" v-for="(item, i) in chartBtns" :key="i" >
+          <v-btn
+            :color="item.color"
+            width="24%"
+            class="btn"
+            v-for="(item, i) in chartBtns"
+            :key="i"
+            @click="chartTitle = item.text"
+          >
             {{item.text}}
           </v-btn>
         </v-card>
       </div>
-      <div class="stats-wrapper d-flex pt-7 justify-space-around">
-        <base-material-stats-card
-          color="secondary"
-          icon="mdi-currency-usd"
-          title="Credit"
-          value="12,000,000"
-          sub-icon="mdi-clock"
-          sub-text="Just Updated"
-        />
-        <base-material-stats-card
-          color="blue"
-          icon="mdi-chart-box-plus-outline"
-          title="Today Sales"
-          value="1780"
-          sub-icon="mdi-tag"
-          sub-text="Sales By Fantastic Apro Team."
-        />
-      </div>
-    </div>
-    <div class="mt-6">
-      <span>
-        In Progress Sales
-      </span>
-      <div class="progress-table d-flex mt-2">
-        <div v-for="(item, i) in progressData" :key="i" class="d-flex flex-column pr-4">
-          <div class="header d-flex justify-center align-center">
-            {{ item.header }}
+      <div class="progress-sales ml-4">
+        <v-card class="pa-4">
+          <span class="text-h6">
+            In Progress Sales
+          </span>
+          <div >
+            <div v-for="(arrayItem, i) in progressData" :key="i" class="progress-table d-flex justify-space-between mt-4">
+              <div v-for="(item, j) in arrayItem" :key="j" class="d-flex flex-column">
+                <div v-if="i === 0" class="grey--text text-body-2 header d-flex justify-center align-center">
+                  {{ item.header }}
+                </div>
+                <div class="d-flex justify-center align-center" :class="`${item.body.toLowerCase()}--text`">
+                  {{ item.body }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="d-flex justify-center align-center">
-            {{ item.body }}
-          </div>
-        </div>
+        </v-card>
       </div>
     </div>
   </div>
@@ -55,27 +82,52 @@ export default {
   },
   data() {
     return {
+      chartTitle: 'Flight Sales',
       progressData: [
-        {
-          header: 'Date/Time',
-          body: 'Example Data'
-        },
-        {
-          header: 'Service',
-          body: 'Example Data'
-        },
-        {
-          header: 'Amount',
-          body: 'Example Data'
-        },
-        {
-          header: 'Ref No',
-          body: 'Example Data'
-        },
-        {
-          header: 'Status',
-          body: 'Example Data'
-        },
+        [
+          {
+            header: 'Date/Time',
+            body: '99/05/15'
+          },
+          {
+            header: 'Service',
+            body: 'Flight'
+          },
+          {
+            header: 'Amount',
+            body: '18,800,000'
+          },
+          {
+            header: 'Ref No',
+            body: '186754'
+          },
+          {
+            header: 'Status',
+            body: 'Success'
+          },
+        ],
+        [
+          {
+            header: 'Date/Time',
+            body: '99/05/15'
+          },
+          {
+            header: 'Service',
+            body: 'Hotel'
+          },
+          {
+            header: 'Amount',
+            body: '1,800,000'
+          },
+          {
+            header: 'Ref No',
+            body: '186754'
+          },
+          {
+            header: 'Status',
+            body: 'Error'
+          },
+        ]
       ],
       chartBtns: [
         {
@@ -120,22 +172,22 @@ export default {
 <style lang="scss" scoped>
 .stats-wrapper {
   & > div {
-    width: 45%;
+    width: 24%;
   }
 }
 .chart-wrapper {
   width: 50%;
 }
+.progress-sales {
+  flex-grow: 1;
+}
 .progress-table {
-  border: 1px solid $greyColor;
-  width: fit-content;
-  height: 150px;
+  width: 100%;
   .header {
     height: 50px;
-    border: 1px solid $greyColor
-  }
-  & > div:last-of-type {
-    height: 100px;
+    &:last-of-type {
+      border-right: nnone;
+    }
   }
 }
 </style>

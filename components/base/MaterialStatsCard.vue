@@ -92,6 +92,7 @@
   display: flex
   flex-wrap: wrap
   position: relative
+  max-height: 150px
 
   > div:first-child
     justify-content: space-between

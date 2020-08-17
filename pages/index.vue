@@ -41,14 +41,14 @@
         </div>
         <v-card class="d-flex pa-2 align-center justify-space-between">
           <v-btn
+            v-for="(item, i) in chartBtns"
+            :key="i"
             :color="item.color"
             width="24%"
             class="btn"
-            v-for="(item, i) in chartBtns"
-            :key="i"
             @click="chartTitle = item.text"
           >
-            {{item.text}}
+            {{ item.text }}
           </v-btn>
         </v-card>
       </div>
@@ -57,7 +57,7 @@
           <span class="text-h6">
             In Progress Sales
           </span>
-          <div >
+          <div>
             <div v-for="(arrayItem, i) in progressData" :key="i" class="progress-table d-flex justify-space-between mt-4">
               <div v-for="(item, j) in arrayItem" :key="j" class="d-flex flex-column">
                 <div v-if="i === 0" class="grey--text text-body-2 header d-flex justify-center align-center">
@@ -72,6 +72,11 @@
         </v-card>
       </div>
     </div>
+    <highchart
+      class="mt-4 rounded elevation-2"
+      :options="chartOptions"
+      :update="['options.title', 'options.series']"
+    />
   </div>
 </template>
 <script>
@@ -82,6 +87,53 @@ export default {
   },
   data() {
     return {
+      chartOptions: {
+        chart: {
+          type: 'area'
+        },
+
+        title: {
+          text: 'Pattern fill plugin demo'
+        },
+
+        xAxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+
+        plotOptions: {
+          area: {
+            fillColor: {
+              pattern: {
+                path: {
+                  d: 'M 0 0 L 10 10 M 9 -1 L 11 1 M -1 9 L 1 11',
+                  strokeWidth: 3
+                },
+                width: 10,
+                height: 10,
+                opacity: 0.4
+              }
+            }
+          }
+        },
+
+        series: [{
+          data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6],
+          color: '#88e',
+          fillColor: {
+            pattern: {
+              color: '#11d'
+            }
+          }
+        }, {
+          data: [null, null, null, null, null, 43.1, 95.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+          color: '#e88',
+          fillColor: {
+            pattern: {
+              color: '#d11'
+            }
+          }
+        }]
+      },
       chartTitle: 'Flight Sales',
       progressData: [
         [

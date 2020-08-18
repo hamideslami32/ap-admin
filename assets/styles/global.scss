@@ -5,6 +5,10 @@
   src: url('../fonts/dana-fanum-regular.woff2');
 }
 
+* {
+  text-transform: none !important;
+}
+
 body {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif !important;

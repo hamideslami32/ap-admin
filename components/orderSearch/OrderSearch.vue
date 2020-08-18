@@ -39,7 +39,7 @@
           </form>
           <div class="d-flex justify-end my-2">
             <v-btn type="submit" width="200" color="primary" x-large @submit.prevent="search">
-              search
+              Search
             </v-btn>
           </div>
         </div>

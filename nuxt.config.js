@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+// import webpack from 'webpack'
 
 export default {
   /*
@@ -26,7 +27,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap' }
-    ]
+    ],
   },
 
   router: {
@@ -67,7 +68,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     "@nuxtjs/toast",
-    '@nuxtjs/universal-storage'
+    '@nuxtjs/universal-storage',
+    'nuxt-highcharts'
   ],
 
   // toast config
@@ -122,5 +124,10 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    // plugins: [
+    //   new webpack.IgnorePlugin({
+    //     resourceRegExp: /\@highcharts\/map\-collection/
+    //   })
+    // ],
   }
 }

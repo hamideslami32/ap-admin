@@ -79,13 +79,6 @@ export default {
             sortDesc: false,
         }
     },
-    computed: {
-      generateTableOrders() {
-        let orders = []
-
-        return orders
-      }
-    },
     methods: {
         toggleOrder () {
           this.sortDesc = !this.sortDesc

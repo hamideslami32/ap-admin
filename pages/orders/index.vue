@@ -3,7 +3,7 @@
     <v-flex class="pa-4">
       <v-expansion-panels :value="openExpansionPanel" :multiple="true">
         <OrderSearch />
-        <OrderTable title="Orders" :data="ordersData" :headers="mockHeaderData" />
+        <OrderTable title="Orders" v-if="this.$orders.orders" :data="this.$orders.orders" :headers="mockHeaderData" />
       </v-expansion-panels>
     </v-flex>
   </v-layout>
@@ -12,15 +12,18 @@
 <script>
 import OrderSearch from '~/components/orderSearch/OrderSearch'
 import OrderTable from '~/components/orderTable/OrderTable'
-import {ordersData} from '~/assets/js/orders-data'
+// import {ordersData} from '~/assets/js/orders-data'
 export default {
   components: {
     OrderSearch,
     OrderTable
   },
+  mounted() {
+    this.$orders.getOrders()
+  },
   data() {
     return {
-      ordersData,
+      // ordersData,
       // index of expansion panels to be open by default
       // we can use arrays for multiple modules
       openExpansionPanel: [0, 1],

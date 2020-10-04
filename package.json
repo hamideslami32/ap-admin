@@ -27,6 +27,7 @@
     "@nuxtjs/universal-storage": "^0.5.5",
     "apexcharts": "^3.19.2",
     "chart.js": "^2.9.3",
+    "dayjs": "^1.9.1",
     "highcharts": "^8.1.2",
     "lodash": "^4.17.19",
     "node-sass": "^4.14.1",

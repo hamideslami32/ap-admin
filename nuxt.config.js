@@ -49,6 +49,7 @@ export default {
     "~plugins/mask",
     "~plugins/base",
     "~plugins/orders",
+    "~plugins/numbers",
   ],
   /*
   ** Auto import components

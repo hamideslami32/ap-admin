@@ -8,6 +8,7 @@ class Orders {
         this.axios = ctx.app.$axios
         this.redirect = ctx.redirect
         this.orders = null
+        this.order = null
     }
 
     async getOrders(limit = 20, offset = 0) {
@@ -31,6 +32,29 @@ class Orders {
           this.orders = orders
           message.status = 'success'
           message.text = 'orders is ready'
+      } catch (error) {
+            console.log({error})
+            message.status = 'error'
+            message.text = 'something is wrong'
+      }
+      return message
+    }
+
+    async getOrder(orderId) {
+      let message = {}
+      try {
+          let order = await this.axios.$get(`/order/${orderId}`)
+
+          order = new Order(order)
+
+          order.orderItems.forEach(item => {
+            item.flights = item.flights.map(flight => new Flight(flight))
+          })
+
+          this.order = order
+
+          message.status = 'success'
+          message.text = 'order is ready'
       } catch (error) {
             console.log({error})
             message.status = 'error'

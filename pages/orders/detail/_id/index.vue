@@ -613,6 +613,9 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.$orders.getOrder(this.$route.params.id)
+  },
   methods: {
     colorize(item) {
       if (item.title === 'Phone' || item.title === 'Order Number') return 'secondary--text'

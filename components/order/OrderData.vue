@@ -4,8 +4,8 @@
       <td>
         {{ data.order._id }}
         <br>
-        <nuxt-link :to="{ path: '/orders', query: { phone: data.phone } }">
-          {{ data.phone || '09366182745' }}
+        <nuxt-link :to="{ path: '/orders', query: { phone: '' } }">
+          {{ data.order.user ? data.order.user.phone : '0' }}
         </nuxt-link>
       </td>
       <td>
@@ -24,24 +24,24 @@
         <br>
         {{ data.firstOrder.flights[1].providerKey }} - {{ data.firstOrder.flights[1].airline }}
       </td>
-      <td>{{ data.pax }} P</td>
+      <td>{{ data.firstOrder.passengers.length || '' }} </td>
       <td>
-        {{ data.price }}
+        {{ data.price | separateNumber }}
         <!-- <br>
         {{ data.salesPrice }} -->
       </td>
-      <td>{{ data.departingConfCode }} <br> {{ data.returningConfCode }}</td>
+      <td>{{ data.firstOrder.pnr[0] }} <br> {{ data.firstOrder.pnr[1] }}</td>
       <td>
-        <v-chip class="success white--text rounded py-1 mb-1 px-2">
+        <v-chip class="white--text rounded py-1 mb-1 px-2" :class="getBadgeColor(data.order.status)">
           {{ data.order.status }}
         </v-chip>
         <br>
-        <v-chip class="success white--text rounded py-1 px-2">
+        <v-chip class="white--text rounded py-1 px-2" :class="getBadgeColor(data.order.status)">
           {{ data.order.status }}
         </v-chip>
       </td>
-      <td :class="getColor(data.paymentStatus || 'Success')">
-        {{ data.paymentStatus || 'Success'}}
+      <td :class="getColor(data.paymentStatus || '')">
+        {{ data.paymentStatus || ''}}
       </td>
       <td class="d-flex flex-column justify-space-around">
         <v-btn class="secondary white--text" small @click="$router.push('/orders/detail')">
@@ -56,8 +56,8 @@
       <td>
         {{ data.order._id }}
         <br>
-        <nuxt-link :to="{ path: '/orders', query: { phone: data.phone } }">
-          {{ data.phone }}
+        <nuxt-link :to="{ path: '/orders', query: { phone: '' } }">
+          {{ data.order.user ? data.order.user.phone : '' }}
         </nuxt-link>
       </td>
       <td>
@@ -70,23 +70,23 @@
       <td>
         {{ data.firstOrder.flights[0].providerKey }} - {{ data.firstOrder.flights[0].airline }}
       </td>
-      <td>{{ data.pax }} P</td>
+      <td>{{ data.firstOrder.passengers.length || '' }} </td>
       <td>
-        {{ data.price }}
+        {{ data.price | separateNumber  }}
         <!-- <br>
         {{ data.salesPrice }} -->
       </td>
-      <td>{{ data.departingConfCode }}</td>
+      <td>{{ data.firstOrder.pnr[0] }}</td>
       <td>
-        <v-chip class="success white--text rounded py-1 px-2">
+        <v-chip class="white--text rounded py-1 px-2" :class="getBadgeColor(data.order.status)">
           {{ data.order.status }}
         </v-chip>
       </td>
-      <td :class="getColor(data.paymentStatus || 'Success')">
-        {{ data.paymentStatus || 'Success'}}
+      <td :class="getColor(data.paymentStatus || '')">
+        {{ data.paymentStatus || ''}}
       </td>
       <td class="d-flex flex-column justify-space-around">
-        <v-btn class="secondary white--text" small @click="$router.push('/orders/detail')">
+        <v-btn class="secondary white--text" small @click="$router.push(`/orders/detail/${data.order._id}`)">
           Detail
         </v-btn>
         <v-btn class="blue white--text" small>
@@ -105,10 +105,18 @@ export default {
         required: true
       }
     },
-    mounted() {
-      console.log(this.data.firstOrder)
-    },
     methods: {
+      getBadgeColor(string) {
+        let color = 'blue'
+        if (string.includes('success')) {
+          color = 'success'
+        } else if (string.includes('failed')) {
+          color = 'danger'
+        } else if (string.includes('pending')) {
+          color = 'grey'
+        }
+        return color
+      },
       getColor(string) {
         let color = ''
         if (string.includes('success')) {

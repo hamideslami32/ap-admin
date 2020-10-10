@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev-local": "PORT=3003 API_URL=http://localhost:3000/api nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "export": "nuxt export",

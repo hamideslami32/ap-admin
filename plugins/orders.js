@@ -12,59 +12,59 @@ class Orders {
     }
 
     async getOrders(limit = 20, offset = 0) {
-      let message = {}
-      try {
-          let orders = await this.axios.$get('/order/all', {
-            params: {
-              limit,
-              offset
-            }
-          })
-
-          orders = orders.map(order => new Order(order))
-
-          orders.forEach(order => {
-            order.order.orderItems.forEach(item => {
-              item.flights = item.flights.map(flight => new Flight(flight))
+        let message = {}
+        try {
+            let orders = await this.axios.$get('/order/all', {
+                params: {
+                    limit,
+                    offset
+                }
             })
-          })
 
-          this.orders = orders
-          message.status = 'success'
-          message.text = 'orders is ready'
-      } catch (error) {
+            orders = orders.map(order => new Order(order))
+
+            orders.forEach(order => {
+                order.order.orderItems.forEach(item => {
+                    item.flights = item.flights.map(flight => new Flight(flight))
+                })
+            })
+
+            this.orders = orders
+            message.status = 'success'
+            message.text = 'orders is ready'
+        } catch (error) {
             console.log({error})
             message.status = 'error'
             message.text = 'something is wrong'
-      }
-      return message
+        }
+        return message
     }
 
     async getOrder(orderId) {
-      let message = {}
-      try {
-          let order = await this.axios.$get(`/order/${orderId}`)
+        let message = {}
+        try {
+            let order = await this.axios.$get(`/order/${orderId}`)
 
-          order = new Order(order)
+            order = new Order(order)
 
-          order.orderItems.forEach(item => {
-            item.flights = item.flights.map(flight => new Flight(flight))
-          })
+            order.orderItems.forEach(item => {
+                item.flights = item.flights.map(flight => new Flight(flight))
+            })
 
-          this.order = order
+            this.order = order
 
-          message.status = 'success'
-          message.text = 'order is ready'
-      } catch (error) {
+            message.status = 'success'
+            message.text = 'order is ready'
+        } catch (error) {
             console.log({error})
             message.status = 'error'
             message.text = 'something is wrong'
-      }
-      return message
+        }
+        return message
     }
 
     orders() {
-      return this.orders
+        return this.orders
     }
 
 }

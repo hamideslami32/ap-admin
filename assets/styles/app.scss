@@ -1,17 +1,9 @@
 @import 'vars';
 
-@font-face {
-  font-family: 'dana';
-  src: url('../fonts/dana-fanum-regular.woff2');
-}
+@import 'fonts';
 
 * {
   text-transform: none !important;
-}
-
-body {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif !important;
 }
 
 a {

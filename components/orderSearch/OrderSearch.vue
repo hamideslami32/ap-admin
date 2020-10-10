@@ -1,10 +1,10 @@
 <template>
-    <v-expansion-panel class="search">
-        <v-expansion-panel-header class="text-h6 mb-4">
+    <v-expansion-panel class="search" :value="false">
+        <v-expansion-panel-header class="text-h6">
             Search
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column mt-6">
                 <div class="filters d-flex flex-column">
                     <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
                         <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
@@ -284,36 +284,39 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
-  height: 100%;
-  .container {
-    padding: 8px !important;
-  }
+    height: 100%;
 
-  .filter-cols-wrapper {
-    background-color: #fff;
-
-    .filter-col {
-      width: 100%;
-      border-right: 1px solid $lightGrey;
-      margin-left: 24px;
-
-      &:first-of-type {
-        margin-left: 0;
-      }
-      &:last-of-type {
-        padding-right: 0 !important;
-        border-right: none;
-      }
-
-      .field {
-        width: 100%;
-      }
+    .container {
+        padding: 8px !important;
     }
-  }
+
+    .filter-cols-wrapper {
+        background-color: #fff;
+
+        .filter-col {
+            width: 100%;
+            border-right: 1px solid $lightGrey;
+            margin-left: 24px;
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+
+            &:last-of-type {
+                padding-right: 0 !important;
+                border-right: none;
+            }
+
+            .field {
+                width: 100%;
+            }
+        }
+    }
 }
+
 @media only screen and (max-width: 960px) {
-  .filter-col {
-    border-right: none !important;
-  }
+    .filter-col {
+        border-right: none !important;
+    }
 }
 </style>

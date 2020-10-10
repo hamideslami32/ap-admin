@@ -185,37 +185,40 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
-  height: 100%;
-  .container {
-    padding: 8px !important;
-  }
+    height: 100%;
 
-  .filter-cols-wrapper {
-    background-color: #fff;
-
-    .filter-col {
-      width: 100%;
-      max-width: 400px;
-      border-right: 1px solid $lightGrey;
-      margin-left: 24px;
-
-      &:first-of-type {
-        margin-left: 0;
-      }
-      &:last-of-type {
-        padding-right: 0 !important;
-        border-right: none;
-      }
-
-      .field {
-        width: 100%;
-      }
+    .container {
+        padding: 8px !important;
     }
-  }
+
+    .filter-cols-wrapper {
+        background-color: #fff;
+
+        .filter-col {
+            width: 100%;
+            max-width: 400px;
+            border-right: 1px solid $lightGrey;
+            margin-left: 24px;
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+
+            &:last-of-type {
+                padding-right: 0 !important;
+                border-right: none;
+            }
+
+            .field {
+                width: 100%;
+            }
+        }
+    }
 }
+
 @media only screen and (max-width: 960px) {
-  .filter-col {
-    border-right: none !important;
-  }
+    .filter-col {
+        border-right: none !important;
+    }
 }
 </style>

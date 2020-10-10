@@ -211,10 +211,11 @@ export default {
 
 <style lang="scss" scoped>
 .table-header {
-  border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
 }
+
 .expand {
-  line-height: 1.5 !important;
-  padding: 15px !important;
+    line-height: 1.5 !important;
+    padding: 15px !important;
 }
 </style>

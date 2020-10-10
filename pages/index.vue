@@ -270,23 +270,28 @@ export default {
 
 <style lang="scss" scoped>
 .stats-wrapper {
-  & > div {
-    width: 24%;
-  }
-}
-.chart-wrapper {
-  width: 50%;
-}
-.progress-sales {
-  flex-grow: 1;
-}
-.progress-table {
-  width: 100%;
-  .header {
-    height: 50px;
-    &:last-of-type {
-      border-right: nnone;
+    & > div {
+        width: 24%;
     }
-  }
+}
+
+.chart-wrapper {
+    width: 50%;
+}
+
+.progress-sales {
+    flex-grow: 1;
+}
+
+.progress-table {
+    width: 100%;
+
+    .header {
+        height: 50px;
+
+        &:last-of-type {
+            border-right: nnone;
+        }
+    }
 }
 </style>

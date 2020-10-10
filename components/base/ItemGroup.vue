@@ -119,6 +119,6 @@ export default {
 
 <style>
 .v-list-group__activator p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 </style>

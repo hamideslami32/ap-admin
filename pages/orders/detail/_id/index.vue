@@ -625,26 +625,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .v-input--selection-controls {
-    margin-top: 0 !important;
-  }
-  .dialog-main {
-    border-top: 1px solid $greyColor;
-  }
-  .user-info {
-    height: 60px;
-    background-color: $lightGrey;
-  }
-  .passengers {
-    .edit {
-      width: 100%;
-      min-height: 200px;
-      background: $backLight;
-      &__main {
-        .fields-wrapper > * {
-          width: 15%;
-        }
-      }
+    .v-input--selection-controls {
+        margin-top: 0 !important;
     }
-  }
+
+    .dialog-main {
+        border-top: 1px solid $greyColor;
+    }
+
+    .user-info {
+        height: 60px;
+        background-color: $lightGrey;
+    }
+
+    .passengers {
+        .edit {
+            width: 100%;
+            min-height: 200px;
+            background: $backLight;
+
+            &__main {
+                .fields-wrapper > * {
+                    width: 15%;
+                }
+            }
+        }
+    }
 </style>

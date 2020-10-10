@@ -29,7 +29,7 @@
                     <div class="d-flex align-center flex-grow-1">
                         <div class="d-flex flex-column  align-center flex-grow-1">
                             <span>{{ 'Economy' }}</span>
-                            <span class="d-flex align-center" style="width:100%;">
+                            <span class="d-flex align-center" style="width: 100%;">
                                 <div class="circle" />
                                 <div class="line" />
                             </span>
@@ -40,7 +40,7 @@
                         </v-icon>
                         <div class="d-flex flex-column align-center flex-grow-1">
                             <span>{{ 'Class H' }}</span>
-                            <span class="d-flex align-center" style="width:100%;">
+                            <span class="d-flex align-center" style="width: 100%;">
                                 <div class="line" />
                                 <div class="circle primary" />
                             </span>
@@ -120,7 +120,7 @@
                 <div class="pax__rules rounded pa-3">
                     <div>
                         <div class="d-flex justify-space-between">
-                            <div class="font-weight-bold" style="fontSize: 20px;">
+                            <div class="font-weight-bold" style="fontsize: 20px;">
                                 قوانین استرداد (شناسه نرخی y)
                             </div>
                             <div class="primary--text text-h5 mb-4">
@@ -288,61 +288,69 @@ export default {
 
 <style lang="scss" scoped>
 .order-wrapper {
-  width: 100%;
-  min-height: 210px;
-  .label {
-    display: flex;
-    width: 45px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px 0 0 4px !important;
-    &> div {
-      transform: rotate(-90deg);
-    }
-  }
-  .main {
-    height: 200px;
-    & > div {
-      height: 100%;
-    }
-    .flight-detail {
-      & > div {
-        height: inherit;
-        justify-content: space-around;
-      }
-    }
-    .btn-wrapper {
-      justify-content: space-evenly;
-    }
-  }
-  .edit {
-    background-color: $backLight;
-    min-height: 200px;
-    .inputs {
-      & > div {
-        width: 10%;
-      }
-    }
-  }
-  .pax {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    width: 100%;
+    min-height: 210px;
 
-    &__rules {
-      height: auto;
-      font-family: 'dana' !important;
-      direction: rtl;
-      min-height: 100px;
-      width: 100%;
-      border: 1px dashed $primary;
-      background-color: $backLight;
+    .label {
+        display: flex;
+        width: 45px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px 0 0 4px !important;
+
+        & > div {
+            transform: rotate(-90deg);
+        }
     }
 
-    &__table {
-      border-bottom: 1px dashed $lightPrimary;
+    .main {
+        height: 200px;
 
+        & > div {
+            height: 100%;
+        }
+
+        .flight-detail {
+            & > div {
+                height: inherit;
+                justify-content: space-around;
+            }
+        }
+
+        .btn-wrapper {
+            justify-content: space-evenly;
+        }
     }
-  }
+
+    .edit {
+        background-color: $backLight;
+        min-height: 200px;
+
+        .inputs {
+            & > div {
+                width: 10%;
+            }
+        }
+    }
+
+    .pax {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        &__rules {
+            height: auto;
+            font-family: 'dana' !important;
+            direction: rtl;
+            min-height: 100px;
+            width: 100%;
+            border: 1px dashed $primary;
+            background-color: $backLight;
+        }
+
+        &__table {
+            border-bottom: 1px dashed $lightPrimary;
+        }
+    }
 }
 
 </style>

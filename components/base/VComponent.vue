@@ -14,7 +14,7 @@
                 rel="noopener"
                 target="_blank"
                 class="secondary--text"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
             >
                 full documentation
             </a>

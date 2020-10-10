@@ -147,9 +147,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .card {
-    max-width: 500px;
-    width: 100%;
-    justify-content: center;
-  }
+    .card {
+        max-width: 500px;
+        width: 100%;
+        justify-content: center;
+    }
 </style>

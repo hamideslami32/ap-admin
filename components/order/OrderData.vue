@@ -131,8 +131,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-data-table > .v-data-table__wrapper > table > tbody > tr > td{
-  height: 80px;
-  padding: 8px;
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    height: 80px;
+    padding: 8px;
 }
 </style>

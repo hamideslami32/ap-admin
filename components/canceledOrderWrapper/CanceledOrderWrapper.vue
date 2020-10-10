@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 .canceled-order-wrapper {
-  width: 100%;
-  border: 1px solid grey;
+    width: 100%;
+    border: 1px solid grey;
 }
 </style>

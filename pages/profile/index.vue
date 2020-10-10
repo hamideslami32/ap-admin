@@ -134,39 +134,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .profile {
-    justify-content: space-between;
-    min-height: 400px;
+    .profile {
+        justify-content: space-between;
+        min-height: 400px;
 
-    .form {
-      flex-wrap: wrap;
-      justify-content: space-between;
-      height: 80%;
+        .form {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 80%;
 
-      & > div {
-        width: 48%;
-      }
+            & > div {
+                width: 48%;
+            }
+        }
+
+        .card-group {
+            display: flex;
+            width: 39%;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .roles,
+        .permissions {
+            padding: 1rem;
+            height: 49%;
+            align-items: space-between;
+            align-self: stretch;
+
+            .title {
+                border-bottom: 1px solid $primary;
+                color: $primary;
+                border-radius: none;
+            }
+        }
     }
-
-    .card-group {
-      display: flex;
-      width: 39%;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .roles,
-    .permissions {
-      padding: 1rem;
-      height: 49%;
-      align-items: space-between;
-      align-self: stretch;
-
-      .title {
-        border-bottom: 1px solid $primary;
-        color: $primary;
-        border-radius: none;
-      }
-    }
-  }
 </style>

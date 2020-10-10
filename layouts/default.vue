@@ -1,66 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer
-            v-model="drawer"
-            color="primary"
-            width="270"
-            :clipped="drawerClipped"
-            app
-            dark
-        >
-            <v-list>
-                <template v-for="(item, i) in items">
-                    <div
-                        v-if="item.heading"
-                        :key="item.heading"
-                        class="d-flex pl-4 lightPrimary--text"
-                    >
-                        <v-list-item-content>
-                            <v-list-item-title>
-                                <nuxt-link :to="item.to" class="text-decoration-none">
-                                    {{ item.heading }}
-                                </nuxt-link>
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </div>
-                    <v-list-group
-                        v-else
-                        :key="item.text"
-                        v-model="item.model"
-                        color="white"
-                        :append-icon="item.icon"
-                    >
-                        <template v-slot:activator>
-                            <v-icon class="mr-4">
-                                {{ item['icon-pre'] }}
-                            </v-icon>
-                            <v-list-item-content @click="$router.push(item.to)">
-                                <v-list-item-title>
-                                    {{ item.text }}
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </template>
-                        <v-list-item
-                            v-for="(child, j) in item.children"
-                            :key="j"
-                            link
-                            :to="child.to"
-                            exact
-                        >
-                            <v-list-item-action v-if="child.icon" class="ml-3">
-                                <v-icon>{{ child.icon }}</v-icon>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title class="text-body-2">
-                                    {{ child.text }}
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-group>
-                    <v-divider :key="i" width="90%" class="lightPrimary mx-auto" />
-                </template>
-            </v-list>
-        </v-navigation-drawer>
+        <app-drawer :show="drawer" />
 
         <v-app-bar
             :clipped-left="$vuetify.breakpoint.mdAndUp"
@@ -270,12 +210,14 @@
 </template>
 
 <script>
+import AppDrawer from '~/components/drawer/AppDrawer'
 import { VHover, VListItem } from 'vuetify/lib'
 
 export default {
     name: 'Default',
     middleware: ['auth'],
     components: {
+        AppDrawer,
         AppBarItem: {
             render (h) {
                 return h(VHover, {
@@ -433,22 +375,26 @@ export default {
 
 <style lang="scss" scoped>
 a {
-  color: #C5ACF2 !important;
+    color: #c5acf2 !important;
 }
+
 .v-list .v-list-item--active .v-icon {
-  color: $lightPrimary ;
+    color: $lightPrimary;
 }
+
 .child-item {
-  font-size: 0.8em !important;
+    font-size: 0.8em !important;
 }
+
 .user-profile {
-  border-radius: 50%;
-  padding: 0 !important;
-  min-width: unset !important;
+    border-radius: 50%;
+    padding: 0 !important;
+    min-width: unset !important;
 }
+
 .user-menu-item {
-  &:hover {
-    background-color: #eee !important;
-  }
+    &:hover {
+        background-color: #eee !important;
+    }
 }
 </style>

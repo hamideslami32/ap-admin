@@ -61,18 +61,31 @@ export default {
             type: String,
             required: true
         },
-        headers: {
-            type: Array,
-            required: true
-        },
     },
     data() {
         return {
             sortSelect: {
                 value: 'orderID',
                 label:'Sort Item',
-                selectList: this.headers.map(x => x.value)
+                // selectList: this.headers.map(x => x.value)
             },
+            headers: [
+                {
+                    text: "Order ID",
+                    align: "start",
+                    value: "id",
+                },
+                { text: "ORG - DST" , value: 'route'},
+                { text: "Travel Date" , value: 'travel-date'},
+                { text: "Date of Issue" , value: "issue-date"},
+                { text: "Airline/Provider", value: "airline-provider" },
+                { text: "Pax", value: "pax" },
+                { text: "Net/Sales Price", value: "price" },
+                { text: "Confirmation Code", value: "conf-code" },
+                { text: "Order Status", value: "order-status", sortable :false },
+                { text: "Payment Status", value: "payment-status", sortable :false },
+                { text: "Ticket/Details", value: "ticket-details", sortable :false }
+            ],
             page: 1,
             pageCount: 0,
             sortBy: 'id',
@@ -94,22 +107,23 @@ export default {
 
 <style lang="scss" scoped>
 .data-table {
-  .v-data-table {
-    line-height: 2 !important;
-  }
-  .order-icon {
-    background-color: #fff;
-    border: 1px solid grey;
-    position: absolute;
-    left: 2px;
-    margin-top: 5px;
-    padding: 3px;
-  }
+    .v-data-table {
+        line-height: 2 !important;
+    }
+
+    .order-icon {
+        background-color: #fff;
+        border: 1px solid grey;
+        position: absolute;
+        left: 2px;
+        margin-top: 5px;
+        padding: 3px;
+    }
 }
 
 @media only screen and (max-width: 960px) {
-  .filter-col {
-    border-right: none !important;
-  }
+    .filter-col {
+        border-right: none !important;
+    }
 }
 </style>

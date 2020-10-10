@@ -1,66 +1,67 @@
 {
-  "name": "apro-admin-panel",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "dev-local": "PORT=3003 API_URL=http://localhost:3000/api nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "export": "nuxt export",
-    "serve": "nuxt serve",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "prepublish": "npm run build && npm run export",
-    "publish": "surge dist apro-admin.surge.sh"
-  },
-  "lint-staged": {
-    "*.{js,vue}": "eslint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "apro-admin-panel",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "dev-local": "PORT=3003 API_URL=http://localhost:3000/api nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "export": "nuxt export",
+        "serve": "nuxt serve",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+        "prepublish": "npm run build && npm run export",
+        "publish": "surge dist apro-admin.surge.sh"
+    },
+    "lint-staged": {
+        "*.{js,vue}": "eslint --fix",
+        "*.{scss,css}": "stylelint --fix"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "dependencies": {
+        "@nuxtjs/axios": "^5.11.0",
+        "@nuxtjs/toast": "^3.3.0",
+        "@nuxtjs/universal-storage": "^0.5.5",
+        "apexcharts": "^3.19.2",
+        "chart.js": "^2.9.3",
+        "dayjs": "^1.9.1",
+        "highcharts": "^8.1.2",
+        "lodash": "^4.17.19",
+        "node-sass": "^4.14.1",
+        "nuxt": "^2.13.0",
+        "nuxt-highcharts": "^1.0.2",
+        "sass-loader": "^8.0.2",
+        "style-loader": "^1.2.1",
+        "v-mask": "^2.2.3",
+        "vee-validate": "^3.3.5",
+        "vue-apexcharts": "^1.5.3",
+        "vue-chartjs": "^3.5.0",
+        "vue-fragment": "^1.5.1",
+        "vue-grid-layout": "^2.3.8"
+    },
+    "devDependencies": {
+        "@nuxtjs/eslint-config": "^3.0.0",
+        "@nuxtjs/eslint-module": "^2.0.0",
+        "@nuxtjs/vuetify": "^1.11.2",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.2.0",
+        "eslint-plugin-nuxt": "^1.0.0",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
+        "@nuxtjs/stylelint-module": "^4.0.0",
+        "@vue/test-utils": "^1.0.3",
+        "babel-core": "7.0.0-bridge.0",
+        "babel-jest": "^26.0.1",
+        "eslint-plugin-prettier": "^3.1.4",
+        "jest": "^26.0.1",
+        "stylelint": "^13.6.1",
+        "stylelint-config-standard": "^20.0.0",
+        "stylelint-scss": "^3.18.0",
+        "vue-jest": "^3.0.4"
     }
-  },
-  "dependencies": {
-    "@nuxtjs/axios": "^5.11.0",
-    "@nuxtjs/toast": "^3.3.0",
-    "@nuxtjs/universal-storage": "^0.5.5",
-    "apexcharts": "^3.19.2",
-    "chart.js": "^2.9.3",
-    "dayjs": "^1.9.1",
-    "highcharts": "^8.1.2",
-    "lodash": "^4.17.19",
-    "node-sass": "^4.14.1",
-    "nuxt": "^2.13.0",
-    "nuxt-highcharts": "^1.0.2",
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.2.1",
-    "v-mask": "^2.2.3",
-    "vee-validate": "^3.3.5",
-    "vue-apexcharts": "^1.5.3",
-    "vue-chartjs": "^3.5.0",
-    "vue-fragment": "^1.5.1",
-    "vue-grid-layout": "^2.3.8"
-  },
-  "devDependencies": {
-    "@nuxtjs/eslint-config": "^3.0.0",
-    "@nuxtjs/eslint-module": "^2.0.0",
-    "@nuxtjs/vuetify": "^1.11.2",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
-    "eslint-plugin-nuxt": "^1.0.0",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "@nuxtjs/stylelint-module": "^4.0.0",
-    "@vue/test-utils": "^1.0.3",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^26.0.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "jest": "^26.0.1",
-    "stylelint": "^13.6.1",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-scss": "^3.18.0",
-    "vue-jest": "^3.0.4"
-  }
 }

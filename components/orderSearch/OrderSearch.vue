@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel class="search">
-    <v-expansion-panel-header class="text-h6 mb-4">
+    <v-expansion-panel-header class="text-h6 mb-2">
       Search
     </v-expansion-panel-header>
     <v-expansion-panel-content>
@@ -14,6 +14,7 @@
                   v-model="item.value"
                   v-mask="item.mask"
                   outlined
+                  dense
                   :label="item.label"
                   :placeholder="item.placeholder"
                 />
@@ -22,6 +23,7 @@
                   v-model="item.value"
                   :label="item.label"
                   outlined
+                  dense
                   :items="item.selectList"
                 />
                 <div v-if="key === 'secondCol'">
@@ -29,6 +31,7 @@
                     v-model="item.s_value"
                     v-mask="item.mask"
                     outlined
+                    dense
                     :label="item.label"
                     :placeholder="item.s_placeholder"
                     class="ml-2"
@@ -37,7 +40,7 @@
               </div>
             </div>
           </form>
-          <div class="d-flex justify-end my-2">
+          <div class="d-flex justify-end my-1">
             <v-btn type="submit" width="200" color="primary" x-large @submit.prevent="search">
               Search
             </v-btn>

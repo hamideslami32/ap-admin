@@ -26,7 +26,7 @@ export default {
       // ordersData,
       // index of expansion panels to be open by default
       // we can use arrays for multiple modules
-      openExpansionPanel: [0, 1],
+      openExpansionPanel: [1],
       mockHeaderData: [
           {
             text: "Order ID",

@@ -109,9 +109,9 @@ export default {
       getBadgeColor(string) {
         let color = 'blue'
         if (string.includes('success')) {
-          color = 'success'
+          color = 'green'
         } else if (string.includes('failed')) {
-          color = 'danger'
+          color = 'red'
         } else if (string.includes('pending')) {
           color = 'grey'
         }

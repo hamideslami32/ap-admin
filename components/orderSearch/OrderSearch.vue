@@ -1,54 +1,49 @@
 <template>
-  <v-expansion-panel class="search">
-    <v-expansion-panel-header class="text-h6 mb-2">
-      Search
-    </v-expansion-panel-header>
-    <v-expansion-panel-content>
-      <div class="d-flex flex-column">
-        <div class="filters d-flex flex-column">
-          <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
-            <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
-              <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
-                <v-text-field
-                  v-if="item.type === 'input'"
-                  v-model="item.value"
-                  v-mask="item.mask"
-                  outlined
-                  dense
-                  :label="item.label"
-                  :placeholder="item.placeholder"
-                />
-                <v-select
-                  v-else
-                  v-model="item.value"
-                  :label="item.label"
-                  outlined
-                  dense
-                  :items="item.selectList"
-                />
-                <div v-if="key === 'secondCol'">
-                  <v-text-field
-                    v-model="item.s_value"
-                    v-mask="item.mask"
-                    outlined
-                    dense
-                    :label="item.label"
-                    :placeholder="item.s_placeholder"
-                    class="ml-2"
-                  />
+    <v-expansion-panel class="search">
+        <v-expansion-panel-header class="text-h6 mb-2">
+            Search
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+            <div class="d-flex flex-column">
+                <div class="filters d-flex flex-column">
+                    <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
+                        <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
+                            <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
+                                <v-text-field
+                                    v-if="item.type === 'input'"
+                                    v-model="item.value"
+                                    v-mask="item.mask"
+                                    outlined
+                                    dense
+                                    :label="item.label"
+                                    :placeholder="item.placeholder"
+                                />
+                                <v-select
+                                    v-else
+                                    v-model="item.value"
+                                    :label="item.label"
+                                    outlined
+                                    dense
+                                    :items="item.selectList"
+                                />
+                                <div v-if="key === 'secondCol'">
+                                    <v-text-field
+                                        v-model="item.s_value"
+                                        v-mask="item.mask"
+                                        outlined
+                                        dense
+                                        :label="item.label"
+                                        :placeholder="item.s_placeholder"
+                                        class="ml-2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
-          </form>
-          <div class="d-flex justify-end my-1">
-            <v-btn type="submit" width="200" color="primary" x-large @submit.prevent="search">
-              Search
-            </v-btn>
-          </div>
-        </div>
-      </div>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+        </v-expansion-panel-content>
+    </v-expansion-panel>
 </template>
 
 <script>
@@ -60,212 +55,212 @@ export default {
         return {
             filterFieldsData: {
                 firstCol: [
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Phone',
-                    placeholder: '0912-123-4567',
-                    mask:'####-###-####'
-                },
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Order No',
-                    placeholder: 'IF-123456',
-                    mask:'AA-#######'
-                },
-                {
-                    value: 'Flight',
-                    type: 'select',
-                    label:'Product',
-                    selectList: [
-                    'Flight',
-                    'Hotel',
-                    'Bus',
-                    'Visa'
-                    ]
-                }
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Phone',
+                        placeholder: '0912-123-4567',
+                        mask:'####-###-####'
+                    },
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Order No',
+                        placeholder: 'IF-123456',
+                        mask:'AA-#######'
+                    },
+                    {
+                        value: 'Flight',
+                        type: 'select',
+                        label:'Product',
+                        selectList: [
+                            'Flight',
+                            'Hotel',
+                            'Bus',
+                            'Visa'
+                        ]
+                    }
                 ],
                 secondCol: [
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Issue Date',
-                    placeholder: 'From - YY/MM/DD',
-                    s_value: '',
-                    s_placeholder: 'To - YY/MM/DD',
-                    mask:'##/##/##'
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Issue Date',
+                        placeholder: 'From - YY/MM/DD',
+                        s_value: '',
+                        s_placeholder: 'To - YY/MM/DD',
+                        mask:'##/##/##'
 
-                },
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Travel Date',
-                    placeholder: 'From - YY/MM/DD',
-                    s_value: '',
-                    s_placeholder: 'To - YY/MM/DD',
-                    mask:'##/##/##'
+                    },
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Travel Date',
+                        placeholder: 'From - YY/MM/DD',
+                        s_value: '',
+                        s_placeholder: 'To - YY/MM/DD',
+                        mask:'##/##/##'
 
-                },
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Route',
-                    placeholder: 'Origin (THR)',
-                    s_value: '',
-                    s_placeholder: 'Destination (KIH)',
-                    mask:'AAA'
+                    },
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Route',
+                        placeholder: 'Origin (THR)',
+                        s_value: '',
+                        s_placeholder: 'Destination (KIH)',
+                        mask:'AAA'
 
-                }
+                    }
                 ],
                 thirdCol: [
-                {
-                    value: 'Failed',
-                    type: 'select',
-                    label:'Payment Status',
-                    placeholder: '',
-                    selectList: [
-                    'Success',
-                    'Pending',
-                    'Failed',
-                    'Partial'
-                    ]
-                },
-                {
-                    value: 'Pending',
-                    type: 'select',
-                    label:'Order Status',
-                    placeholder: '',
-                    selectList: [
-                    'Success',
-                    'Pending',
-                    'Failed'
-                    ]
-                },
-                {
-                    value: '',
-                    type: 'input',
-                    label:'Confirmation Code',
-                    placeholder: '12X45FH9',
-                    mask:''
+                    {
+                        value: 'Failed',
+                        type: 'select',
+                        label:'Payment Status',
+                        placeholder: '',
+                        selectList: [
+                            'Success',
+                            'Pending',
+                            'Failed',
+                            'Partial'
+                        ]
+                    },
+                    {
+                        value: 'Pending',
+                        type: 'select',
+                        label:'Order Status',
+                        placeholder: '',
+                        selectList: [
+                            'Success',
+                            'Pending',
+                            'Failed'
+                        ]
+                    },
+                    {
+                        value: '',
+                        type: 'input',
+                        label:'Confirmation Code',
+                        placeholder: '12X45FH9',
+                        mask:''
 
-                }
+                    }
                 ],
             }
         }
     },
     watch: {
-      $route: {
-        handler: function() {
-          this.init()
+        $route: {
+            handler: function() {
+                this.init()
+            },
+            deep: true,
+            immediate: true
         },
-        deep: true,
-        immediate: true
-      },
     },
     mounted() {
-      this.init()
+        this.init()
 
     },
     methods: {
-      init() {
-        this.fillSearchValues()
+        init() {
+            this.fillSearchValues()
         // if (urlHasValue) this.search()
-      },
-      fillSearchValues() {
+        },
+        fillSearchValues() {
 
-        // get url
-        let url =  window.location.search
-        let searchParams =  new URLSearchParams(url)
+            // get url
+            let url =  window.location.search
+            let searchParams =  new URLSearchParams(url)
 
-        // let urlHasParams = Boolean(searchParams.getAll().length())
-        let urlHasParams = true
+            // let urlHasParams = Boolean(searchParams.getAll().length())
+            let urlHasParams = true
 
-        if (urlHasParams) {
-          let urlObj = {}
-          searchParams.forEach((value,label) => {
-            urlObj[label] = value
-          })
+            if (urlHasParams) {
+                let urlObj = {}
+                searchParams.forEach((value,label) => {
+                    urlObj[label] = value
+                })
 
-          // normalized url object
-          let fieldValuesArray = normalizeUrl(urlObj)
+                // normalized url object
+                let fieldValuesArray = normalizeUrl(urlObj)
 
-          //set values
-          this.setSearchFieldValues(fieldValuesArray)
+                //set values
+                this.setSearchFieldValues(fieldValuesArray)
 
-        }
+            }
 
-        // return if url has value
-        return urlHasParams
-      },
-      setSearchFieldValues(fieldsArray) {
-        forEach(fieldsArray, (item) => {
-          forOwn(this.filterFieldsData, (array) => {
-            forEach(array, (fieldObject) => {
+            // return if url has value
+            return urlHasParams
+        },
+        setSearchFieldValues(fieldsArray) {
+            forEach(fieldsArray, (item) => {
+                forOwn(this.filterFieldsData, (array) => {
+                    forEach(array, (fieldObject) => {
 
-              if (fieldObject.label === item.label) {
+                        if (fieldObject.label === item.label) {
 
-                if (item.placeholder && (item.placeholder === 'to' || item.placeholder === 'destination')) {
-                  fieldObject.s_value = item.value
+                            if (item.placeholder && (item.placeholder === 'to' || item.placeholder === 'destination')) {
+                                fieldObject.s_value = item.value
 
-                } else {
-                  if (fieldObject.type === 'select') {
-                    fieldObject.value = capitalizeFirstLetter(item.value)
-                  } else {
-                    fieldObject.value = item.value
-                  }
-                }
-              }
+                            } else {
+                                if (fieldObject.type === 'select') {
+                                    fieldObject.value = capitalizeFirstLetter(item.value)
+                                } else {
+                                    fieldObject.value = item.value
+                                }
+                            }
+                        }
+                    })
+                })
             })
-          })
-        })
-      },
+        },
         fieldCol(key) {
             return key === 'secondCol' ? 4 : 8
         },
         search() {
-          const url = this.generateSearchUrl()
-          this.$router.push({path: '/orders', query: url})
+            const url = this.generateSearchUrl()
+            this.$router.push({path: '/orders', query: url})
         },
         getSearchFormValues() {
-          let fieldValuesArray = []
-          let label
-          let fieldData
-          forOwn(this.filterFieldsData, (items,i) => {
+            let fieldValuesArray = []
+            let label
+            let fieldData
+            forOwn(this.filterFieldsData, (items,i) => {
                 forEach(items , (fieldObject) => {
-                  const fieldLabel = fieldObject.label
+                    const fieldLabel = fieldObject.label
 
-                  if (fieldObject.value) {
-                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
-                      label = fieldLabel+'-from'
-                    } else if (fieldLabel === 'Route') {
-                      label = fieldLabel+'-origin'
-                    } else {
-                      label = fieldLabel
+                    if (fieldObject.value) {
+                        if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                            label = fieldLabel+'-from'
+                        } else if (fieldLabel === 'Route') {
+                            label = fieldLabel+'-origin'
+                        } else {
+                            label = fieldLabel
+                        }
+
+                        fieldData = {
+                            label: label,
+                            value: fieldObject.value
+                        }
+
+                        fieldValuesArray.push(fieldData)
                     }
+                    if (i === 'secondCol' && fieldObject.s_value) {
 
-                    fieldData = {
-                      label: label,
-                      value: fieldObject.value
+                        if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
+                            label = fieldLabel+'-to'
+                        } else if (fieldLabel === 'Route') {
+                            label = fieldLabel+'-dest'
+                        }
+
+                        fieldData = {
+                            label: label,
+                            value: fieldObject.s_value,
+                        }
+
+                        fieldValuesArray.push(fieldData)
                     }
-
-                    fieldValuesArray.push(fieldData)
-                  }
-                  if (i === 'secondCol' && fieldObject.s_value) {
-
-                    if (fieldLabel === 'Issue Date' || fieldLabel === 'Travel Date') {
-                      label = fieldLabel+'-to'
-                    } else if (fieldLabel === 'Route') {
-                      label = fieldLabel+'-dest'
-                    }
-
-                    fieldData = {
-                      label: label,
-                      value: fieldObject.s_value,
-                    }
-
-                    fieldValuesArray.push(fieldData)
-                  }
                 })
             })
             return normalizeSearchField(fieldValuesArray)
@@ -275,7 +270,7 @@ export default {
             let urlObject = {}
 
             forEach(normalizedSearchFormValues, (x => {
-              urlObject[x.label] = x.value
+                urlObject[x.label] = x.value
             }))
 
             return urlObject
@@ -287,36 +282,39 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
-  height: 100%;
-  .container {
-    padding: 8px !important;
-  }
+    height: 100%;
 
-  .filter-cols-wrapper {
-    background-color: #fff;
-
-    .filter-col {
-      width: 100%;
-      border-right: 1px solid $lightGrey;
-      margin-left: 24px;
-
-      &:first-of-type {
-        margin-left: 0;
-      }
-      &:last-of-type {
-        padding-right: 0 !important;
-        border-right: none;
-      }
-
-      .field {
-        width: 100%;
-      }
+    .container {
+        padding: 8px !important;
     }
-  }
+
+    .filter-cols-wrapper {
+        background-color: #fff;
+
+        .filter-col {
+            width: 100%;
+            border-right: 1px solid $lightGrey;
+            margin-left: 24px;
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+
+            &:last-of-type {
+                padding-right: 0 !important;
+                border-right: none;
+            }
+
+            .field {
+                width: 100%;
+            }
+        }
+    }
 }
+
 @media only screen and (max-width: 960px) {
-  .filter-col {
-    border-right: none !important;
-  }
+    .filter-col {
+        border-right: none !important;
+    }
 }
 </style>

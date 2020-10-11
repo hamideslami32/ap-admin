@@ -31,34 +31,34 @@ export const normalizeUrl= (urlObj) => {
     forOwn(urlObj, (item, key) => {
         placeholder = null
         switch (key) {
-            case 'issue-date-from':
-                label = 'Issue Date'
-                placeholder = 'from'
-                break
-            case 'issue-date-to':
-                label = 'Issue Date'
-                placeholder = 'to'
-                break
-            case 'travel-date-from':
-                label = 'Travel Date'
-                placeholder = 'from'
-                break
-            case 'travel-date-to':
-                label = 'Travel Date'
-                placeholder = 'to'
-                break
-            case 'route-origin':
-                label = 'Route'
-                placeholder = 'origin'
-                break
-            case 'route-dest':
-                label = 'Route'
-                placeholder = 'destination'
-                break
+        case 'issue-date-from':
+            label = 'Issue Date'
+            placeholder = 'from'
+            break
+        case 'issue-date-to':
+            label = 'Issue Date'
+            placeholder = 'to'
+            break
+        case 'travel-date-from':
+            label = 'Travel Date'
+            placeholder = 'from'
+            break
+        case 'travel-date-to':
+            label = 'Travel Date'
+            placeholder = 'to'
+            break
+        case 'route-origin':
+            label = 'Route'
+            placeholder = 'origin'
+            break
+        case 'route-dest':
+            label = 'Route'
+            placeholder = 'destination'
+            break
 
-            default:
-                label = key
-                break
+        default:
+            label = key
+            break
         }
         result.push({
             label: label.replace('-', ' ').replace(regex, (c) => c.toUpperCase()),
@@ -71,5 +71,5 @@ export const normalizeUrl= (urlObj) => {
 }
 
 export const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }

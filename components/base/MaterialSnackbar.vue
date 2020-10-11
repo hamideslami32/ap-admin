@@ -1,59 +1,59 @@
 <template>
-  <v-snackbar
-    v-model="internalValue"
-    class="v-snackbar--material"
-    v-bind="{
-      ...$attrs,
-      'color': 'transparent'
-    }"
-  >
-    <base-material-alert
-      v-model="internalValue"
-      :color="$attrs.color"
-      :dismissible="dismissible"
-      :type="type"
-      class="ma-0"
-      dark
+    <v-snackbar
+        v-model="internalValue"
+        class="v-snackbar--material"
+        v-bind="{
+            ...$attrs,
+            'color': 'transparent'
+        }"
     >
-      <slot />
-    </base-material-alert>
-  </v-snackbar>
+        <base-material-alert
+            v-model="internalValue"
+            :color="$attrs.color"
+            :dismissible="dismissible"
+            :type="type"
+            class="ma-0"
+            dark
+        >
+            <slot />
+        </base-material-alert>
+    </v-snackbar>
 </template>
 <script>
-  export default {
+export default {
     name: 'BaseMaterialSnackbar',
 
     props: {
-      dismissible: {
-        type: Boolean,
-        default: true,
-      },
-      type: {
-        type: String,
-        default: '',
-      },
-      value: Boolean,
+        dismissible: {
+            type: Boolean,
+            default: true,
+        },
+        type: {
+            type: String,
+            default: '',
+        },
+        value: Boolean,
     },
 
     data () {
-      return {
-        internalValue: this.value,
-      }
+        return {
+            internalValue: this.value,
+        }
     },
 
     watch: {
-      internalValue (val, oldVal) {
-        if (val === oldVal) return
+        internalValue (val, oldVal) {
+            if (val === oldVal) return
 
-        this.$emit('input', val)
-      },
-      value (val, oldVal) {
-        if (val === oldVal) return
+            this.$emit('input', val)
+        },
+        value (val, oldVal) {
+            if (val === oldVal) return
 
-        this.internalValue = val
-      },
+            this.internalValue = val
+        },
     },
-  }
+}
 </script>
 
 <style lang="sass">

@@ -47,7 +47,7 @@ class Orders {
 
             order = new Order(order)
 
-            order.orderItems.forEach(item => {
+            order.order.orderItems.forEach(item => {
                 item.flights = item.flights.map(flight => new Flight(flight))
             })
 

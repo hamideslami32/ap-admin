@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex>
+        <v-flex v-if="$orders.order">
             <div class="d-flex justify-space-between px-4 align-center user-info">
                 <span v-for="(item, i) in userData" :key="i">
                     <span>
@@ -44,7 +44,7 @@
                     <!-- <CanceledOrderWrapper /> -->
                 </v-expansion-panels>
                 <OrderWrapper label-color="green" label-title="Success" />
-                <PriceDetails class="my-8" />
+                <PriceDetails class="my-8" :data="priceData" />
                 <div class="my-4 rounded passengers">
                     <!-- <CanceledOrderWrapper /> -->
                     <v-card class="rounded">
@@ -613,8 +613,92 @@ export default {
             ],
         }
     },
-    mounted() {
+    computed: {
+        orderWrapperData() {
+            // {
+            //     flightStatus,
+            //     airlineLogo,
+            //     airlineName,
+            //     airlineCode,
+            //     provider,
+            //     origin,
+            //     destination,
+            //     originCode,
+            //     destCode,
+            //     departureDate,
+            //     arrivaldate,
+            //     flightFinancialType,
+            //     airplane,
+            //     flightClass,
+            //     isRefundable,
+            //     passengersCount: {
+            //         adult: 3,
+            //         child: 1,
+            //         infant: 1
+            //     },
+            //     price: {
+            //         totalprice: 26135617,
+            //         passengers: {
+            //             adult: 2367352,
+            //             child: 265364,
+            //             infant: 354623
+            //         },
+            //         tax,
+            //         fare
+            //     },
+            //     pnr,
+            //     rules,
+
+            // }
+            return {
+
+            }
+        },
+        priceData() {
+            if (!this.$orders.order) return {}
+            else return {
+                tableData: [
+                    {
+                        title: 'Purchased Price',
+                        value: this.$orders.order.firstOrder.price,
+                        color: 'primary--text'
+                    },
+                    {
+                        title: 'Commission',
+                        value: 0,
+                        color: 'secondary--text'
+                    },
+                    {
+                        title: 'Discount',
+                        value: 0,
+                        color: ''
+                    },
+                    {
+                        title: 'Mark Up/Down',
+                        value: 0,
+                        color: ''
+                    },
+
+                    {
+                        title: 'Sales Price',
+                        value: this.$orders.order.firstOrder.price,
+                        color: ''
+                    },
+                    {
+                        title: 'Net Price',
+                        value: 0,
+                        color: ''
+                    }
+                ],
+                benfit: 0
+            }
+        }
+    },
+    created() {
         this.$orders.getOrder(this.$route.params.id)
+    },
+    mounted() {
+        console.log(this.$orders.order)
     },
     methods: {
         colorize(item) {

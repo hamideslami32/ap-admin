@@ -146,6 +146,10 @@
 <script>
 export default {
     props: {
+        // order: {
+        //     type: Object,
+        //     required: true
+        // },
         labelColor: {
             type: String,
             default: 'red'

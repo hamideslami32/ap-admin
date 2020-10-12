@@ -42,7 +42,7 @@
                 {{ data.paymentStatus || '' }}
             </td>
             <td class="d-flex flex-column justify-space-around">
-                <v-btn class="secondary white--text" small @click="$router.push('/orders/detail')">
+                <v-btn class="secondary white--text" small @click="$router.push(`/orders/detail/${data.order._id}`)">
                     Detail
                 </v-btn>
                 <v-btn class="blue white--text" small>

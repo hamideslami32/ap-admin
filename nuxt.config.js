@@ -37,7 +37,8 @@ export default {
   ** Global CSS
   */
     css: [
-        "~/assets/styles/app.scss"
+        "~/assets/styles/app.scss",
+        'vue-json-pretty/lib/styles.css'
     ],
     /*
   ** Plugins to load before mounting the App
@@ -50,6 +51,7 @@ export default {
         "~plugins/base",
         "~plugins/orders",
         "~plugins/numbers",
+        "~plugins/json-pretty",
     ],
     /*
   ** Auto import components

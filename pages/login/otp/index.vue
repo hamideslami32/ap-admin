@@ -33,7 +33,6 @@
                             rules="required|min:5|max:5"
                         >
                             <v-text-field
-                                v-if="step !== 'phone'"
                                 v-model="otp"
                                 :error-messages="errors"
                                 label="OTP Code"

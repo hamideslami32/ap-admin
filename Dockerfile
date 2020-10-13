@@ -10,8 +10,11 @@ ADD . /app/
 
 ENV HOST 0.0.0.0
 
+ARG API_URL
+
 ENV NODE_ENV production
 ENV BASE_URL /admin/
+ENV API_URL $API_URL
 
 RUN npm run build
 

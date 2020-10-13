@@ -6,3 +6,23 @@ variables:
   IMAGE: registry.apro-dev.ir/apro/apro-admin
   SERVICE: apro-admin
 
+build:
+    stage: build
+    script:
+        - >
+            docker build
+            -t $IMAGE:$TAG
+            --build-arg "PUBLIC_PATH=https://apro.ir/static/fr" .
+            --build-arg "API_URL=https://apro.ir/api"
+
+
+build-stg:
+    stage: build
+    script:
+        - >
+            docker build
+            -t $IMAGE:$TAG_STG
+            --build-arg "PUBLIC_PATH=https://apro-dev.ir/static/fr" .
+            --build-arg "API_URL=https://apro-dev.ir/api"
+    only:
+        - staging

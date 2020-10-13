@@ -8,7 +8,7 @@
                             {{ item.title }}
                         </div>
                         <div class="text-subtitle-1 font-weight-medium" :class="item.color">
-                            {{ item.value }}
+                            {{ item.value | separateNumber }}
                         </div>
                     </div>
                     <v-divider vertical class="px-2" />
@@ -19,7 +19,7 @@
                 <div class="grey--text text--darken-1 mb-2">
                     Benefit
                 </div>
-                <span class="green--text text-subtitle-1 font-weight-medium">{{ data.benefit || '' }} T</span>
+                <span class="green--text text-subtitle-1 font-weight-medium">{{ data.benefit && '-' }}</span>
             </div>
         </v-card>
     </div>

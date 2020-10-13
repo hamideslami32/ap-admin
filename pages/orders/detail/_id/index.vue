@@ -690,15 +690,12 @@ export default {
                         color: ''
                     }
                 ],
-                benfit: 0
+                benefit: 0
             }
         }
     },
     created() {
         this.$orders.getOrder(this.$route.params.id)
-    },
-    mounted() {
-        console.log(this.$orders.order)
     },
     methods: {
         colorize(item) {

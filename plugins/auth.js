@@ -27,25 +27,41 @@ class Auth {
             this.storage.setCookie(COOKIE_TOKEN, token)
             this.redirect( 302, '/')
             message.status = 'success'
-            message.text = 'user is login'
+            message.text = 'User is login'
         } catch (error) {
             if(error.response.status === 401) {
                 message.status = 'error'
-                message.text = 'username or password is wrong'
+                message.text = 'Username or password is wrong'
             }
         }
         return message
     }
+
+    requestOtp(phoneNumber) {
+        return this.axios.$post('/auth/otp', { phoneNumber })
+    }
+
+    async verifyOtp(phoneNumber, otp) {
+        const { token, user, expiration } = await this.axios.$post('/auth/otp/verify', { phoneNumber, otp })
+        this.setToken(token)
+        this.user = user
+        this.storage.setCookie(COOKIE_TOKEN, token, {
+            expires: new Date(expiration)
+        })
+        this.redirect( 302, '/')
+        return user
+    }
+
     async register(args) {
         let message = {}
         try {
             await this.axios.$post('/auth/register', args)
-            this.redirect(401, '/login')
+            this.redirect(401, '/login/otp')
             message.status = 'success'
-            message.text = 'user is registered'
+            message.text = 'User is registered'
         } catch (error) {
             message.status = 'error'
-            message.text = 'registeration failed'
+            message.text = 'Registeration failed'
         }
         return message
     }
@@ -54,7 +70,7 @@ class Auth {
         this.user = null
         this.storage.removeCookie('token')
         this.removeToken()
-        this.redirect(302, '/login')
+        this.redirect(302, '/login/otp')
     }
 
     async fetchUser() {

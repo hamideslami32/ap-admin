@@ -42,7 +42,8 @@
         "vue-apexcharts": "^1.5.3",
         "vue-chartjs": "^3.5.0",
         "vue-fragment": "^1.5.1",
-        "vue-grid-layout": "^2.3.8"
+        "vue-grid-layout": "^2.3.8",
+        "vue-json-pretty": "^1.7.0"
     },
     "devDependencies": {
         "@nuxtjs/eslint-config": "^3.0.0",

@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex v-if="$orders.order">
+        <v-flex v-if="false || $orders.order">
             <div class="d-flex justify-space-between px-4 align-center user-info">
                 <span v-for="(item, i) in userData" :key="i">
                     <span>
@@ -155,6 +155,9 @@
         </div> -->
             </div>
         </v-flex>
+        <vue-json-pretty
+            :data="{ key: 'value' }"
+        />
         <v-dialog v-model="dialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>

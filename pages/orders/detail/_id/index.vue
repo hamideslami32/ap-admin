@@ -690,7 +690,7 @@ export default {
                         color: ''
                     }
                 ],
-                benfit: 0
+                benefit: 0
             }
         }
     },

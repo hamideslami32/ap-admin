@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex v-if="false || $orders.order">
+        <v-flex v-if="false && $orders.order">
             <div class="d-flex justify-space-between px-4 align-center user-info">
                 <span v-for="(item, i) in userData" :key="i">
                     <span>
@@ -156,7 +156,10 @@
             </div>
         </v-flex>
         <vue-json-pretty
-            :data="{ key: 'value' }"
+            v-if="this.$orders.order"
+            class="json-view"
+            :data="this.$orders.order"
+            :highlight-mouseover-node="true"
         />
         <v-dialog v-model="dialog" persistent max-width="600px">
             <v-card>
@@ -709,6 +712,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .json-view {
+        padding: 20px;
+    }
     .v-input--selection-controls {
         margin-top: 0 !important;
     }

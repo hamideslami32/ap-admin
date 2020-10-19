@@ -6,7 +6,7 @@
             </div>
             <div class="main d-flex align-center flex-grow-1 px-4">
                 <div class="airline mr-6 d-flex flex-column justify-center">
-                    <img src="~/assets/imgs/I3.png" class="mb-4" alt="airline logo" width="70%">
+                    <img src="~/assets/images/I3.png" class="mb-4" alt="airline logo" width="70%">
                     <div class="mb-2">
                         I3 365
                     </div>

@@ -9,7 +9,7 @@
         >
             <v-app-bar-nav-icon class="mr-4" @click.stop="drawer = !drawer" />
             <nuxt-link to="/">
-                <img class="d-block" src="~/assets/imgs/logo.svg" alt="apro-logo" height="28px">
+                <img class="d-block" src="~/assets/images/logo.svg" alt="apro-logo" height="28px">
             </nuxt-link>
             <v-spacer />
             <v-btn icon>
@@ -78,7 +78,7 @@
                         v-on="on"
                     >
                         <v-avatar>
-                            <img src="~/assets/imgs/avatar.png" alt="avatar">
+                            <img src="~/assets/images/avatar.png" alt="avatar">
                         </v-avatar>
                     </v-btn>
                 </template>
@@ -102,7 +102,7 @@
                 </v-list>
             </v-menu>
         </v-app-bar>
-        <v-main class="grey lighten-2">
+        <v-main>
             <div>
                 <nuxt />
             </div>

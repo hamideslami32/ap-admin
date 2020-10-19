@@ -6,7 +6,7 @@
               <div class="col-lg-3 order-lg-2">
                   <div class="card-profile-image">
                       <a href="#">
-                          <img src="~/assets/imgs/avatar.png" class="rounded-circle">
+                          <img src="~/assets/images/avatar.png" class="rounded-circle">
                       </a>
                   </div>
               </div>
@@ -59,7 +59,7 @@
         <v-card v-if="$auth.user" class="d-flex justify-space-around pa-4 align-center" width="60%">
             <div class="avatar mr-8">
                 <v-avatar size="256">
-                    <img src="~/assets/imgs/avatar.png" alt="avatar">
+                    <img src="~/assets/images/avatar.png" alt="avatar">
                 </v-avatar>
             </div>
             <form class="d-flex mt-2 form">

@@ -7,8 +7,8 @@ class Auth {
     constructor(ctx) {
         this.axios = ctx.app.$axios
         this.storage = ctx.$storage
-        this.redirect = ctx.redirect
         this.user = null
+        this.router = ctx.app.router
 
         const token = this.storage.getCookie(COOKIE_TOKEN)
 
@@ -19,22 +19,18 @@ class Auth {
     }
 
     async login(args) {
-        let message = {}
         try {
             const { token, user } = await this.axios.$post('/auth/login', args)
             this.setToken(token)
             this.user = user
             this.storage.setCookie(COOKIE_TOKEN, token)
-            this.redirect( 302, '/')
-            message.status = 'success'
-            message.text = 'User is login'
-        } catch (error) {
-            if(error.response.status === 401) {
-                message.status = 'error'
-                message.text = 'Username or password is wrong'
+        } catch (err) {
+            if (err.response.status === 401) {
+                throw new Error('Username or password is wrong')
             }
+            throw err
         }
-        return message
+        return this.user
     }
 
     requestOtp(phoneNumber) {
@@ -48,7 +44,6 @@ class Auth {
         this.storage.setCookie(COOKIE_TOKEN, token, {
             expires: new Date(expiration)
         })
-        this.redirect( 302, '/')
         return user
     }
 
@@ -56,7 +51,7 @@ class Auth {
         let message = {}
         try {
             await this.axios.$post('/auth/register', args)
-            this.redirect(401, '/login/otp')
+            this.router.push('/login')
             message.status = 'success'
             message.text = 'User is registered'
         } catch (error) {
@@ -70,13 +65,12 @@ class Auth {
         this.user = null
         this.storage.removeCookie('token')
         this.removeToken()
-        this.redirect(302, '/login/otp')
+        this.router.push('/login')
     }
 
     async fetchUser() {
         try {
-            const user = await this.axios.$get('/auth/user')
-            this.user = user
+            this.user = await this.axios.$get('/auth/user')
         } catch (error) {
             console.log({error})
         }

@@ -22,5 +22,29 @@ export default [
                 to: '/orders/hotel'
             }
         ]
+    },
+    {
+        title: 'Users',
+        icon: 'mdi-account',
+        children: [
+            {
+                title: 'Users',
+                to: '/users',
+            },
+        ]
+    },
+    {
+        title: 'Administration',
+        icon: 'mdi-cog',
+        children: [
+            {
+                title: 'Admins',
+                to: '/admins',
+            },
+            {
+                title: 'Roles',
+                to: '/roles',
+            }
+        ]
     }
 ]

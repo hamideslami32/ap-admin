@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex v-if="false && $orders.order">
+        <v-flex v-if="order">
             <div class="d-flex justify-space-between px-4 align-center user-info">
                 <span v-for="(item, i) in userData" :key="i">
                     <span>
@@ -138,29 +138,16 @@
                     </v-card>
                 </div>
                 <div>
-                    <v-card id="tab-4" class="rounded">
+                    <v-card id="tab-4" class="rounded mb-5">
                         <DataTable title="Customer Support" :data="customerSupportData" :headers="supportHeaders" />
                     </v-card>
+
+                    <v-btn :to="(order || {})._id + '/' + 'json'">
+                        View as JSON
+                    </v-btn>
                 </div>
-                <!-- <div class="d-flex justify-center mt-8">
-          <v-btn color="secondary">
-            Send Ticket
-          </v-btn>
-          <v-btn color="secondary" class="mx-4">
-            Send Payment
-          </v-btn>
-          <v-btn color="secondary">
-            User Log
-          </v-btn>
-        </div> -->
             </div>
         </v-flex>
-        <vue-json-pretty
-            v-if="this.$orders.order"
-            class="json-view"
-            :data="this.$orders.order"
-            :highlight-mouseover-node="true"
-        />
         <v-dialog v-model="dialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
@@ -240,6 +227,7 @@ import DataTable from '~/components/dataTable/DataTable'
 
 // import CanceledOrderWrapper from '~/components/canceledOrderWrapper/CanceledOrderWrapper'
 import PriceDetails from '~/components/priceDetails/PriceDetails'
+import {orderApi} from "@/api/orderApi"
 
 export default {
     components: {
@@ -248,8 +236,12 @@ export default {
         // CanceledOrderWrapper,
         PriceDetails
     },
+    async fetch() {
+        this.order = await orderApi.getOrder(this.$route.params.id)
+    },
     data() {
         return {
+            order: null,
             dialog: false,
             secondDialog: false,
             secondDialogData: [
@@ -661,12 +653,12 @@ export default {
             }
         },
         priceData() {
-            if (!this.$orders.order) return {}
+            if (!this.order) return {}
             else return {
                 tableData: [
                     {
                         title: 'Purchased Price',
-                        value: this.$orders.order.firstOrder.price,
+                        value: this.order.firstOrder.price,
                         color: 'primary--text'
                     },
                     {
@@ -687,7 +679,7 @@ export default {
 
                     {
                         title: 'Sales Price',
-                        value: this.$orders.order.firstOrder.price,
+                        value: this.order.firstOrder.price,
                         color: ''
                     },
                     {
@@ -699,9 +691,6 @@ export default {
                 benefit: 0
             }
         }
-    },
-    created() {
-        this.$orders.getOrder(this.$route.params.id)
     },
     methods: {
         colorize(item) {

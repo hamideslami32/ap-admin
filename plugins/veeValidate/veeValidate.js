@@ -1,7 +1,23 @@
 import Vue from 'vue'
-import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { ValidationObserver, ValidationProvider, setInteractionMode, extend } from 'vee-validate'
+import {max, min, required} from 'vee-validate/dist/rules'
 
-// setInteractionMode('eager')
+setInteractionMode('eager')
+
+extend('min', {
+    ...min,
+    message: "{_field_} should be {length} characters",
+})
+
+extend('max', {
+    ...max,
+    message: "{_field_} should be {length} characters",
+})
+
+extend("required", {
+    ...required,
+    message: "{_field_} can not be empty",
+})
 
 Vue.component('v-provider', {
     extends: ValidationProvider,

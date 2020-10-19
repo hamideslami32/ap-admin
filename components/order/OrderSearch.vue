@@ -1,55 +1,48 @@
 <template>
-    <v-expansion-panel class="search">
-        <v-expansion-panel-header class="text-h6 mb-2">
-            Search
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-            <div class="d-flex flex-column">
-                <div class="filters d-flex flex-column">
-                    <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
-                        <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
-                            <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
-                                <v-text-field
-                                    v-if="item.type === 'input'"
-                                    v-model="item.value"
-                                    v-mask="item.mask"
-                                    outlined
-                                    dense
-                                    :label="item.label"
-                                    :placeholder="item.placeholder"
-                                />
-                                <v-select
-                                    v-else
-                                    v-model="item.value"
-                                    :label="item.label"
-                                    outlined
-                                    dense
-                                    :items="item.selectList"
-                                />
-                                <div v-if="key === 'secondCol'">
-                                    <v-text-field
-                                        v-model="item.s_value"
-                                        v-mask="item.mask"
-                                        outlined
-                                        dense
-                                        :label="item.label"
-                                        :placeholder="item.s_placeholder"
-                                        class="ml-2"
-                                    />
-                                </div>
-                            </div>
+    <div class="d-flex flex-column mt-4">
+        <div class="filters d-flex flex-column">
+            <form class="d-flex flex-column flex-md-row filter-cols-wrapper">
+                <div v-for="(col, key) in filterFieldsData" :key="key" class="filter-col pr-6">
+                    <div v-for="(item, j) in col" :key="j" class="field d-flex align-items">
+                        <v-text-field
+                            v-if="item.type === 'input'"
+                            v-model="item.value"
+                            v-mask="item.mask"
+                            outlined
+                            dense
+                            :label="item.label"
+                            :placeholder="item.placeholder"
+                        />
+                        <v-select
+                            v-else
+                            v-model="item.value"
+                            :label="item.label"
+                            outlined
+                            dense
+                            :items="item.selectList"
+                        />
+                        <div v-if="key === 'secondCol'">
+                            <v-text-field
+                                v-model="item.s_value"
+                                v-mask="item.mask"
+                                outlined
+                                dense
+                                :label="item.label"
+                                :placeholder="item.s_placeholder"
+                                class="ml-2"
+                            />
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </v-expansion-panel-content>
-    </v-expansion-panel>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
-import { normalizeSearchField, normalizeUrl, capitalizeFirstLetter } from '~/utils/helpers'
+import { normalizeSearchField, normalizeUrl, capitalizeFirstLetter } from '@/utils/helpers'
 export default {
     data() {
         return {

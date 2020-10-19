@@ -2,27 +2,49 @@
     <v-layout>
         <v-flex class="pa-4">
             <v-expansion-panels :value="openExpansionPanel" :multiple="true">
-                <OrderSearch />
-                <OrderTable v-if="this.$orders.orders" title="Orders" :data="this.$orders.orders" :headers="mockHeaderData" />
+                <v-expansion-panel class="search">
+                    <v-expansion-panel-header class="text-h6">
+                        Search
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                        <order-search />
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel class="search">
+                    <v-expansion-panel-header class="text-h6">
+                        Orders
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                        <order-table v-if="orders" :items="orders.items" :headers="mockHeaderData" />
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+                <v-pagination v-model="page" :length="orders ? Math.ceil(orders.count / limit) : 2" />
             </v-expansion-panels>
         </v-flex>
     </v-layout>
 </template>
 
 <script>
-import OrderSearch from '~/components/orderSearch/OrderSearch'
-import OrderTable from '~/components/orderTable/OrderTable'
-// import {ordersData} from '~/assets/js/orders-data'
+import OrderSearch from '@/components/order/OrderSearch'
+import OrderTable from '@/components/order/OrderTable'
+import {orderApi} from "@/api/orderApi"
+
 export default {
     components: {
         OrderSearch,
         OrderTable
     },
+    async fetch() {
+        this.orders = await orderApi.getOrders(this.limit, this.limit * (this.$route.query.page - 1))
+    },
     data() {
         return {
             // ordersData,
             // index of expansion panels to be open by default
-            // we can use arrays for multiple modules
+            // we can use arrays for multiple modules,
+            limit: 20,
+            orders: null,
             openExpansionPanel: [1],
             mockHeaderData: [
                 {
@@ -43,8 +65,23 @@ export default {
             ],
         }
     },
-    mounted() {
-        this.$orders.getOrders()
-    }
+    computed: {
+        page: {
+            get() {
+                return Number(this.$route.query.page) || 1
+            },
+            set(x) {
+                this.$router.push({
+                    query: {
+                        ...this.$route.query,
+                        page: x
+                    }
+                })
+            }
+        }
+    },
+    watch: {
+        'page': '$fetch'
+    },
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
     <v-app light>
-        <v-app-bar
+        <!--<v-app-bar
             fixed
             app
             dark
             class="white"
         >
             <v-chip class="white py-6">
-                <img src="~/assets/imgs/logo.svg" alt="apro-logo" height="40px">
+                <img src="~/assets/images/logo.svg" alt="apro-logo" height="40px">
             </v-chip>
-        </v-app-bar>
+        </v-app-bar>-->
         <v-main class="my-8">
             <v-container>
                 <nuxt />

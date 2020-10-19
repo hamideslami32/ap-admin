@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import OrderSearch from '~/components/orderSearch/OrderSearch'
-import OrderTable from '~/components/orderTable/OrderTable'
+import OrderSearch from '@/components/order/OrderSearch'
+import OrderTable from '@/components/order/OrderTable'
 // import {ordersData} from '~/assets/js/orders-data'
 export default {
     components: {
